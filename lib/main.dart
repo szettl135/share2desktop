@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
     primaryColor: Colors.lightBlue[800],
 
     // Define the default font family.
-    fontFamily: 'Georgia',
 
     // Define the default `TextTheme`. Use this to specify the default
     // text styling for headlines, titles, bodies of text, and more.
@@ -63,18 +62,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  
+   bool _loadingButton1 = false;
+  bool _loadingButton2 = false;
+  bool switchListTileValue = false;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -85,42 +78,77 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      //key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: Color(0xFF5F79FF),
         automaticallyImplyLeading: true,
         title: Text(
           'Share2Desktop',
+          
         ),
         actions: [],
         centerTitle: true,
         elevation: 4,
       ),
       backgroundColor: Color(0xFFF5F5F5),
+      drawer: Drawer(
+        elevation: 16,
+        child: SwitchListTile(
+          value: switchListTileValue ??= false,
+          onChanged: (newValue) =>
+              setState(() => switchListTileValue = newValue),
+          title: Text(
+            'Dark Mode',
+            //style: FlutterFlowTheme.title3,
+          ),
+          subtitle: Text(
+            'turns on dark mode',
+            /*style: FlutterFlowTheme.subtitle2.override(
+              fontFamily: 'Poppins',
+              fontSize: 12,
+              fontStyle: FontStyle.italic,
+            ),*/
+          ),
+          tileColor: Color(0xFFF5F5F5),
+          dense: false,
+          controlAffinity: ListTileControlAffinity.trailing,
+        ),
+      ),
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Einstellungen',
-
-                ),
-                Icon(
-                  Icons.settings_outlined,
-                  color: Colors.black,
-                  size: 24,
-                )
-              ],
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Einstellungen',
+                    /*style: FlutterFlowTheme.bodyText1.override(
+                      fontFamily: 'Poppins',
+                      fontSize: 20,
+                    ),*/
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
+                    child: Icon(
+                      Icons.settings_outlined,
+                      color: Colors.black,
+                      size: 24,
+                    ),
+                  )
+                ],
+              ),
             ),
+            Spacer(flex: 3),
             Align(
               alignment: AlignmentDirectional(0, 0),
               child: Container(
-                width: 120,
-                height: 120,
+                width: 150,
+                height: 150,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -130,9 +158,34 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            Text(
-              'Share2Desktop',
-            )
+            Spacer(),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+              child: Text(
+                'Share2Desktop',
+                /*style: FlutterFlowTheme.bodyText1.override(
+                  fontFamily: 'Poppins',
+                  fontSize: 35,
+                ),*/
+              ),
+            ),
+            Spacer(flex: 2),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(40, 0, 40, 0),
+              child: TextButton(
+                onPressed: null,
+                child: Text("Pa Brate")
+              ),
+            ),
+            Spacer(),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(40, 0, 40, 0),
+              child: TextButton(
+                onPressed: null,
+                child: Text("Pa Brate")
+              ),
+            ),
+            Spacer(flex: 5)
           ],
         ),
       ),
