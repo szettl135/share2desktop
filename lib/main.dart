@@ -22,7 +22,22 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        //primarySwatch: Colors.blue,
+        // Define the default brightness and colors.
+    brightness: Brightness.light,
+    primaryColor: Colors.lightBlue[800],
+
+    // Define the default font family.
+    fontFamily: 'Georgia',
+
+    // Define the default `TextTheme`. Use this to specify the default
+    // text styling for headlines, titles, bodies of text, and more.
+    textTheme: const TextTheme(
+      headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+      headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+      bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+    ),
+  
       ),
       home: const MyHomePage(title: 'Share2Desktop'),
     );
@@ -71,14 +86,55 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        backgroundColor: Color(0xFF5F79FF),
+        automaticallyImplyLeading: true,
+        title: Text(
+          'Share2Desktop',
+        ),
+        actions: [],
+        centerTitle: true,
+        elevation: 4,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Text("hallo")
+      backgroundColor: Color(0xFFF5F5F5),
+      body: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Einstellungen',
+
+                ),
+                Icon(
+                  Icons.settings_outlined,
+                  color: Colors.black,
+                  size: 24,
+                )
+              ],
+            ),
+            Align(
+              alignment: AlignmentDirectional(0, 0),
+              child: Container(
+                width: 120,
+                height: 120,
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: Image.network(
+                  'https://picsum.photos/seed/27/600',
+                ),
+              ),
+            ),
+            Text(
+              'Share2Desktop',
+            )
+          ],
+        ),
       ),
     );
   }
