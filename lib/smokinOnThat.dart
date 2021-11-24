@@ -7,12 +7,20 @@ class Programm extends StatelessWidget {
         appBar: new AppBar(title: new Text("Seas")),
         body: Column(
           children: [
-            Container(alignment: Alignment.topRight, 
-            child: TextButton(child: Row(children: [
-              Text("Einstellungen"),
-              Icon(Icons.settings)
-            ]),            
-            onPressed: null))
+            
+            Row(
+              children: [
+                Spacer(flex: 1),
+                 Container(alignment: Alignment.topRight, 
+                child: TextButton(child: Row(children: [
+                Text("Einstellungen"),
+                Icon(Icons.settings)
+              ]),            
+            onPressed: null,
+            ))
+              ],
+            )
+           
           ],
 
         )
