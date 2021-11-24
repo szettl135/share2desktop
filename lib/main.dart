@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share2desktop/smokinOnThat.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,26 +25,16 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         //primarySwatch: Colors.blue,
         // Define the default brightness and colors.
-    brightness: Brightness.light,
-    primaryColor: Colors.lightBlue[800],
-
-    // Define the default font family.
-
-    // Define the default `TextTheme`. Use this to specify the default
-    // text styling for headlines, titles, bodies of text, and more.
-    textTheme: const TextTheme(
-      headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-      headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-      bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+   
     ),
   
-      ),
-      home: const MyHomePage(title: 'Share2Desktop'),
+      
+      home: Programm(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+/*class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -61,7 +52,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+/*class _MyHomePageState extends State<MyHomePage> {
   
    bool _loadingButton1 = false;
   bool _loadingButton2 = false;
@@ -69,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
  
 
-  @override
+  /*@override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
