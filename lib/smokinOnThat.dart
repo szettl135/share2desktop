@@ -38,9 +38,38 @@ class Programm extends StatelessWidget {
           Spacer(flex: 1),
 
           //Buttons
-          OutlinedButton(onPressed: () => {print("Senden")}, child: Container(padding: EdgeInsets.all(50), child: Row(children: [
-          SizedBox(width:20),Spacer(flex:1),Text("Senden"),Spacer(flex:1),Icon(Icons.arrow_forward),SizedBox(width:20)
-          ],))),
+          /*Row(children: [
+            Spacer(flex:1),
+            OutlinedButton(onPressed: () => {print("Senden")}, child: Container(padding: EdgeInsets.all(10), child: Row(children: [
+              SizedBox(width:20),Spacer(flex:1),Text("Senden"),Spacer(flex:1),Icon(Icons.arrow_forward),SizedBox(width:20)
+            ],))),
+            Spacer(flex:1)
+          ],),*/
+          Row(
+              children: [
+                Spacer(flex:1),
+            
+                //SizedBox(width: 50),
+              /*Spacer(flex:1),
+                Container(padding: EdgeInsets.all(10), alignment:  Alignment.center,
+                  child: OutlinedButton(child: Row(children: [
+                    SizedBox(width: 20),
+                    Spacer(flex:1),
+                    Text("Senden"),
+                    Spacer(flex: 1),
+                    Icon(Icons.arrow_forward),
+                    SizedBox(width: 20)
+                  ]),            
+                  onPressed: () => {
+                  print("Einstellungen")
+                  },
+                  )),
+              Spacer(flex:1)*/
+              OutlinedButton(onPressed: () => {print("Einstellungen")}, child: Row(children: [SizedBox(width:10),Text("Senden"),Icon(Icons.arrow_forward),SizedBox(width:10)],)),
+              Spacer(flex: 1)
+              ],
+            ),
+          
 
           Spacer(flex:1)
           ],
