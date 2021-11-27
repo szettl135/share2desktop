@@ -31,16 +31,16 @@ class Programm extends StatelessWidget {
 
           //Logo und Titel
 
-          Image(image: AssetImage("assets/icon.png")),
+          Image(image: AssetImage("assets/icon.png"), alignment: Alignment.center,width: 200),
           SizedBox(height: 20),
           Text("Share2Desktop"),
 
           Spacer(flex: 1),
 
           //Buttons
-          OutlinedButton(onPressed: () => {print("Senden")}, child: Row(children: [
-          Spacer(flex:1),Text("Senden"),Spacer(flex:1),Icon(Icons.arrow_forward),SizedBox(width:20)
-          ],)),
+          OutlinedButton(onPressed: () => {print("Senden")}, child: Container(padding: EdgeInsets.all(50), child: Row(children: [
+          SizedBox(width:20),Spacer(flex:1),Text("Senden"),Spacer(flex:1),Icon(Icons.arrow_forward),SizedBox(width:20)
+          ],))),
 
           Spacer(flex:1)
           ],
