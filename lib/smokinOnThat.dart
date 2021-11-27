@@ -15,19 +15,22 @@ class Programm extends StatelessWidget {
                  alignment: Alignment.topRight, 
                 child: TextButton(child: Row(children: [
                 Text("Einstellungen"),
-                SizedBox(width: 2),
+                SizedBox(width: 5),
                 Icon(Icons.settings)
               ]),            
             onPressed: () => {
-  print("lmao")
-},
+            print("lmao")
+          },
             ))
               ],
             ),
           
-          SizedBox(height: 20),
+          
           //Logo und Titel
-          Text("sample text")
+
+          Image(image: ImageProvider("icon/icon.png")),
+          SizedBox(height: 20),
+          Text("Share2Desktop"),
           ],
 
         )
