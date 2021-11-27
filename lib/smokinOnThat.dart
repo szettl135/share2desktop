@@ -37,19 +37,34 @@ class Programm extends StatelessWidget {
 
           Spacer(flex: 1),
 
+
+          //Senden
           Row(
               children: [
                 Spacer(flex:1),
-              OutlinedButton(onPressed: () => {print("Einstellungen")}, child: Row(children: [SizedBox(width:50),Text("Senden"),Icon(Icons.arrow_forward),SizedBox(width:50)],)),
+              OutlinedButton(onPressed: () => {print("Senden")}, child: Row(children: [SizedBox(width:50),Text("Senden"),Icon(Icons.arrow_forward),SizedBox(width:50)],)),
               Spacer(flex: 1)
               ],
             ),
           
 
-          Spacer(flex:1)
-          ],
+          SizedBox(height: 30),
 
-        )
+
+          //Empfangen
+          Row(
+              children: [
+                Spacer(flex:1),
+              OutlinedButton(onPressed: () => {print("Empfangen")}, child: Row(children: [SizedBox(width:50),Text("Empfangen"),Icon(Icons.arrow_forward),SizedBox(width:50)],)),
+              Spacer(flex: 1)
+              ],
+            ),
+          
+
+          Spacer(flex:1),
+          
+
+        ])
       );
   }
 }
