@@ -19,18 +19,30 @@ class Programm extends StatelessWidget {
                 Icon(Icons.settings)
               ]),            
             onPressed: () => {
-            print("lmao")
+            print("Einstellungen")
           },
             ))
               ],
             ),
           
           
+          //Abstand
+          Spacer(flex: 1),
+
           //Logo und Titel
 
-          Image(image: ImageProvider("icon/icon.png")),
+          Image(image: AssetImage("assets/icon.png")),
           SizedBox(height: 20),
           Text("Share2Desktop"),
+
+          Spacer(flex: 1),
+
+          //Buttons
+          OutlinedButton(onPressed: () => {print("Senden")}, child: Row(children: [
+          Spacer(flex:1),Text("Senden"),Spacer(flex:1),Icon(Icons.arrow_forward),SizedBox(width:20)
+          ],)),
+
+          Spacer(flex:1)
           ],
 
         )
