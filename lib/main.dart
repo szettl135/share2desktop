@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:share2desktop/smokinOnThat.dart';
+import 'package:share2desktop/deviceSelection.dart';
+import 'package:share2desktop/startpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
     ),
   
       
-      home: Programm(),
+      home: DeviceSelection(),
     );
   }
 }
