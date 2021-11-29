@@ -22,6 +22,19 @@ class MyApp extends StatelessWidget {
             buttonColor: Colors.white, //  <-- dark color
             textTheme: ButtonTextTheme.primary, //  <-- this auto selects the right color
           ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              primary: Colors.black, // This is a custom color variable
+              //textStyle: GoogleFonts.fredokaOne(),
+            ),
+           
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: TextButton.styleFrom(
+              primary: Colors.black, // This is a custom color variable
+              //textStyle: GoogleFonts.fredokaOne(),
+            ),
+          ),
           // Define the default font family.
           fontFamily: 'Arial',
           textTheme: const TextTheme(
@@ -37,8 +50,21 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color(0xff252525),
           primaryColor: Color(0xff161616),
           buttonTheme: ButtonThemeData(
-            buttonColor: Color(0xff333333), //  <-- dark color
+            buttonColor: Colors.white, //  <-- dark color
             textTheme: ButtonTextTheme.primary, //  <-- this auto selects the right color
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              primary: Colors.white, // This is a custom color variable
+              //textStyle: GoogleFonts.fredokaOne(),
+            ),
+           
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: TextButton.styleFrom(
+              primary: Colors.white, // This is a custom color variable
+              //textStyle: GoogleFonts.fredokaOne(),
+            ),
           ),
           // Define the default font family.
           fontFamily: 'Arial',

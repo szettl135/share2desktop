@@ -12,7 +12,7 @@ class DeviceSelection extends StatelessWidget {
             children: [
               Spacer(flex: 1),
               Container(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(30),
                   alignment: Alignment.center,
                   child: TextButton(
                     child: Row(children: [

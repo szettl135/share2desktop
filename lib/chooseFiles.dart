@@ -7,6 +7,7 @@ class ChooseFiles extends StatelessWidget {
     return Scaffold(
       appBar: new AppBar(title: new Text("Share2Desktop")),
       body: Column(children: [
+        Container(padding: EdgeInsets.all(30), child:
         Row(
             mainAxisAlignment:MainAxisAlignment.center ,
             children: [
@@ -29,6 +30,7 @@ class ChooseFiles extends StatelessWidget {
               SizedBox(width: 20)
             ],
           ),
+        ),
         Spacer(flex:1),
         OutlinedButton(onPressed: () => print("E"), child: Text("Dateien auswählen")),
         Spacer(flex:2)
