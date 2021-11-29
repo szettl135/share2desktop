@@ -70,6 +70,16 @@ class DeviceSelection extends StatelessWidget {
                       title: const Text("Smartphone"),
                       subtitle: Text("iPhone von Fabian"),
                       onTap: () => {print: "CCCCC"}),
+                  ListTile(
+                      leading: const Icon(Icons.phone_iphone),
+                      title: const Text("Smartphone"),
+                      subtitle: Text("iPhone SE von Lennart"),
+                      onTap: () => {print: "DDDD"}),
+                  ListTile(
+                      leading: const Icon(Icons.phone_iphone),
+                      title: const Text("Smartphone"),
+                      subtitle: Text("iPhone 12 von Lennart"),
+                      onTap: () => {print: "EEEE"}),
                 ],
               )),
                       
