@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:share2desktop/chooseFiles.dart';
 
 class DeviceSelection extends StatefulWidget {
-  const DeviceSelection({Key? key}) : super(key : key);
-  
+  const DeviceSelection({Key? key}) : super(key: key);
+
   @override
   _DeviceSelection createState() => _DeviceSelection();
 }
+
 class _DeviceSelection extends State<DeviceSelection> {
+  Object? selectedDevice = null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,47 +64,59 @@ class _DeviceSelection extends State<DeviceSelection> {
               child: ListView(
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
+                  //https://protocoderspoint.com/flutter-listview-ontap-selected-item-send-data-to-new-screen/
+                  //Weiter button weg und einfach wen man device wählt weiter
                   ListTile(
                       leading: const Icon(Icons.computer),
                       title: const Text("Computer 1"),
                       subtitle: Text("Windows-PC von JUMBO"),
-                      onTap: () => {print: "AAAAAAAAAAAAA"}),
+                      onTap: () {
+                        //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChooseFiles(deviceName: Fruitdata[index],)));
+                      }),
                   ListTile(
                       leading: const Icon(Icons.computer),
                       title: const Text("Computer 2"),
                       subtitle: Text("Windows-PC von Schreiner"),
-                      onTap: () => {print: "BBBBB"}),
+                      onTap: () {
+                        print("bc 1");
+                      }),
                   ListTile(
                       leading: const Icon(Icons.phone_iphone),
                       title: const Text("Smartphone"),
                       subtitle: Text("iPhone von Fabian"),
-                      onTap: () => {print: "CCCCC"}),
+                      onTap: () {
+                        print("bc 1");
+                      }),
                   ListTile(
                       leading: const Icon(Icons.phone_iphone),
                       title: const Text("Smartphone"),
                       subtitle: Text("iPhone SE von Lennart"),
-                      onTap: () => {print: "DDDD"}),
+                      onTap: () {
+                        print("bc 1");
+                      }),
                   ListTile(
                       leading: const Icon(Icons.phone_iphone),
                       title: const Text("Smartphone"),
                       subtitle: Text("iPhone 12 von Lennart"),
-                      onTap: () => {print: "EEEE"}),
+                      onTap: () {
+                        print("bc 1");
+                      }),
                 ],
               )),
-                      
+
           //],
 
           //),
           SizedBox(height: 20),
           OutlinedButton(
-            
-              onPressed: () => {Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ChooseFiles()),
-              )},
+              onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ChooseFiles()),
+                    )
+                  },
               child: Text("Weiter")),
           Spacer(flex: 1),
         ]));
   }
-
 }

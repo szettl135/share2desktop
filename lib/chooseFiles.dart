@@ -10,6 +10,9 @@ class ChooseFiles extends StatefulWidget {
 class _ChooseFiles extends State<ChooseFiles> {
    @override
   Widget build(BuildContext context) {
+    final String deviceName;
+
+
     return Scaffold(
       appBar: new AppBar(title: new Text("Share2Desktop")),
       body: Column(children: [
