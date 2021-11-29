@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:share2desktop/deviceSelection.dart';
 
-class ChooseFiles extends StatelessWidget {
+class ChooseFiles extends StatefulWidget {
+  const ChooseFiles({Key? key}) : super(key : key);
+  
+  @override
+  _ChooseFiles createState() => _ChooseFiles();
+}
+
+class _ChooseFiles extends State<ChooseFiles> {
    @override
   Widget build(BuildContext context) {
     return Scaffold(
