@@ -48,10 +48,9 @@ class DeviceSelection extends StatelessWidget {
 
           //Row(children: [
           //SizedBox(width: 100),
-          
           Container(
               padding: EdgeInsets.all(50),
-              height: 500,
+              height: MediaQuery.of(context).size.height * 0.5,
               child: ListView(
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[

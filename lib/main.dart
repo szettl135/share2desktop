@@ -15,43 +15,44 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Share2Desktop',
       theme: ThemeData(
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: Color(0xffEBF7FF),
-        primaryColor: Color(0xff5F79FF),
-    
+          brightness: Brightness.light,
+          scaffoldBackgroundColor: Color(0xffEBF7FF),
+          primaryColor: Color(0xff5F79FF),
+          buttonTheme: ButtonThemeData(
+            buttonColor: Colors.white, //  <-- dark color
+            textTheme: ButtonTextTheme.primary, //  <-- this auto selects the right color
+          ),
+          // Define the default font family.
+          fontFamily: 'Arial',
+          textTheme: const TextTheme(
+            headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            headline2: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+            bodyText2: TextStyle(fontSize: 14.0),
+          )
 
-        // Define the default font family.
-        fontFamily: 'Arial',
-
-        textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-          headline2: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
-          bodyText2: TextStyle(fontSize: 14.0),
-        )
-        
-        /* light theme settings */
-      ),
+          /* light theme settings */
+          ),
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Color(0xff252525),
-        primaryColor: Color(0xff161616),
-
-        // Define the default font family.
-        fontFamily: 'Arial',
-
-        textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-          headline2: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
-          bodyText2: TextStyle(fontSize: 14.0),
-        )
-        /* dark theme settings */
-      ),
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: Color(0xff252525),
+          primaryColor: Color(0xff161616),
+          buttonTheme: ButtonThemeData(
+            buttonColor: Color(0xff333333), //  <-- dark color
+            textTheme: ButtonTextTheme.primary, //  <-- this auto selects the right color
+          ),
+          // Define the default font family.
+          fontFamily: 'Arial',
+          textTheme: const TextTheme(
+            headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            headline2: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+            bodyText2: TextStyle(fontSize: 14.0),
+          )
+          /* dark theme settings */
+          ),
       //damit system theme verwendet wird beim straten
-      themeMode: ThemeMode.system, 
-  
-      
+      themeMode: ThemeMode.system,
+
       home: DeviceSelection(),
     );
   }
 }
-
