@@ -51,15 +51,25 @@ class DeviceSelection extends StatelessWidget {
           
           Container(
               padding: EdgeInsets.all(50),
-              height: 200,
+              height: 500,
               child: ListView(
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
                   ListTile(
                       leading: const Icon(Icons.computer),
-                      title: const Text("hendi 1"),
-                      subtitle: Text("xdd"),
+                      title: const Text("Computer 1"),
+                      subtitle: Text("Windows-PC von JUMBO"),
                       onTap: () => {print: "AAAAAAAAAAAAA"}),
+                  ListTile(
+                      leading: const Icon(Icons.computer),
+                      title: const Text("Computer 2"),
+                      subtitle: Text("Windows-PC von Schreiner"),
+                      onTap: () => {print: "BBBBB"}),
+                  ListTile(
+                      leading: const Icon(Icons.phone),
+                      title: const Text("Smartphone"),
+                      subtitle: Text("iPhone von Fabian"),
+                      onTap: () => {print: "CCCCC"}),
                 ],
               )),
                       
