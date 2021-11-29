@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share2desktop/receiveFiles.dart';
 
 class ChooseFiles extends StatefulWidget {
   const ChooseFiles({Key? key}) : super(key : key);
@@ -45,7 +46,12 @@ class _ChooseFiles extends State<ChooseFiles> {
           ),
         ),
         Spacer(flex:1),
-        OutlinedButton(onPressed: () => print("E"), child: Text("Dateien auswählen")),
+        OutlinedButton(onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ReceiveFiles()),
+                    )
+                  },child: Text("Dateien auswählen")),
         Spacer(flex:2)
       ])
     );
