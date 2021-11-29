@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:share2desktop/chooseFiles.dart';
 
 class DeviceSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: new AppBar(title: new Text("Seas")),
+        appBar: new AppBar(title: new Text("Share2Desktop")),
         body: Column(children: [
           //Einstellungen
           Row(
@@ -65,7 +66,7 @@ class DeviceSelection extends StatelessWidget {
                       subtitle: Text("Windows-PC von Schreiner"),
                       onTap: () => {print: "BBBBB"}),
                   ListTile(
-                      leading: const Icon(Icons.phone),
+                      leading: const Icon(Icons.phone_iphone),
                       title: const Text("Smartphone"),
                       subtitle: Text("iPhone von Fabian"),
                       onTap: () => {print: "CCCCC"}),
@@ -77,7 +78,11 @@ class DeviceSelection extends StatelessWidget {
           //),
           SizedBox(height: 20),
           OutlinedButton(
-              onPressed: () => {print: "outlinedbutton"},
+            
+              onPressed: () => {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChooseFiles()),
+              )},
               child: Text("Weiter")),
           Spacer(flex: 1),
         ]));
