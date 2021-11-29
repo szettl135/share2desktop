@@ -13,8 +13,10 @@ class ChooseFiles extends StatelessWidget {
             children: [
               SizedBox(width: 20),
               Column(children: [
-                Text("Dein Gerät:"),
+                Text("Dein Gerät:",style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 10),
                 Text("DeviceName"),
+                SizedBox(height: 10),
                 Icon(Icons.phone_iphone)
               ],),
               //Spacer(flex:1),
@@ -23,8 +25,10 @@ class ChooseFiles extends StatelessWidget {
               //Spacer(flex:1),
               SizedBox(width: MediaQuery.of(context).size.width * 0.125),
                Column(children: [
-                Text("Zum Gerät:"),
+                Text("Zum Gerät:",style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 10),
                 Text("DeviceName"),
+                SizedBox(height: 10),
                 Icon(Icons.computer)
               ],),
               SizedBox(width: 20)

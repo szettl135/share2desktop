@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
           textTheme: const TextTheme(
             headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
             headline2: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+            bodyText1: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             bodyText2: TextStyle(fontSize: 14.0),
           )
 
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
           textTheme: const TextTheme(
             headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
             headline2: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+            bodyText1: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             bodyText2: TextStyle(fontSize: 14.0),
           )
           /* dark theme settings */
