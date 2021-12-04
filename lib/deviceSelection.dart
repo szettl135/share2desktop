@@ -109,14 +109,14 @@ class _DeviceSelection extends State<DeviceSelection> {
 
           //),
           SizedBox(height: 20),
-          OutlinedButton(
+          /*OutlinedButton(
               onPressed: () => {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ChooseFiles()),
                     )
                   },
-              child: Text("Weiter")),
+              child: Text("Weiter"))*/
           Spacer(flex: 1),
         ]));
   }
