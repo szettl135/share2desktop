@@ -28,8 +28,16 @@ class _ReceiveFiles extends State<ReceiveFiles> {
               child: ListView(
                 padding: const EdgeInsets.all(8),
                 children: <Widget>[
-                  TextButton(child: Text("video.mp4"),onPressed: () => (print("Video.mp4")),)
-              
+                  //TextButton(child: Text("video.mp4"),onPressed: () => (print("Video.mp4")),)
+
+                  //ein einzelnes Element
+                  Row(mainAxisAlignment:MainAxisAlignment.center,children: [
+                    Text("video.mp4"),SizedBox(width: 50),IconButton(onPressed: () => {print("angenommen")}, icon: const Icon(Icons.save_alt)),SizedBox(width: 50),IconButton(onPressed: () => {print("abgelehnt")}, icon: const Icon(Icons.close))
+                  ],),
+
+                  Row(mainAxisAlignment:MainAxisAlignment.center,children: [
+                    Text("archiv.zip"),SizedBox(width: 50),IconButton(onPressed: () => {print("angenommen")}, icon: const Icon(Icons.save_alt)),SizedBox(width: 50),IconButton(onPressed: () => {print("abgelehnt")}, icon: const Icon(Icons.close))
+                  ],),
             
                 ])),
         Spacer(flex:1)
