@@ -44,27 +44,26 @@ class MyApp extends StatelessWidget {
             bodyText2: TextStyle(fontSize: 14.0),
           )
 
-          /* light theme settings */
+
           ),
       darkTheme: ThemeData(
           brightness: Brightness.dark,
           scaffoldBackgroundColor: Color(0xff252525),
           primaryColor: Color(0xff161616),
           buttonTheme: ButtonThemeData(
-            buttonColor: Colors.white, //  <-- dark color
+            buttonColor: Colors.white, 
             textTheme: ButtonTextTheme.primary, //  <-- this auto selects the right color
           ),
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(
-              primary: Colors.white, // This is a custom color variable
-              //textStyle: GoogleFonts.fredokaOne(),
+              primary: Colors.white, 
             ),
            
           ),
           outlinedButtonTheme: OutlinedButtonThemeData(
             style: TextButton.styleFrom(
-              primary: Colors.white, // This is a custom color variable
-              //textStyle: GoogleFonts.fredokaOne(),
+              primary: Colors.white,
+
             ),
           ),
           // Define the default font family.

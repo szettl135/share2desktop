@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:share2desktop/receiveFiles.dart';
 
 class ChooseFiles extends StatefulWidget {
-  const ChooseFiles({Key? key}) : super(key : key);
+  final String targetDeviceName;
+  //https://pub.dev/packages/device_info
+
+  const ChooseFiles({Key? key, required this.targetDeviceName}) : super(key : key);
   
   @override
   _ChooseFiles createState() => _ChooseFiles();
@@ -11,7 +14,6 @@ class ChooseFiles extends StatefulWidget {
 class _ChooseFiles extends State<ChooseFiles> {
    @override
   Widget build(BuildContext context) {
-    final String deviceName;
 
 
     return Scaffold(

@@ -66,19 +66,20 @@ class _DeviceSelection extends State<DeviceSelection> {
                 children: <Widget>[
                   //https://protocoderspoint.com/flutter-listview-ontap-selected-item-send-data-to-new-screen/
                   //Weiter button weg und einfach wen man device wählt weiter
+                  //jo das passt mal wir brauchen noch dynamisches adden dieser dinger damit das workt
                   ListTile(
                       leading: const Icon(Icons.computer),
                       title: const Text("Computer 1"),
                       subtitle: Text("Windows-PC von JUMBO"),
                       onTap: () {
-                        //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChooseFiles(deviceName: Fruitdata[index],)));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChooseFiles(targetDeviceName: 'computer 1',)));
                       }),
                   ListTile(
                       leading: const Icon(Icons.computer),
                       title: const Text("Computer 2"),
                       subtitle: Text("Windows-PC von Schreiner"),
                       onTap: () {
-                        print("bc 1");
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChooseFiles(targetDeviceName: 'computer 2',)));
                       }),
                   ListTile(
                       leading: const Icon(Icons.phone_iphone),
