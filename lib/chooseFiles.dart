@@ -25,26 +25,34 @@ class ChooseFiles extends StatefulWidget {
 class _ChooseFiles extends State<ChooseFiles> {
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
-  
+  static String deviceName = "oh nein alles kaputt";
+
   Future<void> initPlatformState() async {
     var deviceData = <String, dynamic>{};
 
     try {
       if (kIsWeb) {
         deviceData = _readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
+        deviceName = deviceData["browser_name"];
       } else {
         if (Platform.isAndroid) {
           deviceData =
               _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
+          deviceName = deviceData["device"];
+          
         } else if (Platform.isIOS) {
           deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
+          deviceName = deviceData["name"];
         } else if (Platform.isLinux) {
           deviceData = _readLinuxDeviceInfo(await deviceInfoPlugin.linuxInfo);
+          deviceName = deviceData["name"];
         } else if (Platform.isMacOS) {
           deviceData = _readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo);
+          deviceName = deviceData["computerName"];
         } else if (Platform.isWindows) {
           deviceData =
               _readWindowsDeviceInfo(await deviceInfoPlugin.windowsInfo);
+          deviceName = deviceData["computerName"];
         }
       }
     } on PlatformException {
@@ -169,9 +177,11 @@ class _ChooseFiles extends State<ChooseFiles> {
   }
 
 
+
+
    @override
   Widget build(BuildContext context) {
-
+    
 
     return Scaffold(
       appBar: new AppBar(title: new Text("Share2Desktop")),
@@ -184,7 +194,7 @@ class _ChooseFiles extends State<ChooseFiles> {
               Column(children: [
                 Text("Dein Gerät:",style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 10),
-                Text("DeviceName"),
+                Text(deviceName),
                 SizedBox(height: 10),
                 Icon(Icons.phone_iphone)
               ],),
