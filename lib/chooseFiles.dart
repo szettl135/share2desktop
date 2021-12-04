@@ -39,7 +39,7 @@ class _ChooseFiles extends State<ChooseFiles> {
                Column(children: [
                 Text("Zum Gerät:",style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 10),
-                Text("DeviceName"),
+                Text(widget.targetDeviceName),
                 SizedBox(height: 10),
                 Icon(Icons.computer)
               ],),
