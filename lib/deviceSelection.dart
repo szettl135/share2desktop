@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:share2desktop/chooseFiles.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 class DeviceSelection extends StatefulWidget {
   const DeviceSelection({Key? key}) : super(key: key);
@@ -46,9 +47,13 @@ class _DeviceSelection extends State<DeviceSelection> {
           //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
+              children: <Widget>[
                 Text('Wähle ein Theme'),
                 SizedBox(height: 20),
+                TextButton(child: Text("Helles Erscheinungsbild"), onPressed: () {AdaptiveTheme.of(context).setLight();}),
+                SizedBox(height: 10),
+                TextButton(child: Text("Dunkles Erscheinungsbild"), onPressed: () {AdaptiveTheme.of(context).setDark();}),
+    
                 //TextButton(child: Text("mspaint"), onPressed:  () {_notifier.value = mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light}),
               ],
             ),
@@ -100,10 +105,8 @@ class _DeviceSelection extends State<DeviceSelection> {
                 title: const Text('Aussehen'),
                 onTap: () {
                 
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
+                  _selectTheme();
+                  //Navigator.pop(context);
                 },
               ),
               ListTile(

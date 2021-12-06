@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/deviceSelection.dart';
 import 'package:share2desktop/startpage.dart';
@@ -12,9 +13,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Share2Desktop',
-      theme: ThemeData(
+    return AdaptiveTheme(
+    light: ThemeData(
           brightness: Brightness.light,
           appBarTheme: AppBarTheme(
             color: const Color(0xff5F79FF),
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
 
 
           ),
-      darkTheme: ThemeData(
+      dark: ThemeData(
           brightness: Brightness.dark,
           appBarTheme: AppBarTheme(
             color: const Color(0xff161616),
@@ -102,9 +102,14 @@ class MyApp extends StatelessWidget {
           /* dark theme settings */
           ),
       //damit system theme verwendet wird beim straten
-      themeMode: ThemeMode.system,
-
-      home: DeviceSelection(),
+      
+      initial: AdaptiveThemeMode.system,
+       builder: (theme, darkTheme) => MaterialApp(
+        title: 'Share2Desktop',
+        theme: theme,
+        darkTheme: darkTheme,
+        home: DeviceSelection(),
+      ),
     );
   }
 }
