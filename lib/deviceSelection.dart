@@ -11,6 +11,31 @@ class DeviceSelection extends StatefulWidget {
 class _DeviceSelection extends State<DeviceSelection> {
   Object? selectedDevice = null;
 
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Dein QR-Code'),
+                SizedBox(height: 20),
+                Image(
+                    image: AssetImage("assets/qrtest.png"),
+                    alignment: Alignment.center,
+                    width: 400
+                    ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +54,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                       SizedBox(width: 10),
                       Text("Dein Gerät: XYZ Phone"),
                     ]),
-                    onPressed: () => {print("QR Code")},
+                    onPressed: () => {_showMyDialog()},
                   )),
               Spacer(flex: 1)
             ],
@@ -72,14 +97,20 @@ class _DeviceSelection extends State<DeviceSelection> {
                       title: const Text("Computer 1"),
                       subtitle: Text("Windows-PC von JUMBO"),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChooseFiles(targetDeviceName: 'computer 1',)));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ChooseFiles(
+                                  targetDeviceName: 'computer 1',
+                                )));
                       }),
                   ListTile(
                       leading: const Icon(Icons.computer),
                       title: const Text("Computer 2"),
                       subtitle: Text("Windows-PC von Schreiner"),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChooseFiles(targetDeviceName: 'computer 2',)));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ChooseFiles(
+                                  targetDeviceName: 'computer 2',
+                                )));
                       }),
                   ListTile(
                       leading: const Icon(Icons.phone_iphone),
