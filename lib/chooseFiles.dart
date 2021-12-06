@@ -25,14 +25,23 @@ class ChooseFiles extends StatefulWidget {
 class _ChooseFiles extends State<ChooseFiles> {
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
-  static String deviceName = "oh nein alles kaputt";
+  String _deviceName = "oh nein alles kaputt";
+
+
+@override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
 
   Future<void> initPlatformState() async {
     var deviceData = <String, dynamic>{};
+    var deviceName = String;
 
     try {
       if (kIsWeb) {
         deviceData = _readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
+        print(deviceData);
         deviceName = deviceData["browser_name"];
       } else {
         if (Platform.isAndroid) {
@@ -65,6 +74,7 @@ class _ChooseFiles extends State<ChooseFiles> {
 
     setState(() {
       _deviceData = deviceData;
+      _deviceName = deviceName as String;
     });
   }
 
@@ -191,26 +201,35 @@ class _ChooseFiles extends State<ChooseFiles> {
             mainAxisAlignment:MainAxisAlignment.center ,
             children: [
               SizedBox(width: 20),
+              //Spacer(flex:3),
+              Container(width:MediaQuery.of(context).size.width * 0.33, child:
               Column(children: [
+                SizedBox(height:10),
                 Text("Dein Gerät:",style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 10),
-                Text(deviceName),
-                SizedBox(height: 10),
-                Icon(Icons.phone_iphone)
+              
               ],),
-              //Spacer(flex:1),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.125),
+              ),
+              Spacer(flex:1),
+              //SizedBox(width:20),
+              //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
               Icon(Icons.arrow_forward),
-              //Spacer(flex:1),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.125),
+              //SizedBox(width:20),
+              Spacer(flex:1),
+              //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
+               Container(alignment: Alignment.topCenter, width:MediaQuery.of(context).size.width * 0.33, child:
                Column(children: [
-                Text("Zum Gerät:",style: Theme.of(context).textTheme.bodyText1),
+                // SizedBox(height:10),
+                //Text("Zum Gerät:",style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 10),
+                Icon(Icons.computer),
                 SizedBox(height: 10),
                 Text(widget.targetDeviceName),
-                SizedBox(height: 10),
-                Icon(Icons.computer)
+                SizedBox(height: 10)
               ],),
+              ),
               SizedBox(width: 20)
+              //Spacer(flex:3)
             ],
           ),
         ),
