@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DeviceSelection extends StatefulWidget {
   const DeviceSelection({Key? key}) : super(key: key);
@@ -13,7 +15,34 @@ class _DeviceSelection extends State<DeviceSelection> {
   //bool isSwitched = false;
   Object? selectedDevice = null;
   final ValueNotifier<ThemeMode> _notifier = ValueNotifier(ThemeMode.light);
-
+  Future<void> _aboutDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text("Über die App", style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 20),
+                Text("Von Team Share2Desktop"),
+                RichText(text: new TextSpan(
+                  text: 'share2desktop.com',
+                  style: new TextStyle(color: Colors.blue),
+                  recognizer: new TapGestureRecognizer()
+                    ..onTap = () { launch('http://share2desktop.com/');
+                  },)),
+                
+                Text("2021-12-07")
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
   Future<void> _qrDialog() async {
     return showDialog<void>(
       context: context,
@@ -23,8 +52,8 @@ class _DeviceSelection extends State<DeviceSelection> {
           //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
-                Text('Dein QR-Code'),
+              children: <Widget>[
+                Text('Dein QR-Code', style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 Image(
                     image: AssetImage("assets/qrtest.png"),
@@ -48,7 +77,7 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Wähle ein Theme'),
+                Text('Wähle ein Theme', style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 TextButton(child: Text("Helles Erscheinungsbild"), onPressed: () {AdaptiveTheme.of(context).setLight();}),
                 SizedBox(height: 10),
@@ -60,6 +89,7 @@ class _DeviceSelection extends State<DeviceSelection> {
           ),
         );
       },
+      
     );
   }
 
@@ -113,10 +143,9 @@ class _DeviceSelection extends State<DeviceSelection> {
                 leading: Icon(Icons.info),
                 title: const Text('Über die App'),
                 onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
+                  _aboutDialog();
+                  //das pop würden den dialog deleten
+                  //Navigator.pop(context);
                 },
               ),
             ],
