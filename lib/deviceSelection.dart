@@ -166,7 +166,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                     child: Row(children: [
                       Icon(Icons.qr_code),
                       SizedBox(width: 10),
-                      Text("Dein Gerät", style: Theme.of(context).textTheme.bodyText2),
+                      Text("Dein Gerät", style: Theme.of(context).textTheme.headline4),
                     ]),
                     onPressed: () => {_qrDialog()},
                   )),
@@ -185,7 +185,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                     child: Row(children: [
                       Icon(Icons.camera),
                       SizedBox(width: 10),
-                      Text("QR Code einscannen", style: Theme.of(context).textTheme.bodyText1),
+                      Text("QR Code einscannen", style: Theme.of(context).textTheme.headline5),
                     ]),
                     onPressed: () => {print("QR Code einscannen")},
                   )),
@@ -197,16 +197,18 @@ class _DeviceSelection extends State<DeviceSelection> {
           Spacer(flex: 1),
           Container(
               padding: EdgeInsets.all(8),
+              width: MediaQuery.of(context).size.width * 0.9,
               height: MediaQuery.of(context).size.height * 0.5,
               child: ListView.builder(
                 itemCount: names.length,
+                itemExtent: MediaQuery.of(context).size.height * 0.125,
                 itemBuilder: (context, index) {
                   return Card(
                     //                           <-- Card widget
                     child: ListTile(
-                        leading: Icon(icons[index]),
-                        title: Text(names[index]),
-                        subtitle: Text(subtitles[index]),
+                        //leading: Column(mainAxisAlignment: MainAxisAlignment.center, children: [(Icon(icons[index]))]),
+                        title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [/*Icon(icons[index]), SizedBox(width: 30),*/ Text(names[index], style: Theme.of(context).textTheme.headline3)/*, SizedBox(width: 30)*/]),
+                        //subtitle: Text(subtitles[index]),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ChooseFiles(

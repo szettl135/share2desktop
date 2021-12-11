@@ -54,6 +54,13 @@ class MyApp extends StatelessWidget {
             headline2: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
             bodyText1: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             bodyText2: TextStyle(fontSize: 16.0),
+
+            //Cards
+            headline3: TextStyle(fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+            //Knopf1
+            headline4: TextStyle(fontSize: 25.0, color: Colors.black),
+            //Knopf2
+            headline5: TextStyle(fontSize: 30.0, color: Colors.black, fontWeight: FontWeight.bold),
           )
 
 
@@ -98,6 +105,13 @@ class MyApp extends StatelessWidget {
             headline2: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
             bodyText1: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             bodyText2: TextStyle(fontSize: 16.0),
+
+            //Cards
+            headline3: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            //Knopf1
+            headline4: TextStyle(fontSize: 25.0),
+            //Knopf2
+            headline5: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           )
           /* dark theme settings */
           ),
