@@ -40,12 +40,12 @@ class _ChooseFiles extends State<ChooseFiles> {
               
               ],),
               ),
-              Spacer(flex:1),
-              //SizedBox(width:20),
+              //Spacer(flex:1),
+              SizedBox(width:100),
               //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
               Icon(Icons.arrow_forward),
-              //SizedBox(width:20),
-              Spacer(flex:1),
+              SizedBox(width:100),
+              //Spacer(flex:1),
               //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
                Container(alignment: Alignment.topCenter, width:MediaQuery.of(context).size.width * 0.33, child:
                Column(children: [
