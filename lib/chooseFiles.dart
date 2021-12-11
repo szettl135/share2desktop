@@ -35,16 +35,16 @@ class _ChooseFiles extends State<ChooseFiles> {
               Container(width:MediaQuery.of(context).size.width * 0.33, child:
               Column(children: [
                 SizedBox(height:10),
-                Text("Dein Gerät:",style: Theme.of(context).textTheme.bodyText1),
+                Text("Dein Gerät:",style: Theme.of(context).textTheme.headline4),
                 SizedBox(height: 10),
               
               ],),
               ),
               //Spacer(flex:1),
-              SizedBox(width:100),
+              SizedBox(width:MediaQuery.of(context).size.width * 0.05),
               //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
               Icon(Icons.arrow_forward),
-              SizedBox(width:100),
+              SizedBox(width:MediaQuery.of(context).size.width * 0.05),
               //Spacer(flex:1),
               //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
                Container(alignment: Alignment.topCenter, width:MediaQuery.of(context).size.width * 0.33, child:
@@ -52,9 +52,9 @@ class _ChooseFiles extends State<ChooseFiles> {
                 // SizedBox(height:10),
                 //Text("Zum Gerät:",style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 10),
-                Icon(Icons.computer),
+                Icon(Icons.computer, size: 30.0,),
                 SizedBox(height: 10),
-                Text(widget.targetDeviceName),
+                Text(widget.targetDeviceName, style: Theme.of(context).textTheme.headline4),
                 SizedBox(height: 10)
               ],),
               ),
@@ -69,7 +69,7 @@ class _ChooseFiles extends State<ChooseFiles> {
                       context,
                       MaterialPageRoute(builder: (context) => ReceiveFiles()),
                     )
-                  },child: Text("Dateien auswählen")),
+                  },child: Text("Dateien auswählen", style: Theme.of(context).textTheme.headline3 )),
         Spacer(flex:2)
       ])
     );
