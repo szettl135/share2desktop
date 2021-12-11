@@ -181,7 +181,7 @@ class _DeviceSelection extends State<DeviceSelection> {
             children: [
               Spacer(flex: 1),
               Container(
-                  width: MediaQuery.of(context).size.width * 0.4,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   padding: EdgeInsets.all(10),
                     
                     child: Row(
@@ -234,17 +234,25 @@ class _DeviceSelection extends State<DeviceSelection> {
                 itemBuilder: (context, index) {
                   return Card(
 
-                    color: Colors.white.withOpacity(0.9),
-                    //                           <-- Card widget
+                    color: Color(0xffEBF7FF),
+                    
+                    //          
+                    //                 <-- Card widget
                     shape: ContinuousRectangleBorder(
-    borderRadius: BorderRadius.circular(40), // if you need this
+    borderRadius: BorderRadius.circular(10), // if you need this
     side: BorderSide(
       color: Colors.grey,
       width: 1,
     ),
   ),
                     child: ListTile(
-                        //leading: Column(mainAxisAlignment: MainAxisAlignment.center, children: [(Icon(icons[index]))]),
+                      leading: Container(
+                height: double.infinity,
+                child: Icon(icons[index])),
+                trailing: Container(
+                height: double.infinity,
+                child: Icon(Icons.arrow_right_alt)),
+                        
                         title: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center, 
