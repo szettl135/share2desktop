@@ -4,6 +4,8 @@ import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:qr_flutter/qr_flutter.dart';
+
 class DeviceSelection extends StatefulWidget {
   const DeviceSelection({Key? key}) : super(key: key);
 
@@ -55,10 +57,11 @@ class _DeviceSelection extends State<DeviceSelection> {
               children: <Widget>[
                 Text('Dein QR-Code', style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                Image(
+                Container(child: getQRCodeImage("http://share2desktop.com/"), width: 400),
+                /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
-                    width: 400),
+                    width: 400),*/
               ],
             ),
           ),
@@ -289,5 +292,15 @@ class _DeviceSelection extends State<DeviceSelection> {
               child: Text("Weiter"))*/
           Spacer(flex: 1),
         ]));
+  }
+
+  QrImage getQRCodeImage(data) {
+    return QrImage(
+        data: data,
+        version: QrVersions.auto,
+        gapless: false,
+        //embeddedImage: AssetImage('assets/icon.png'),
+        backgroundColor: Color(0xffFFFFFF),
+      );
   }
 }
