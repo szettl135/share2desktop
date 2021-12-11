@@ -1,6 +1,6 @@
 
 
-import 'package:flutter/material.dart';
+
 import 'package:share2desktop/languages.dart';
 
 class LanguageDe extends Languages{
