@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ReceiveFiles extends StatefulWidget {
@@ -11,23 +12,13 @@ class _ReceiveFiles extends State<ReceiveFiles> {
   Object? selectedDevice = null;
 
 final titel = [
-    Icons.computer,
-    Icons.computer,
-    Icons.phone_iphone,
-    Icons.phone_iphone,
-    Icons.computer,
-    Icons.phone_iphone,
-    Icons.phone_iphone,
+    "Urlaub.mp4",
+    "landschaft.png",
   ];
 
   final untertitel = [
-    Icons.computer,
-    Icons.computer,
-    Icons.phone_iphone,
-    Icons.phone_iphone,
-    Icons.computer,
-    Icons.phone_iphone,
-    Icons.phone_iphone,
+    "Video | 10 MB",
+    "Bild  | 25 kB"
   ];
   @override
   Widget build(BuildContext context) {
@@ -57,7 +48,7 @@ final titel = [
               width: MediaQuery.of(context).size.width * 0.9,
               height: MediaQuery.of(context).size.height * 0.5,
               child: ListView.builder(
-                itemCount: names.length,
+                itemCount: titel.length,
                 itemExtent: MediaQuery.of(context).size.height * 0.125,
                 itemBuilder: (context, index) {
                   return Card(
@@ -74,43 +65,29 @@ final titel = [
                       ),
                     ),
                     child: ListTile(
-                        leading: Container(
-                            height: double.infinity, child: Icon(icons[index])),
-                        trailing: Container(
-                            height: double.infinity,
-                            child: Icon(Icons.arrow_right_alt)),
+                        
                         title: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                      
-                                      child: AutoSizeText(
-                                        names[index],
-                                        //style: Theme.of(context)
-                                            //.textTheme
-                                           // .headline3,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                        maxLines: 3,
-                                        minFontSize: 0,
-                              maxFontSize: 25,
-                                        stepGranularity: 0.1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ))
-                                ],
-                              )
-
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AutoSizeText(titel[index]),
+                    SizedBox(width: 10),
+                    IconButton(
+                        onPressed: () => {print("angenommen")},
+                        icon: const Icon(Icons.save_alt)),
+                    SizedBox(width: 20),
+                    IconButton(
+                        onPressed: () => {print("abgelehnt")},
+                        icon: const Icon(Icons.close))
+                  ]),
+                  subtitle: Text(untertitel[index])
+                ),
                               /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
-                            ]),
+                            
                         //subtitle: Text(subtitles[index]),
                         
-                  )
-                },
-              )),
+                  );
+                
+              })),
           /*Container(
               padding: EdgeInsets.all(50),
               height: MediaQuery.of(context).size.height * 0.5,
@@ -159,8 +136,8 @@ final titel = [
                     ],
                   ),
                 )
-              ]))*/,
+              ]))*/
           Spacer(flex: 1)
-        ]));
+    ]));
   }
 }
