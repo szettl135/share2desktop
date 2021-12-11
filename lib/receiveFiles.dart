@@ -66,19 +66,20 @@ final titel = [
                     ),
                     child: ListTile(
                         
-                        title: Row(
+                        title: AutoSizeText(titel[index]),
+                        trailing: Container(width: MediaQuery.of(context).size.width*0.25,child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    AutoSizeText(titel[index]),
-                    SizedBox(width: 10),
+                    
                     IconButton(
                         onPressed: () => {print("angenommen")},
                         icon: const Icon(Icons.save_alt)),
-                    SizedBox(width: 20),
+                    Spacer(flex:1),
                     IconButton(
                         onPressed: () => {print("abgelehnt")},
-                        icon: const Icon(Icons.close))
-                  ]),
+                        icon: const Icon(Icons.close)),
+                        Spacer(flex:3)
+                  ])),
                   subtitle: Text(untertitel[index])
                 ),
                               /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
