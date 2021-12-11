@@ -93,9 +93,9 @@ class _DeviceSelection extends State<DeviceSelection> {
     );
   }
 
-  final names = ['computer1', 'computer2', 'handy1', 'handy2','hatzer pc1','hatzerphone 5','yeeeet'];
+  final names = ['computer1', 'computer2', 'handy1', 'handy2','gaming laptop','server','handy3'];
 
-  final subtitles = ['bumbo sein pc', 'jumbos computer', 'xd', 'yeet','xd', 'yeet','yought'];
+  final subtitles = ['12.34.56.78', '12.34.56.78', '12.34.56.78', '12.34.56.78','12.34.56.78', '12.34.56.78','12.34.56.78'];
 
   final icons = [
     Icons.computer,
