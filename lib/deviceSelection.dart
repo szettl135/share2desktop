@@ -35,7 +35,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                     ..onTap = () { launch('http://share2desktop.com/');
                   },)),
                 
-                Text("2021-12-07")
+                Text("2021-12-11")
               ],
             ),
           ),
