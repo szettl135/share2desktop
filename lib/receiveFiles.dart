@@ -10,6 +10,25 @@ class ReceiveFiles extends StatefulWidget {
 class _ReceiveFiles extends State<ReceiveFiles> {
   Object? selectedDevice = null;
 
+final titel = [
+    Icons.computer,
+    Icons.computer,
+    Icons.phone_iphone,
+    Icons.phone_iphone,
+    Icons.computer,
+    Icons.phone_iphone,
+    Icons.phone_iphone,
+  ];
+
+  final untertitel = [
+    Icons.computer,
+    Icons.computer,
+    Icons.phone_iphone,
+    Icons.phone_iphone,
+    Icons.computer,
+    Icons.phone_iphone,
+    Icons.phone_iphone,
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +37,7 @@ class _ReceiveFiles extends State<ReceiveFiles> {
           Container(
               padding: EdgeInsets.all(30),
               child: Text("Dateien empfangen",
-                  style: Theme.of(context).textTheme.headline2)),
+                  style: Theme.of(context).textTheme.headline4)),
           SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -34,6 +53,65 @@ class _ReceiveFiles extends State<ReceiveFiles> {
           ),
           Spacer(flex: 2),
           Container(
+              padding: EdgeInsets.all(8),
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: ListView.builder(
+                itemCount: names.length,
+                itemExtent: MediaQuery.of(context).size.height * 0.125,
+                itemBuilder: (context, index) {
+                  return Card(
+                    color: Color(0xffEBF7FF),
+
+                    //
+                    //                 <-- Card widget
+                    shape: ContinuousRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(10), // if you need this
+                      side: BorderSide(
+                        color: Colors.grey,
+                        width: 1,
+                      ),
+                    ),
+                    child: ListTile(
+                        leading: Container(
+                            height: double.infinity, child: Icon(icons[index])),
+                        trailing: Container(
+                            height: double.infinity,
+                            child: Icon(Icons.arrow_right_alt)),
+                        title: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                      
+                                      child: AutoSizeText(
+                                        names[index],
+                                        //style: Theme.of(context)
+                                            //.textTheme
+                                           // .headline3,
+                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        maxLines: 3,
+                                        minFontSize: 0,
+                              maxFontSize: 25,
+                                        stepGranularity: 0.1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ))
+                                ],
+                              )
+
+                              /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
+                            ]),
+                        //subtitle: Text(subtitles[index]),
+                        
+                  )
+                },
+              )),
+          /*Container(
               padding: EdgeInsets.all(50),
               height: MediaQuery.of(context).size.height * 0.5,
               child:
@@ -81,7 +159,7 @@ class _ReceiveFiles extends State<ReceiveFiles> {
                     ],
                   ),
                 )
-              ])),
+              ]))*/,
           Spacer(flex: 1)
         ]));
   }

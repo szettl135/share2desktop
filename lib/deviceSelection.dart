@@ -229,6 +229,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                               maxLines: 2,
                               minFontSize: 0,
                               maxFontSize: 30,
+                         
                               stepGranularity: 0.1,
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ]),

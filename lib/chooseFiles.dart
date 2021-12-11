@@ -1,4 +1,5 @@
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/receiveFiles.dart';
 
@@ -30,35 +31,39 @@ class _ChooseFiles extends State<ChooseFiles> {
         Row(
             mainAxisAlignment:MainAxisAlignment.center ,
             children: [
-              SizedBox(width: 20),
+              Spacer(),
+              //SizedBox(width: 20),
               //Spacer(flex:3),
               Container(width:MediaQuery.of(context).size.width * 0.33, child:
               Column(children: [
                 SizedBox(height:10),
-                Text("Dein Gerät:",style: Theme.of(context).textTheme.headline4),
+                AutoSizeText("Dein Gerät:",style: TextStyle(fontSize: 30.0), minFontSize: 0),
                 SizedBox(height: 10),
               
               ],),
               ),
               //Spacer(flex:1),
-              SizedBox(width:MediaQuery.of(context).size.width * 0.05),
+              SizedBox(width:MediaQuery.of(context).size.width * 0.025),
               //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
               Icon(Icons.arrow_forward),
-              SizedBox(width:MediaQuery.of(context).size.width * 0.05),
+              SizedBox(width:MediaQuery.of(context).size.width * 0.025),
               //Spacer(flex:1),
               //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
                Container(alignment: Alignment.topCenter, width:MediaQuery.of(context).size.width * 0.33, child:
-               Column(children: [
+               Column(crossAxisAlignment: CrossAxisAlignment.center,
+                 mainAxisAlignment: MainAxisAlignment.center, children: [
+                 
                 // SizedBox(height:10),
                 //Text("Zum Gerät:",style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 10),
                 Icon(Icons.computer, size: 30.0,),
                 SizedBox(height: 10),
-                Text(widget.targetDeviceName, style: Theme.of(context).textTheme.headline4),
+                AutoSizeText(widget.targetDeviceName, textAlign: TextAlign.center, style: TextStyle(fontSize: 25.0), minFontSize: 0, stepGranularity: 1, maxLines: 4,overflow: TextOverflow.ellipsis,),
                 SizedBox(height: 10)
               ],),
               ),
-              SizedBox(width: 20)
+              //SizedBox(width: 20)
+              Spacer()
               //Spacer(flex:3)
             ],
           ),
