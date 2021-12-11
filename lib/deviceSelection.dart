@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/chooseFiles.dart';
@@ -27,16 +28,19 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("Über die App", style: Theme.of(context).textTheme.bodyText1),
+                Text("Über die App",
+                    style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 Text("Von Team Share2Desktop"),
-                RichText(text: new TextSpan(
+                RichText(
+                    text: new TextSpan(
                   text: 'share2desktop.com',
                   style: new TextStyle(color: Colors.blue),
                   recognizer: new TapGestureRecognizer()
-                    ..onTap = () { launch('http://share2desktop.com/');
-                  },)),
-                
+                    ..onTap = () {
+                      launch('http://share2desktop.com/');
+                    },
+                )),
                 Text("2021-12-11")
               ],
             ),
@@ -45,6 +49,7 @@ class _DeviceSelection extends State<DeviceSelection> {
       },
     );
   }
+
   Future<void> _qrDialog() async {
     return showDialog<void>(
       context: context,
@@ -55,9 +60,12 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Dein QR-Code', style: Theme.of(context).textTheme.bodyText1),
+                Text('Dein QR-Code',
+                    style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                Container(child: getQRCodeImage("http://share2desktop.com/"), width: 400),
+                Container(
+                    child: getQRCodeImage("http://share2desktop.com/"),
+                    width: 400),
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
@@ -70,7 +78,7 @@ class _DeviceSelection extends State<DeviceSelection> {
     );
   }
 
-   Future<void> _selectTheme() async {
+  Future<void> _selectTheme() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -80,25 +88,49 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Wähle ein Theme', style: Theme.of(context).textTheme.bodyText1),
+                Text('Wähle ein Theme',
+                    style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                TextButton(child: Text("Helles Erscheinungsbild"), onPressed: () {AdaptiveTheme.of(context).setLight();}),
+                TextButton(
+                    child: Text("Helles Erscheinungsbild"),
+                    onPressed: () {
+                      AdaptiveTheme.of(context).setLight();
+                    }),
                 SizedBox(height: 10),
-                TextButton(child: Text("Dunkles Erscheinungsbild"), onPressed: () {AdaptiveTheme.of(context).setDark();}),
-    
+                TextButton(
+                    child: Text("Dunkles Erscheinungsbild"),
+                    onPressed: () {
+                      AdaptiveTheme.of(context).setDark();
+                    }),
+
                 //TextButton(child: Text("mspaint"), onPressed:  () {_notifier.value = mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light}),
               ],
             ),
           ),
         );
       },
-      
     );
   }
 
-  final names = ['Lennarts Desktop', 'Jonas Google Pixel 3', 'iPhone SE von David', 'Sebis Laptop','Christians MacBook Pro','Denis PCs','Alex Computer'];
+  final names = [
+    'Lennarts Desktop',
+    'Jonas Google Pixel 3',
+    'iPhone SE von David',
+    'Sebis Laptop',
+    'Christians MacBook',
+    'Denis PCs',
+    'Alex Computer'
+  ];
 
-  final subtitles = ['12.34.56.78', '12.34.56.78', '12.34.56.78', '12.34.56.78','12.34.56.78', '12.34.56.78','12.34.56.78'];
+  final subtitles = [
+    '12.34.56.78',
+    '12.34.56.78',
+    '12.34.56.78',
+    '12.34.56.78',
+    '12.34.56.78',
+    '12.34.56.78',
+    '12.34.56.78'
+  ];
 
   final icons = [
     Icons.computer,
@@ -137,7 +169,6 @@ class _DeviceSelection extends State<DeviceSelection> {
                 leading: Icon(Icons.visibility),
                 title: const Text('Aussehen'),
                 onTap: () {
-                
                   _selectTheme();
                   //Navigator.pop(context);
                 },
@@ -155,7 +186,6 @@ class _DeviceSelection extends State<DeviceSelection> {
           ),
         ),
         appBar: new AppBar(title: new Text("Share2Desktop")),
-        
         body: Column(children: [
           //Einstellungen
           /*Row(
@@ -183,92 +213,97 @@ class _DeviceSelection extends State<DeviceSelection> {
               Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   padding: EdgeInsets.all(10),
-                    
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Spacer(),
-                        OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            primary: Colors.black,
-                          
-                      padding: EdgeInsets.all(12)),
-                      //shape:RectangleBorder(
-              //borderRadius: BorderRadius.circular(16))),
-                    child: Row(children: [
-                      
-                      Icon(Icons.qr_code),
-                      SizedBox(width: 10),
-                      Text("Dein Gerät", style: Theme.of(context).textTheme.headline4),
-                    ]),
-                    onPressed: () => {_qrDialog()},
-
-                    ),
-                    Expanded(
-      child: IconButton(onPressed: () => (print("camera")), iconSize: 40.0, icon: Icon(Icons.photo_camera)),
-      ),
-                    
-                    
-                    ],)
-                    
-                    
-                  ),
-
-                  
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Spacer(),
+                      OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                            primary: Colors.black, padding: EdgeInsets.all(12)),
+                        //shape:RectangleBorder(
+                        //borderRadius: BorderRadius.circular(16))),
+                        child: Row(children: [
+                          Icon(Icons.qr_code),
+                          SizedBox(width: 10),
+                          AutoSizeText("Dein Gerät",
+                              maxLines: 2,
+                              minFontSize: 0,
+                              maxFontSize: 30,
+                              stepGranularity: 0.1,
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ]),
+                        onPressed: () => {_qrDialog()},
+                      ),
+                      Expanded(
+                        child: IconButton(
+                            onPressed: () => (print("camera")),
+                            iconSize: 40.0,
+                            icon: Icon(Icons.photo_camera)),
+                      ),
+                    ],
+                  )),
               Spacer(flex: 1)
             ],
           ),
 
           //Abstand
           Spacer(flex: 1),
-          Text("Geräte in der Nähe: ",style: Theme.of(context).textTheme.headline2),
-          SizedBox(height:20),
+          AutoSizeText("Geräte in der Nähe: ",
+              style: Theme.of(context).textTheme.headline2),
+          SizedBox(height: 20),
           Container(
               padding: EdgeInsets.all(8),
               width: MediaQuery.of(context).size.width * 0.9,
               height: MediaQuery.of(context).size.height * 0.5,
               child: ListView.builder(
-                
                 itemCount: names.length,
                 itemExtent: MediaQuery.of(context).size.height * 0.125,
                 itemBuilder: (context, index) {
                   return Card(
-
                     color: Color(0xffEBF7FF),
-                    
-                    //          
+
+                    //
                     //                 <-- Card widget
                     shape: ContinuousRectangleBorder(
-    borderRadius: BorderRadius.circular(10), // if you need this
-    side: BorderSide(
-      color: Colors.grey,
-      width: 1,
-    ),
-  ),
+                      borderRadius:
+                          BorderRadius.circular(10), // if you need this
+                      side: BorderSide(
+                        color: Colors.grey,
+                        width: 1,
+                      ),
+                    ),
                     child: ListTile(
-                      leading: Container(
-                height: double.infinity,
-                child: Icon(icons[index])),
-                trailing: Container(
-                height: double.infinity,
-                child: Icon(Icons.arrow_right_alt)),
-                        
+                        leading: Container(
+                            height: double.infinity, child: Icon(icons[index])),
+                        trailing: Container(
+                            height: double.infinity,
+                            child: Icon(Icons.arrow_right_alt)),
                         title: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center, 
-                          children: [
-                            Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  crossAxisAlignment: CrossAxisAlignment.center,
-  children: [
-    Text(names[index], style: Theme.of(context).textTheme.headline3)
-  ],
-)
-                            
-                          
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                      
+                                      child: AutoSizeText(
+                                        names[index],
+                                        //style: Theme.of(context)
+                                            //.textTheme
+                                           // .headline3,
+                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        maxLines: 3,
+                                        minFontSize: 0,
+                              maxFontSize: 25,
+                                        stepGranularity: 0.1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ))
+                                ],
+                              )
 
-                            
-                            /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
+                              /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
                             ]),
                         //subtitle: Text(subtitles[index]),
                         onTap: () {
@@ -355,11 +390,11 @@ class _DeviceSelection extends State<DeviceSelection> {
 
   QrImage getQRCodeImage(data) {
     return QrImage(
-        data: data,
-        version: QrVersions.auto,
-        gapless: false,
-        //embeddedImage: AssetImage('assets/icon.png'),
-        backgroundColor: Color(0xffFFFFFF),
-      );
+      data: data,
+      version: QrVersions.auto,
+      gapless: false,
+      //embeddedImage: AssetImage('assets/icon.png'),
+      backgroundColor: Color(0xffFFFFFF),
+    );
   }
 }
