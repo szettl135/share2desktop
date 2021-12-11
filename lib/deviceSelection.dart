@@ -93,7 +93,7 @@ class _DeviceSelection extends State<DeviceSelection> {
     );
   }
 
-  final names = ['computer1', 'computer2', 'handy1', 'handy2','gaming laptop','server','handy3'];
+  final names = ['Lennarts Desktop', 'Jonas Google Pixel 3', 'iPhone SE von David', 'Sebis Laptop','Christians MacBook Pro','Denis PCs','Alex Computer'];
 
   final subtitles = ['12.34.56.78', '12.34.56.78', '12.34.56.78', '12.34.56.78','12.34.56.78', '12.34.56.78','12.34.56.78'];
 
@@ -155,7 +155,7 @@ class _DeviceSelection extends State<DeviceSelection> {
         
         body: Column(children: [
           //Einstellungen
-          Row(
+          /*Row(
             children: [
               Spacer(flex: 1),
               Container(
@@ -172,29 +172,53 @@ class _DeviceSelection extends State<DeviceSelection> {
                   )),
               Spacer(flex: 1)
             ],
-          ),
+          ),*/
           SizedBox(height: 20),
           Row(
             children: [
               Spacer(flex: 1),
               Container(
-                  //width: MediaQuery.of(context).size.width * 0.4,
+                  width: MediaQuery.of(context).size.width * 0.4,
                   padding: EdgeInsets.all(10),
-                  alignment: Alignment.center,
-                  child: OutlinedButton(
+                    
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Spacer(),
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            primary: Colors.black,
+                      padding: EdgeInsets.all(12),
+                      shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16))),
                     child: Row(children: [
-                      Icon(Icons.camera),
+                      
+                      Icon(Icons.qr_code),
                       SizedBox(width: 10),
-                      Text("QR Code einscannen", style: Theme.of(context).textTheme.headline5),
+                      Text("Dein Gerät", style: Theme.of(context).textTheme.headline4),
                     ]),
-                    onPressed: () => {print("QR Code einscannen")},
-                  )),
+                    onPressed: () => {_qrDialog()},
+
+                    ),
+                    Expanded(
+      child: IconButton(onPressed: () => (print("camera")), iconSize: 40.0, icon: Icon(Icons.photo_camera)),
+      ),
+                    
+                    
+                    ],)
+                    
+                    
+                  ),
+
+                  
               Spacer(flex: 1)
             ],
           ),
 
           //Abstand
           Spacer(flex: 1),
+          Text("Geräte in der Nähe: ",style: Theme.of(context).textTheme.headline2),
+          SizedBox(height:20),
           Container(
               padding: EdgeInsets.all(8),
               width: MediaQuery.of(context).size.width * 0.9,
@@ -207,7 +231,16 @@ class _DeviceSelection extends State<DeviceSelection> {
                     //                           <-- Card widget
                     child: ListTile(
                         //leading: Column(mainAxisAlignment: MainAxisAlignment.center, children: [(Icon(icons[index]))]),
-                        title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [/*Icon(icons[index]), SizedBox(width: 30),*/ Text(names[index], style: Theme.of(context).textTheme.headline3)/*, SizedBox(width: 30)*/]),
+                        title: Row(
+                          
+                          mainAxisAlignment: MainAxisAlignment.center, 
+                          children: [
+                            
+                          
+
+                            
+                            /*Icon(icons[index]), SizedBox(width: 30),*/ Text(names[index], style: Theme.of(context).textTheme.headline3)/*, SizedBox(width: 30)*/
+                            ]),
                         //subtitle: Text(subtitles[index]),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(

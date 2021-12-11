@@ -51,16 +51,16 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Arial',
           textTheme: const TextTheme(
             headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-            headline2: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+            headline2: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
             bodyText1: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             bodyText2: TextStyle(fontSize: 16.0),
 
             //Cards
-            headline3: TextStyle(fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+            headline3: TextStyle(fontSize: 25.0, color: Colors.black, fontWeight: FontWeight.bold),
             //Knopf1
-            headline4: TextStyle(fontSize: 25.0, color: Colors.black),
+            headline4: TextStyle(fontSize: 30.0, color: Colors.black),
             //Knopf2
-            headline5: TextStyle(fontSize: 30.0, color: Colors.black, fontWeight: FontWeight.bold),
+            headline5: TextStyle(fontSize: 35.0, color: Colors.black, fontWeight: FontWeight.bold),
           )
 
 
@@ -107,11 +107,11 @@ class MyApp extends StatelessWidget {
             bodyText2: TextStyle(fontSize: 16.0),
 
             //Cards
-            headline3: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            headline3: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
             //Knopf1
-            headline4: TextStyle(fontSize: 25.0),
+            headline4: TextStyle(fontSize: 30.0),
             //Knopf2
-            headline5: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+            headline5: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
           )
           /* dark theme settings */
           ),
