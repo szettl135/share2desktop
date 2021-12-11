@@ -191,9 +191,10 @@ class _DeviceSelection extends State<DeviceSelection> {
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
                             primary: Colors.black,
-                      padding: EdgeInsets.all(12),
-                      shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16))),
+                          
+                      padding: EdgeInsets.all(12)),
+                      //shape:RectangleBorder(
+              //borderRadius: BorderRadius.circular(16))),
                     child: Row(children: [
                       
                       Icon(Icons.qr_code),
@@ -227,22 +228,39 @@ class _DeviceSelection extends State<DeviceSelection> {
               width: MediaQuery.of(context).size.width * 0.9,
               height: MediaQuery.of(context).size.height * 0.5,
               child: ListView.builder(
+                
                 itemCount: names.length,
                 itemExtent: MediaQuery.of(context).size.height * 0.125,
                 itemBuilder: (context, index) {
                   return Card(
+
+                    color: Colors.white.withOpacity(0.9),
                     //                           <-- Card widget
+                    shape: ContinuousRectangleBorder(
+    borderRadius: BorderRadius.circular(40), // if you need this
+    side: BorderSide(
+      color: Colors.grey,
+      width: 1,
+    ),
+  ),
                     child: ListTile(
                         //leading: Column(mainAxisAlignment: MainAxisAlignment.center, children: [(Icon(icons[index]))]),
                         title: Row(
-                          
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center, 
                           children: [
+                            Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    Text(names[index], style: Theme.of(context).textTheme.headline3)
+  ],
+)
                             
                           
 
                             
-                            /*Icon(icons[index]), SizedBox(width: 30),*/ Text(names[index], style: Theme.of(context).textTheme.headline3)/*, SizedBox(width: 30)*/
+                            /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
                             ]),
                         //subtitle: Text(subtitles[index]),
                         onTap: () {
