@@ -42,7 +42,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                       launch('http://share2desktop.com/');
                     },
                 )),
-                Text("2021-12-11")
+                Text("2021-12-13")
               ],
             ),
           ),
@@ -121,19 +121,13 @@ class _DeviceSelection extends State<DeviceSelection> {
     'Sebis Laptop',
     'Christians MacBook Pro',
     'Denis PCs',
-    'Alex Computer'
+    'Alex Computer',
+    'Lennarts DesktopLennarts Desktop',
+    'Bladees Handy'
+    //'Christians MacBook ProChristians MacBook ProChristians MacBook Pro'
   ];
 
-  final subtitles = [
-    '12.34.56.78',
-    '12.34.56.78',
-    '12.34.56.78',
-    '12.34.56.78',
-    '12.34.56.78',
-    '12.34.56.78',
-    '12.34.56.78'
-  ];
-
+  
   final icons = [
     Icons.computer,
     Icons.computer,
@@ -142,7 +136,11 @@ class _DeviceSelection extends State<DeviceSelection> {
     Icons.computer,
     Icons.phone_iphone,
     Icons.phone_iphone,
+    Icons.phone_iphone,
+    Icons.phone_iphone
   ];
+
+  var devicesGroup = AutoSizeGroup();
 
   @override
   Widget build(BuildContext context) {
@@ -226,17 +224,17 @@ class _DeviceSelection extends State<DeviceSelection> {
                         //shape:RectangleBorder(
                         //borderRadius: BorderRadius.circular(16))),
                         child: Row(children: [
-                          Icon(Icons.qr_code),
+                          Icon(Icons.qr_code, color: Theme.of(context).textTheme.headline4!.color),
                           SizedBox(width: 10),
                           Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.25, child:  
                           AutoSizeText("Dein Gerät",
                           textAlign: TextAlign.center,
                               maxLines: 1,
-                              //minFontSize: 0,
-                              //maxFontSize: 30,
-                              presetFontSizes: [30, 15, 5],
-                              stepGranularity: 0.1,
-                          style: TextStyle(fontWeight: FontWeight.bold))),
+                              minFontSize: 0,
+                              maxFontSize: 30,
+                              //presetFontSizes: [30, 15, 5],
+                              stepGranularity: 1,
+                          style: Theme.of(context).textTheme.headline4)),
                               SizedBox(width: 10),
                               Icon(Icons.qr_code, color: Colors.transparent),
                         ],
@@ -268,7 +266,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                 itemExtent: MediaQuery.of(context).size.height * 0.125,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Color(0xffEBF7FF),
+                    color: Theme.of(context).scaffoldBackgroundColor,
 
                     //
                     //                 <-- Card widget
@@ -304,11 +302,13 @@ class _DeviceSelection extends State<DeviceSelection> {
                                            // .headline3,
                                         style: TextStyle(fontWeight: FontWeight.bold),
                                         //maxLines: 3,
-                                        maxLines: 2,
-                                        presetFontSizes: [25, 15, 5],
+                                        maxLines: 1,
+                                        //presetFontSizes: [25, 15, 5],
                                         //minFontSize: 0,
-                                        //maxFontSize: 25,
-                                        //stepGranularity: 0.1,
+                                        group: devicesGroup,
+                                        //overflowReplacement: Text(names[index].substring(0,2)+"..."),
+                                        maxFontSize: 25,
+                                        stepGranularity: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ))
                                 ],

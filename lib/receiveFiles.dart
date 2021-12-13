@@ -11,6 +11,9 @@ class ReceiveFiles extends StatefulWidget {
 class _ReceiveFiles extends State<ReceiveFiles> {
   Object? selectedDevice = null;
 
+var filesGroup = AutoSizeGroup();
+var subGroup = AutoSizeGroup();
+
 final titel = [
     "Urlaub.mp4",
     "landschaft.png",
@@ -39,11 +42,11 @@ final titel = [
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               OutlinedButton(
-                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText("Alles annehmen", textAlign: TextAlign.center, maxLines: 1, presetFontSizes: [25, 15, 5])),
+                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText("Alles annehmen", textAlign: TextAlign.center, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
                   onPressed: () => {print("alles annehmen")}),
               SizedBox(width: 30),
               OutlinedButton(
-                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText("Alles ablehnen", textAlign: TextAlign.center, maxLines: 1,presetFontSizes: [25, 15, 5])),
+                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText("Alles ablehnen", textAlign: TextAlign.center, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
                   onPressed: () => {print("ablehnen")})
             ],
           ),
@@ -57,7 +60,7 @@ final titel = [
                 itemExtent: MediaQuery.of(context).size.height * 0.125,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Color(0xffEBF7FF),
+                    color: Theme.of(context).scaffoldBackgroundColor,
 
                     //
                     //                 <-- Card widget
@@ -72,7 +75,7 @@ final titel = [
                     child: Column( mainAxisAlignment: MainAxisAlignment.center,
  crossAxisAlignment: CrossAxisAlignment.center, children:[ ListTile(
                         
-                        title: Container(width: MediaQuery.of(context).size.width*0.50, child: AutoSizeText(titel[index], maxLines: 1, presetFontSizes: [30, 20, 15])),
+                        title: Container(width: MediaQuery.of(context).size.width*0.50, child: AutoSizeText(titel[index], group: filesGroup, maxLines: 1, minFontSize: 5, maxFontSize: 30, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
                         trailing: Container(alignment: Alignment.centerRight, width: MediaQuery.of(context).size.width*0.25,child: Row(
                   //mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -86,7 +89,7 @@ final titel = [
                         icon: const Icon(Icons.close)),
                         Spacer(flex:3)
                   ])),
-                  subtitle: Container(width:MediaQuery.of(context).size.width*0.50, child:  AutoSizeText(untertitel[index], maxLines: 1, presetFontSizes: [20, 15, 10])
+                  subtitle: Container(width:MediaQuery.of(context).size.width*0.50, child:  AutoSizeText(untertitel[index], group: subGroup, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1,overflow: TextOverflow.ellipsis)
                 )),
                               /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
                             
