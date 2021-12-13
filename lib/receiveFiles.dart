@@ -18,7 +18,7 @@ final titel = [
 
   final untertitel = [
     "Video | 10 MB",
-    "Bild  | 25 kB"
+    "Bild | 25 kB"
   ];
   @override
   Widget build(BuildContext context) {
@@ -26,19 +26,20 @@ final titel = [
         appBar: new AppBar(title: new Text("Share2Desktop")),
         body: Column(children: [
           Container(
-              padding: EdgeInsets.all(30),
-              child: Text("Dateien empfangen",
-                  style: Theme.of(context).textTheme.headline4)),
+              width: MediaQuery.of(context).size.width * 0.9,
+              padding: EdgeInsets.only(top: 30),
+              child: AutoSizeText("Dateien empfangen",
+                  style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center, maxLines: 1, presetFontSizes: [30, 15, 5])),
           SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               OutlinedButton(
-                  child: Text("Alles annehmen"),
+                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText("Alles annehmen", textAlign: TextAlign.center, maxLines: 1, presetFontSizes: [25, 15, 5])),
                   onPressed: () => {print("alles annehmen")}),
               SizedBox(width: 30),
               OutlinedButton(
-                  child: Text("Alles ablehnen"),
+                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText("Alles ablehnen", textAlign: TextAlign.center, maxLines: 1,presetFontSizes: [25, 15, 5])),
                   onPressed: () => {print("ablehnen")})
             ],
           ),
@@ -66,7 +67,7 @@ final titel = [
                     ),
                     child: ListTile(
                         
-                        title: AutoSizeText(titel[index]),
+                        title: Container(width: MediaQuery.of(context).size.width*0.50, child: AutoSizeText(titel[index], maxLines: 1, presetFontSizes: [30, 20, 15])),
                         trailing: Container(width: MediaQuery.of(context).size.width*0.25,child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -80,8 +81,8 @@ final titel = [
                         icon: const Icon(Icons.close)),
                         Spacer(flex:3)
                   ])),
-                  subtitle: Text(untertitel[index])
-                ),
+                  subtitle: Container(width:MediaQuery.of(context).size.width*0.50, child:  AutoSizeText(untertitel[index], maxLines: 1, presetFontSizes: [20, 15, 10])
+                )),
                               /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
                             
                         //subtitle: Text(subtitles[index]),
