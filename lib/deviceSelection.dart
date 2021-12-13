@@ -211,7 +211,7 @@ class _DeviceSelection extends State<DeviceSelection> {
             children: [
               Spacer(flex: 1),
               Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.6,
                   padding: EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -234,7 +234,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                               //maxFontSize: 30,
                               presetFontSizes: [30, 15, 5],
                               stepGranularity: 0.1,
-                              style: TextStyle(fontWeight: FontWeight.bold))),
+                          style: TextStyle(fontWeight: FontWeight.bold))),
                               SizedBox(width: 10),
                               Icon(Icons.qr_code, color: Colors.transparent),
                         ],
