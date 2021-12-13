@@ -228,13 +228,16 @@ class _DeviceSelection extends State<DeviceSelection> {
                           SizedBox(width: 10),
                           Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.25, child:  
                           AutoSizeText("Dein Gerät",
+                          textAlign: TextAlign.center,
                               maxLines: 1,
                               //minFontSize: 0,
                               //maxFontSize: 30,
                               presetFontSizes: [30, 15, 5],
                               stepGranularity: 0.1,
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                        )],
+                              style: TextStyle(fontWeight: FontWeight.bold))),
+                              SizedBox(width: 10),
+                              Icon(Icons.qr_code, color: Colors.transparent),
+                        ],
                         
                       )),
                       Expanded(
@@ -252,7 +255,7 @@ class _DeviceSelection extends State<DeviceSelection> {
           //Abstand
           Spacer(flex: 1),
           AutoSizeText("Geräte in der Nähe: ",
-              style: Theme.of(context).textTheme.headline2),
+              style: Theme.of(context).textTheme.headline2, textAlign: TextAlign.center),
           SizedBox(height: 20),
           Container(
               padding: EdgeInsets.all(8),
