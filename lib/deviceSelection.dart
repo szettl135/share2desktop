@@ -226,7 +226,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                         child: Row(children: [
                           Icon(Icons.qr_code),
                           SizedBox(width: 10),
-                          Container(width: MediaQuery.of(context).size.width * 0.25, child:  
+                          Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.25, child:  
                           AutoSizeText("Dein Gerät",
                               maxLines: 1,
                               //minFontSize: 0,
@@ -290,6 +290,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
+                                    alignment: Alignment.center,
                                       width: MediaQuery.of(context).size.width * 0.45,
                                       child: AutoSizeText(
                                         names[index],

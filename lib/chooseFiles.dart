@@ -29,7 +29,8 @@ class _ChooseFiles extends State<ChooseFiles> {
       body: Column(children: [
         Container(padding: EdgeInsets.all(30), child:
         Row(
-            mainAxisAlignment:MainAxisAlignment.center ,
+            //mainAxisAlignment:MainAxisAlignment.center ,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Spacer(),
               //SizedBox(width: 20),
@@ -37,7 +38,7 @@ class _ChooseFiles extends State<ChooseFiles> {
               Container(width:MediaQuery.of(context).size.width * 0.33, child:
               Column(children: [
                 SizedBox(height:10),
-                Container(width: MediaQuery.of(context).size.width * 0.30,
+                Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.30,
                   child:
                 AutoSizeText("Dein Gerät",style: Theme.of(context).textTheme.headline4, maxLines: 1, presetFontSizes: [25, 15, 5])),
                 SizedBox(height: 10),
@@ -60,7 +61,7 @@ class _ChooseFiles extends State<ChooseFiles> {
                 SizedBox(height: 10),
                 Icon(Icons.computer, size: 30.0,),
                 SizedBox(height: 10),
-                Container(width: MediaQuery.of(context).size.width * 0.30,
+                Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.30,
                 child: 
                 AutoSizeText(widget.targetDeviceName, textAlign: TextAlign.center, presetFontSizes: [25, 15, 5], style: Theme.of(context).textTheme.headline4,  maxLines: 2,overflow: TextOverflow.ellipsis,),
                 ),SizedBox(height: 10)
@@ -78,7 +79,7 @@ class _ChooseFiles extends State<ChooseFiles> {
                       context,
                       MaterialPageRoute(builder: (context) => ReceiveFiles()),
                     )
-                  },child: Container(
+                  },child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: AutoSizeText("Dateien auswählen", maxLines: 1, textAlign: TextAlign.center, presetFontSizes: [25, 15, 5], style: Theme.of(context).textTheme.headline3 ))

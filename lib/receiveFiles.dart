@@ -14,11 +14,15 @@ class _ReceiveFiles extends State<ReceiveFiles> {
 final titel = [
     "Urlaub.mp4",
     "landschaft.png",
+    "bib.zip",
+    "trainingsplan.docx"
   ];
 
   final untertitel = [
     "Video | 10 MB",
-    "Bild | 25 kB"
+    "Bild | 25 kB",
+    "Archiv | 5 MB",
+    "Text (Word) | 15 kB"
   ];
   @override
   Widget build(BuildContext context) {
