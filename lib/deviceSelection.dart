@@ -222,7 +222,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                         //shape:RectangleBorder(
                         //borderRadius: BorderRadius.circular(16))),
                         child: Row(children: [
-                          Icon(Icons.qr_code),
+                          Icon(Icons.qr_code, color: Theme.of(context).textTheme.headline4!.color),
                           SizedBox(width: 10),
                           Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.25, child:  
                           AutoSizeText("Dein Gerät",
@@ -232,7 +232,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                               maxFontSize: 30,
                               //presetFontSizes: [30, 15, 5],
                               stepGranularity: 1,
-                          style: TextStyle(fontWeight: FontWeight.bold))),
+                          style: Theme.of(context).textTheme.headline4)),
                               SizedBox(width: 10),
                               Icon(Icons.qr_code, color: Colors.transparent),
                         ],
@@ -264,7 +264,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                 itemExtent: MediaQuery.of(context).size.height * 0.125,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Color(0xffEBF7FF),
+                    color: Theme.of(context).scaffoldBackgroundColor,
 
                     //
                     //                 <-- Card widget

@@ -60,7 +60,7 @@ final titel = [
                 itemExtent: MediaQuery.of(context).size.height * 0.125,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Color(0xffEBF7FF),
+                    color: Theme.of(context).scaffoldBackgroundColor,
 
                     //
                     //                 <-- Card widget
