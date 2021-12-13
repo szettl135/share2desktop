@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:share2desktop/deviceInfo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
@@ -51,6 +52,7 @@ class _DeviceSelection extends State<DeviceSelection> {
   }
 
   Future<void> _qrDialog() async {
+    var deviceData = await getDeviceInfo();
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -64,7 +66,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 Container(
-                    child: getQRCodeImage("http://share2desktop.com/"),
+                    child: getQRCodeImage(deviceData.id),
                     width: 400),
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
