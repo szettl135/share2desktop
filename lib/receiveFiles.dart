@@ -11,6 +11,8 @@ class ReceiveFiles extends StatefulWidget {
 class _ReceiveFiles extends State<ReceiveFiles> {
   Object? selectedDevice = null;
 
+var filesGroup = AutoSizeGroup();
+
 final titel = [
     "Urlaub.mp4",
     "landschaft.png",
@@ -72,7 +74,7 @@ final titel = [
                     child: Column( mainAxisAlignment: MainAxisAlignment.center,
  crossAxisAlignment: CrossAxisAlignment.center, children:[ ListTile(
                         
-                        title: Container(width: MediaQuery.of(context).size.width*0.50, child: AutoSizeText(titel[index], maxLines: 1, presetFontSizes: [30, 20, 15])),
+                        title: Container(width: MediaQuery.of(context).size.width*0.50, child: AutoSizeText(titel[index], group: filesGroup, maxLines: 1, presetFontSizes: [30, 20, 15])),
                         trailing: Container(alignment: Alignment.centerRight, width: MediaQuery.of(context).size.width*0.25,child: Row(
                   //mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -86,7 +88,7 @@ final titel = [
                         icon: const Icon(Icons.close)),
                         Spacer(flex:3)
                   ])),
-                  subtitle: Container(width:MediaQuery.of(context).size.width*0.50, child:  AutoSizeText(untertitel[index], maxLines: 1, presetFontSizes: [20, 15, 10])
+                  subtitle: Container(width:MediaQuery.of(context).size.width*0.50, child:  AutoSizeText(untertitel[index], group: filesGroup, maxLines: 1, presetFontSizes: [20, 15, 10])
                 )),
                               /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
                             

@@ -18,7 +18,7 @@ class ChooseFiles extends StatefulWidget {
 
 class _ChooseFiles extends State<ChooseFiles> {
  
-
+var devicesGroup = AutoSizeGroup();
 
    @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _ChooseFiles extends State<ChooseFiles> {
                 SizedBox(height:10),
                 Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.30,
                   child:
-                AutoSizeText("Dein Gerät",style: Theme.of(context).textTheme.headline4, maxLines: 1, presetFontSizes: [25, 15, 5])),
+                AutoSizeText("Dein Gerät",style: Theme.of(context).textTheme.headline4, group: devicesGroup, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1,overflow: TextOverflow.ellipsis,)),
                 SizedBox(height: 10),
               
               ],),
@@ -63,7 +63,7 @@ class _ChooseFiles extends State<ChooseFiles> {
                 SizedBox(height: 10),
                 Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.30,
                 child: 
-                AutoSizeText(widget.targetDeviceName, textAlign: TextAlign.center, presetFontSizes: [25, 15, 5], style: Theme.of(context).textTheme.headline4,  maxLines: 2,overflow: TextOverflow.ellipsis,),
+                AutoSizeText(widget.targetDeviceName, textAlign: TextAlign.center, group: devicesGroup, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1, style: Theme.of(context).textTheme.headline4,overflow: TextOverflow.ellipsis,),
                 ),SizedBox(height: 10)
               ],),
               ),
@@ -82,7 +82,7 @@ class _ChooseFiles extends State<ChooseFiles> {
                   },child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
                     width: MediaQuery.of(context).size.width * 0.5,
-                    child: AutoSizeText("Dateien auswählen", maxLines: 1, textAlign: TextAlign.center, presetFontSizes: [25, 15, 5], style: Theme.of(context).textTheme.headline3 ))
+                    child: AutoSizeText("Dateien auswählen", maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 25, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
                     ),
         Spacer(flex:2)
       ])
