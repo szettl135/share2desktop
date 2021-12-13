@@ -65,7 +65,8 @@ final titel = [
                         width: 1,
                       ),
                     ),
-                    child: ListTile(
+                    child: Column( mainAxisAlignment: MainAxisAlignment.center,
+ crossAxisAlignment: CrossAxisAlignment.center, children:[ ListTile(
                         
                         title: Container(width: MediaQuery.of(context).size.width*0.50, child: AutoSizeText(titel[index], maxLines: 1, presetFontSizes: [30, 20, 15])),
                         trailing: Container(width: MediaQuery.of(context).size.width*0.25,child: Row(
@@ -87,7 +88,7 @@ final titel = [
                             
                         //subtitle: Text(subtitles[index]),
                         
-                  );
+                    ]));
                 
               })),
           /*Container(
