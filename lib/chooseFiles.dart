@@ -40,7 +40,7 @@ var devicesGroup = AutoSizeGroup();
                 SizedBox(height:10),
                 Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.30,
                   child:
-                AutoSizeText("Dein Gerät",style: Theme.of(context).textTheme.headline4, group: devicesGroup, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1,overflow: TextOverflow.ellipsis,)),
+                AutoSizeText("Dein Gerät",style: Theme.of(context).textTheme.headline4, group: devicesGroup, maxLines: 1, minFontSize: 5, maxFontSize: 30, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
                 SizedBox(height: 10),
               
               ],),
@@ -82,7 +82,7 @@ var devicesGroup = AutoSizeGroup();
                   },child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
                     width: MediaQuery.of(context).size.width * 0.5,
-                    child: AutoSizeText("Dateien auswählen", maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 25, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
+                    child: AutoSizeText("Dateien auswählen", maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
                     ),
         Spacer(flex:2)
       ])
