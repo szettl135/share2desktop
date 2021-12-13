@@ -73,8 +73,8 @@ final titel = [
  crossAxisAlignment: CrossAxisAlignment.center, children:[ ListTile(
                         
                         title: Container(width: MediaQuery.of(context).size.width*0.50, child: AutoSizeText(titel[index], maxLines: 1, presetFontSizes: [30, 20, 15])),
-                        trailing: Container(width: MediaQuery.of(context).size.width*0.25,child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                        trailing: Container(alignment: Alignment.centerRight, width: MediaQuery.of(context).size.width*0.25,child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     
                     IconButton(
