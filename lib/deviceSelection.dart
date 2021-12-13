@@ -117,7 +117,7 @@ class _DeviceSelection extends State<DeviceSelection> {
     'Jonas Google Pixel 3',
     'iPhone SE von David',
     'Sebis Laptop',
-    'Christians MacBook',
+    'Christians MacBook Pro',
     'Denis PCs',
     'Alex Computer'
   ];
@@ -220,21 +220,23 @@ class _DeviceSelection extends State<DeviceSelection> {
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
                             primary: Colors.black, padding: EdgeInsets.all(12)),
+                            onPressed: () => {_qrDialog()},
                         //shape:RectangleBorder(
                         //borderRadius: BorderRadius.circular(16))),
                         child: Row(children: [
                           Icon(Icons.qr_code),
                           SizedBox(width: 10),
+                          Container(width: MediaQuery.of(context).size.width * 0.25, child:  
                           AutoSizeText("Dein Gerät",
-                              maxLines: 2,
-                              minFontSize: 0,
-                              maxFontSize: 30,
-                         
+                              maxLines: 1,
+                              //minFontSize: 0,
+                              //maxFontSize: 30,
+                              presetFontSizes: [30, 15, 5],
                               stepGranularity: 0.1,
                               style: TextStyle(fontWeight: FontWeight.bold)),
-                        ]),
-                        onPressed: () => {_qrDialog()},
-                      ),
+                        )],
+                        
+                      )),
                       Expanded(
                         child: IconButton(
                             onPressed: () => (print("camera")),
@@ -288,17 +290,19 @@ class _DeviceSelection extends State<DeviceSelection> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                      
+                                      width: MediaQuery.of(context).size.width * 0.45,
                                       child: AutoSizeText(
                                         names[index],
                                         //style: Theme.of(context)
                                             //.textTheme
                                            // .headline3,
                                         style: TextStyle(fontWeight: FontWeight.bold),
-                                        maxLines: 3,
-                                        minFontSize: 0,
-                              maxFontSize: 25,
-                                        stepGranularity: 0.1,
+                                        //maxLines: 3,
+                                        maxLines: 2,
+                                        presetFontSizes: [25, 15, 5],
+                                        //minFontSize: 0,
+                                        //maxFontSize: 25,
+                                        //stepGranularity: 0.1,
                                         overflow: TextOverflow.ellipsis,
                                       ))
                                 ],
