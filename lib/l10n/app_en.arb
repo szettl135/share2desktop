@@ -1,6 +1,27 @@
 {
+    "aboutTheApp": "About the app",
+    "fromTeamS2D": "Made by Team Share2Desktop",
+
+    "yourQR": "Your QR-Code",
+    "nearbyDevices": "Nearby Devices:",
+    "chooseATheme": "Choose a theme",
+    "lightTheme": "Light theme",
+    "darkTheme": "Dark theme",
+    "settings": "Settings",
+
+    "appearance": "Appearance",
+    "scanQR": "Scan QR-Code",
+    "toDevice": "To Device:",
+    "chooseFiles": "Choose files",
+    "receiveFiles":"Receive files",
+    "acceptAll":"Accept all",
+    "rejectAll":"Reject all",
     "yourDevice": "Your Device",
     "@yourDevice" : {
         "description": "For the Button where you show the QR code of your device"
     }
+
+    
+
+
 }

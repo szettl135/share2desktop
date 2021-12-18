@@ -30,10 +30,10 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("Über die App",
+                Text(AppLocalizations.of(context)!.aboutTheApp,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                Text("Von Team Share2Desktop"),
+                Text(AppLocalizations.of(context)!.fromTeamS2D),
                 RichText(
                     text: new TextSpan(
                   text: 'share2desktop.com',
@@ -43,7 +43,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                       launch('http://share2desktop.com/');
                     },
                 )),
-                Text("2021-12-13")
+                Text("2021-12-18")
               ],
             ),
           ),
@@ -63,7 +63,7 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Dein QR-Code',
+                Text(AppLocalizations.of(context)!.yourQR,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 Container(child: getQRCodeImage(deviceData.id), width: 400),
@@ -89,17 +89,17 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Wähle ein Theme',
+                Text(AppLocalizations.of(context)!.chooseATheme,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 TextButton(
-                    child: Text("Helles Erscheinungsbild"),
+                    child: Text(AppLocalizations.of(context)!.lightTheme),
                     onPressed: () {
                       AdaptiveTheme.of(context).setLight();
                     }),
                 SizedBox(height: 10),
                 TextButton(
-                    child: Text("Dunkles Erscheinungsbild"),
+                    child: Text(AppLocalizations.of(context)!.darkTheme),
                     onPressed: () {
                       AdaptiveTheme.of(context).setDark();
                     }),
@@ -155,7 +155,7 @@ class _DeviceSelection extends State<DeviceSelection> {
               ),
               ListTile(
                 leading: Icon(Icons.settings),
-                title: const Text('Einstellungen'),
+                title: Text(AppLocalizations.of(context)!.settings),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -165,7 +165,7 @@ class _DeviceSelection extends State<DeviceSelection> {
               ),
               ListTile(
                 leading: Icon(Icons.visibility),
-                title: const Text('Aussehen'),
+                title: Text(AppLocalizations.of(context)!.appearance),
                 onTap: () {
                   _selectTheme();
                   //Navigator.pop(context);
@@ -173,7 +173,7 @@ class _DeviceSelection extends State<DeviceSelection> {
               ),
               ListTile(
                 leading: Icon(Icons.info),
-                title: const Text('Über die App'),
+                title: Text(AppLocalizations.of(context)!.aboutTheApp),
                 onTap: () {
                   _aboutDialog();
                   //das pop würden den dialog deleten
@@ -262,7 +262,7 @@ class _DeviceSelection extends State<DeviceSelection> {
 
           //Abstand
           Spacer(flex: 1),
-          AutoSizeText("Geräte in der Nähe: ",
+          AutoSizeText(AppLocalizations.of(context)!.nearbyDevices,
               style: Theme.of(context).textTheme.headline2,
               textAlign: TextAlign.center),
           SizedBox(height: 20),
