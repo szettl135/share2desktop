@@ -119,16 +119,8 @@ class MyApp extends StatelessWidget {
 
       initial: AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => MaterialApp(
-        localizationsDelegates: [
-    AppLocalizations.delegate, // Add this line
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-  ],
-  supportedLocales: [
-    Locale('en', ''), // English, no country code
-    Locale('de', ''), // german, no country code
-  ],
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+  supportedLocales: AppLocalizations.supportedLocales,
         title: 'Share2Desktop',
         theme: theme,
         darkTheme: darkTheme,
