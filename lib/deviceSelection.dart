@@ -65,9 +65,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                 Text('Dein QR-Code',
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                Container(
-                    child: getQRCodeImage(deviceData.id),
-                    width: 400),
+                Container(child: getQRCodeImage(deviceData.id), width: 400),
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
@@ -127,7 +125,6 @@ class _DeviceSelection extends State<DeviceSelection> {
     //'Christians MacBook ProChristians MacBook ProChristians MacBook Pro'
   ];
 
-  
   final icons = [
     Icons.computer,
     Icons.computer,
@@ -218,28 +215,38 @@ class _DeviceSelection extends State<DeviceSelection> {
                     children: [
                       Spacer(),
                       OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            primary: Colors.black, padding: EdgeInsets.all(12)),
-                            onPressed: () => {_qrDialog()},
-                        //shape:RectangleBorder(
-                        //borderRadius: BorderRadius.circular(16))),
-                        child: Row(children: [
-                          Icon(Icons.qr_code, color: Theme.of(context).textTheme.headline4!.color),
-                          SizedBox(width: 10),
-                          Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.25, child:  
-                          AutoSizeText("Dein Gerät",
-                          textAlign: TextAlign.center,
-                              maxLines: 1,
-                              minFontSize: 0,
-                              maxFontSize: 30,
-                              //presetFontSizes: [30, 15, 5],
-                              stepGranularity: 1,
-                          style: Theme.of(context).textTheme.headline4)),
+                          style: OutlinedButton.styleFrom(
+                              primary: Colors.black,
+                              padding: EdgeInsets.all(12)),
+                          onPressed: () => {_qrDialog()},
+                          //shape:RectangleBorder(
+                          //borderRadius: BorderRadius.circular(16))),
+                          child: Row(
+                            children: [
+                              Icon(Icons.qr_code,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .headline4!
+                                      .color),
+                              SizedBox(width: 10),
+                              Container(
+                                  alignment: Alignment.center,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.25,
+                                  child: AutoSizeText("Dein Gerät",
+                                      textAlign: TextAlign.center,
+                                      maxLines: 1,
+                                      minFontSize: 0,
+                                      maxFontSize: 30,
+                                      //presetFontSizes: [30, 15, 5],
+                                      stepGranularity: 1,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline4)),
                               SizedBox(width: 10),
                               Icon(Icons.qr_code, color: Colors.transparent),
-                        ],
-                        
-                      )),
+                            ],
+                          )),
                       Expanded(
                         child: IconButton(
                             onPressed: () => (print("camera")),
@@ -255,7 +262,8 @@ class _DeviceSelection extends State<DeviceSelection> {
           //Abstand
           Spacer(flex: 1),
           AutoSizeText("Geräte in der Nähe: ",
-              style: Theme.of(context).textTheme.headline2, textAlign: TextAlign.center),
+              style: Theme.of(context).textTheme.headline2,
+              textAlign: TextAlign.center),
           SizedBox(height: 20),
           Container(
               padding: EdgeInsets.all(8),
@@ -293,14 +301,16 @@ class _DeviceSelection extends State<DeviceSelection> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    alignment: Alignment.center,
-                                      width: MediaQuery.of(context).size.width * 0.45,
+                                      alignment: Alignment.center,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.45,
                                       child: AutoSizeText(
                                         names[index],
                                         //style: Theme.of(context)
-                                            //.textTheme
-                                           // .headline3,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        //.textTheme
+                                        // .headline3,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                         //maxLines: 3,
                                         maxLines: 1,
                                         //presetFontSizes: [25, 15, 5],
