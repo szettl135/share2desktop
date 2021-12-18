@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+
+
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:share2desktop/deviceInfo.dart';
@@ -12,11 +15,27 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class DeviceSelection extends StatefulWidget {
   const DeviceSelection({Key? key}) : super(key: key);
 
+  static void setLocale(BuildContext context, Locale newLocale) async {
+      _DeviceSelection? state = context.findAncestorStateOfType<_DeviceSelection>();
+        state!.changeLanguage(newLocale);
+     }
+
   @override
   _DeviceSelection createState() => _DeviceSelection();
+
+  
 }
 
 class _DeviceSelection extends State<DeviceSelection> {
+
+  late Locale _locale;
+
+   changeLanguage(Locale locale) {
+     setState(() {
+      _locale = locale;
+     });
+    }
+    
   //bool isSwitched = false;
   Object? selectedDevice = null;
   final ValueNotifier<ThemeMode> _notifier = ValueNotifier(ThemeMode.light);
@@ -67,6 +86,35 @@ class _DeviceSelection extends State<DeviceSelection> {
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 Container(child: getQRCodeImage(deviceData.id), width: 400),
+                /*Image(
+                    image: AssetImage("assets/qrtest.png"),
+                    alignment: Alignment.center,
+                    width: 400),*/
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _settings() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(AppLocalizations.of(context)!.settings,
+                    style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 20),
+                TextButton(child: Text("German"), onPressed: (){DeviceSelection.setLocale(context, Locale("de")); }),
+                SizedBox(height: 10),
+                TextButton(child: Text("English"), onPressed: (){DeviceSelection.setLocale(context, Locale("en")); })
+                
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
@@ -160,7 +208,8 @@ class _DeviceSelection extends State<DeviceSelection> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  Navigator.pop(context);
+                  _settings();
+                  //Navigator.pop(context);
                 },
               ),
               ListTile(
@@ -175,6 +224,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                 leading: Icon(Icons.info),
                 title: Text(AppLocalizations.of(context)!.aboutTheApp),
                 onTap: () {
+                  
                   _aboutDialog();
                   //das pop würden den dialog deleten
                   //Navigator.pop(context);
@@ -419,4 +469,11 @@ class _DeviceSelection extends State<DeviceSelection> {
       backgroundColor: Color(0xffFFFFFF),
     );
   }
+
+  
+
+     
+
+  
 }
+
