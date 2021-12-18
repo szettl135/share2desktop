@@ -7,6 +7,7 @@ import 'package:share2desktop/deviceInfo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeviceSelection extends StatefulWidget {
   const DeviceSelection({Key? key}) : super(key: key);
@@ -29,10 +30,10 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("Über die App",
+                Text(AppLocalizations.of(context)!.aboutTheApp,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                Text("Von Team Share2Desktop"),
+                Text(AppLocalizations.of(context)!.fromTeamS2D),
                 RichText(
                     text: new TextSpan(
                   text: 'share2desktop.com',
@@ -42,7 +43,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                       launch('http://share2desktop.com/');
                     },
                 )),
-                Text("2021-12-13")
+                Text("2021-12-18")
               ],
             ),
           ),
@@ -62,12 +63,10 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Dein QR-Code',
+                Text(AppLocalizations.of(context)!.yourQR,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                Container(
-                    child: getQRCodeImage(deviceData.id),
-                    width: 400),
+                Container(child: getQRCodeImage(deviceData.id), width: 400),
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
@@ -90,17 +89,17 @@ class _DeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Wähle ein Theme',
+                Text(AppLocalizations.of(context)!.chooseATheme,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 TextButton(
-                    child: Text("Helles Erscheinungsbild"),
+                    child: Text(AppLocalizations.of(context)!.lightTheme),
                     onPressed: () {
                       AdaptiveTheme.of(context).setLight();
                     }),
                 SizedBox(height: 10),
                 TextButton(
-                    child: Text("Dunkles Erscheinungsbild"),
+                    child: Text(AppLocalizations.of(context)!.darkTheme),
                     onPressed: () {
                       AdaptiveTheme.of(context).setDark();
                     }),
@@ -127,7 +126,6 @@ class _DeviceSelection extends State<DeviceSelection> {
     //'Christians MacBook ProChristians MacBook ProChristians MacBook Pro'
   ];
 
-  
   final icons = [
     Icons.computer,
     Icons.computer,
@@ -157,7 +155,7 @@ class _DeviceSelection extends State<DeviceSelection> {
               ),
               ListTile(
                 leading: Icon(Icons.settings),
-                title: const Text('Einstellungen'),
+                title: Text(AppLocalizations.of(context)!.settings),
                 onTap: () {
                   // Update the state of the app
                   // ...
@@ -167,7 +165,7 @@ class _DeviceSelection extends State<DeviceSelection> {
               ),
               ListTile(
                 leading: Icon(Icons.visibility),
-                title: const Text('Aussehen'),
+                title: Text(AppLocalizations.of(context)!.appearance),
                 onTap: () {
                   _selectTheme();
                   //Navigator.pop(context);
@@ -175,7 +173,7 @@ class _DeviceSelection extends State<DeviceSelection> {
               ),
               ListTile(
                 leading: Icon(Icons.info),
-                title: const Text('Über die App'),
+                title: Text(AppLocalizations.of(context)!.aboutTheApp),
                 onTap: () {
                   _aboutDialog();
                   //das pop würden den dialog deleten
@@ -218,28 +216,38 @@ class _DeviceSelection extends State<DeviceSelection> {
                     children: [
                       Spacer(),
                       OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            primary: Colors.black, padding: EdgeInsets.all(12)),
-                            onPressed: () => {_qrDialog()},
-                        //shape:RectangleBorder(
-                        //borderRadius: BorderRadius.circular(16))),
-                        child: Row(children: [
-                          Icon(Icons.qr_code, color: Theme.of(context).textTheme.headline4!.color),
-                          SizedBox(width: 10),
-                          Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.25, child:  
-                          AutoSizeText("Dein Gerät",
-                          textAlign: TextAlign.center,
-                              maxLines: 1,
-                              minFontSize: 0,
-                              maxFontSize: 30,
-                              //presetFontSizes: [30, 15, 5],
-                              stepGranularity: 1,
-                          style: Theme.of(context).textTheme.headline4)),
+                          style: OutlinedButton.styleFrom(
+                              primary: Colors.black,
+                              padding: EdgeInsets.all(12)),
+                          onPressed: () => {_qrDialog()},
+                          //shape:RectangleBorder(
+                          //borderRadius: BorderRadius.circular(16))),
+                          child: Row(
+                            children: [
+                              Icon(Icons.qr_code,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .headline4!
+                                      .color),
+                              SizedBox(width: 10),
+                              Container(
+                                  alignment: Alignment.center,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.25,
+                                  child: AutoSizeText(AppLocalizations.of(context)!.yourDevice,
+                                      textAlign: TextAlign.center,
+                                      maxLines: 1,
+                                      minFontSize: 0,
+                                      maxFontSize: 30,
+                                      //presetFontSizes: [30, 15, 5],
+                                      stepGranularity: 1,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline4)),
                               SizedBox(width: 10),
                               Icon(Icons.qr_code, color: Colors.transparent),
-                        ],
-                        
-                      )),
+                            ],
+                          )),
                       Expanded(
                         child: IconButton(
                             onPressed: () => (print("camera")),
@@ -254,8 +262,9 @@ class _DeviceSelection extends State<DeviceSelection> {
 
           //Abstand
           Spacer(flex: 1),
-          AutoSizeText("Geräte in der Nähe: ",
-              style: Theme.of(context).textTheme.headline2, textAlign: TextAlign.center),
+          AutoSizeText(AppLocalizations.of(context)!.nearbyDevices,
+              style: Theme.of(context).textTheme.headline2,
+              textAlign: TextAlign.center),
           SizedBox(height: 20),
           Container(
               padding: EdgeInsets.all(8),
@@ -293,14 +302,16 @@ class _DeviceSelection extends State<DeviceSelection> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    alignment: Alignment.center,
-                                      width: MediaQuery.of(context).size.width * 0.45,
+                                      alignment: Alignment.center,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.45,
                                       child: AutoSizeText(
                                         names[index],
                                         //style: Theme.of(context)
-                                            //.textTheme
-                                           // .headline3,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        //.textTheme
+                                        // .headline3,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                         //maxLines: 3,
                                         maxLines: 1,
                                         //presetFontSizes: [25, 15, 5],

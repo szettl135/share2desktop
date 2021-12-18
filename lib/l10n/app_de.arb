@@ -1,0 +1,24 @@
+{
+    "aboutTheApp": "Über die App",
+    "fromTeamS2D": "Von Team Share2Desktop",
+
+    "yourQR": "Dein QR-Code",
+    "nearbyDevices": "Geräte in der Nähe:",
+    "chooseATheme": "Wähle ein Theme",
+    "lightTheme": "Helles Erscheinungsbild",
+    "darkTheme": "Dunkles Erscheinungsbild",
+    "settings": "Einstellungen",
+
+
+    "yourDevice": "Dein Gerät",
+
+    "appearance": "Aussehen",
+    "scanQR": "QR-Code einscannen",
+    "toDevice": "Zum Gerät:",
+    "chooseFiles": "Dateien auswählen",
+    "receiveFiles":"Dateien empfangen",
+    "acceptAll":"Alles annehmen",
+    "rejectAll":"Alles ablehnen"
+
+
+}

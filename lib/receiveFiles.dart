@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReceiveFiles extends StatefulWidget {
   const ReceiveFiles({Key? key}) : super(key: key);
@@ -35,18 +36,18 @@ final titel = [
           Container(
               width: MediaQuery.of(context).size.width * 0.9,
               padding: EdgeInsets.only(top: 30),
-              child: AutoSizeText("Dateien empfangen",
+              child: AutoSizeText(AppLocalizations.of(context)!.receiveFiles,
                   style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center, maxLines: 1, presetFontSizes: [30, 15, 5])),
           SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               OutlinedButton(
-                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText("Alles annehmen", textAlign: TextAlign.center, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
+                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText(AppLocalizations.of(context)!.acceptAll, textAlign: TextAlign.center, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
                   onPressed: () => {print("alles annehmen")}),
               SizedBox(width: 30),
               OutlinedButton(
-                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText("Alles ablehnen", textAlign: TextAlign.center, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
+                  child: Container(width: MediaQuery.of(context).size.width * 0.33, child: AutoSizeText(AppLocalizations.of(context)!.rejectAll, textAlign: TextAlign.center, maxLines: 1, minFontSize: 5, maxFontSize: 25, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
                   onPressed: () => {print("ablehnen")})
             ],
           ),

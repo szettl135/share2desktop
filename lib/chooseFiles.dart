@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:share2desktop/receiveFiles.dart';
 import 'package:file_picker/file_picker.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -58,7 +59,7 @@ var devicesGroup = AutoSizeGroup();
                 SizedBox(height:10),
                 Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.30,
                   child:
-                AutoSizeText("Dein Gerät",style: Theme.of(context).textTheme.headline4, group: devicesGroup, maxLines: 1, minFontSize: 5, maxFontSize: 30, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
+                AutoSizeText(AppLocalizations.of(context)!.yourDevice,style: Theme.of(context).textTheme.headline4, group: devicesGroup, maxLines: 1, minFontSize: 5, maxFontSize: 30, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
                 SizedBox(height: 10),
               
               ],),
@@ -100,13 +101,14 @@ var devicesGroup = AutoSizeGroup();
                   },child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
                     width: MediaQuery.of(context).size.width * 0.5,
-                    child: AutoSizeText("Fertig", maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
+                    child: AutoSizeText(AppLocalizations.of(context)!.chooseFiles, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
                     ),
         Spacer(flex:1),
         OutlinedButton(onPressed: _pickFile ,child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: AutoSizeText("Dateien auswählen", maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
+                    
                     ),
         Spacer(flex:2)
       ])
