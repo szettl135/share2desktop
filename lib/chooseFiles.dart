@@ -2,6 +2,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/receiveFiles.dart';
+import 'package:file_picker/file_picker.dart';
 
 
 import 'package:flutter/foundation.dart';
@@ -19,6 +20,23 @@ class ChooseFiles extends StatefulWidget {
 class _ChooseFiles extends State<ChooseFiles> {
  
 var devicesGroup = AutoSizeGroup();
+
+  void _pickFile() async {
+      
+    // opens storage to pick files and the picked file or files
+    // are assigned into result and if no file is chosen result is null.
+    // you can also toggle "allowMultiple" true or false depending on your need
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+  
+    // if no file is picked
+    if (result == null) return;
+  
+    // we will log the name, size and path of the
+    // first picked file (if multiple are selected)
+    print(result.files.first.name);
+    print(result.files.first.size);
+    print(result.files.first.path);
+  }
 
    @override
   Widget build(BuildContext context) {
@@ -80,6 +98,12 @@ var devicesGroup = AutoSizeGroup();
                       MaterialPageRoute(builder: (context) => ReceiveFiles()),
                     )
                   },child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
+                    
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: AutoSizeText("Fertig", maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
+                    ),
+        Spacer(flex:1),
+        OutlinedButton(onPressed: _pickFile ,child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: AutoSizeText("Dateien auswählen", maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
