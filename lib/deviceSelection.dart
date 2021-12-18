@@ -7,6 +7,7 @@ import 'package:share2desktop/deviceInfo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeviceSelection extends StatefulWidget {
   const DeviceSelection({Key? key}) : super(key: key);
@@ -233,7 +234,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                                   alignment: Alignment.center,
                                   width:
                                       MediaQuery.of(context).size.width * 0.25,
-                                  child: AutoSizeText("Dein Gerät",
+                                  child: AutoSizeText(AppLocalizations.of(context)!.yourDevice,
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
                                       minFontSize: 0,

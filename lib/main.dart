@@ -1,9 +1,8 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:share2desktop/appLocalizationDelegate.dart';
 import 'package:share2desktop/deviceSelection.dart';
-import 'package:share2desktop/startpage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -120,16 +119,16 @@ class MyApp extends StatelessWidget {
 
       initial: AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => MaterialApp(
-        supportedLocales: [
-          Locale('en', ''),
-          Locale('de', ''),
-        ],
-      localizationsDelegates: [
-        AppLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+        localizationsDelegates: [
+    AppLocalizations.delegate, // Add this line
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ],
+  supportedLocales: [
+    Locale('en', ''), // English, no country code
+    Locale('de', ''), // german, no country code
+  ],
         title: 'Share2Desktop',
         theme: theme,
         darkTheme: darkTheme,

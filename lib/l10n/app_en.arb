@@ -1,0 +1,6 @@
+{
+    "yourDevice": "Your Device",
+    "@yourDevice" : {
+        "description": "For the Button where you show the QR code of your device"
+    }
+}
