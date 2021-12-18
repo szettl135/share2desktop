@@ -3,7 +3,7 @@
 
 import 'package:share2desktop/languages.dart';
 
-class LanguageDe extends Languages{
+class LanguageEn extends Languages{
   
   
   @override
