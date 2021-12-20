@@ -1,8 +1,11 @@
 
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/receiveFiles.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:path/path.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -22,22 +25,39 @@ class _ChooseFiles extends State<ChooseFiles> {
  
 var devicesGroup = AutoSizeGroup();
 
+  
+  late List<File> _files = [];
+  final icons = [
+    Icons.computer,
+    Icons.computer,
+    Icons.phone_iphone,
+    Icons.phone_iphone,
+    Icons.computer,
+    Icons.phone_iphone,
+    Icons.phone_iphone,
+    Icons.phone_iphone,
+    Icons.phone_iphone
+  ];
+
   void _pickFile() async {
       
     // opens storage to pick files and the picked file or files
     // are assigned into result and if no file is chosen result is null.
     // you can also toggle "allowMultiple" true or false depending on your need
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-  
-    // if no file is picked
-    if (result == null) return;
-  
-    // we will log the name, size and path of the
-    // first picked file (if multiple are selected)
-    print(result.files.first.name);
-    print(result.files.first.size);
-    print(result.files.first.path);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+    //_files = await FilePicker.platform.pickFiles(allowMultiple: true);
+
+    if (result != null) {
+      //files = result.paths.map((path) => File(path!)).toList();
+      setState(() {
+        _files = result.paths.map((path) => File(path!)).toList();
+      });
+    } else {
+      // User canceled the picker
+    }
   }
+
+
 
    @override
   Widget build(BuildContext context) {
@@ -110,7 +130,66 @@ var devicesGroup = AutoSizeGroup();
                     child: AutoSizeText("Dateien auswählen", maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
                     
                     ),
-        Spacer(flex:2)
+        Spacer(flex:2),
+        Container(
+              padding: EdgeInsets.all(8),
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: ListView.builder(
+                itemCount: _files.length,
+                itemExtent: MediaQuery.of(context).size.height * 0.125,
+                itemBuilder: (context, index) {
+                  return Card(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    shape: ContinuousRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(10), // if you need this
+                      side: BorderSide(
+                        color: Colors.grey,
+                        width: 1,
+                      ),
+                    ),
+                    child: ListTile(
+                        leading: Container(
+                            height: double.infinity, child: Icon(icons[index])),
+                        trailing: Container(
+                            height: double.infinity,
+                            child: Icon(Icons.arrow_right_alt)),
+                        title: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                      alignment: Alignment.center,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.45,
+                                      child: AutoSizeText(
+                                        basename(_files[index].path),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                        maxLines: 1,
+                                        group: devicesGroup,
+                                        maxFontSize: 25,
+                                        stepGranularity: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ))
+                                ],
+                              )
+                            ]),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ChooseFiles(
+                                    targetDeviceName: _files[index].toString(),
+                                  )));
+                        }),
+                  );
+                },
+              )),
+        
       ])
     );
   }
