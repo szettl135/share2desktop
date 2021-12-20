@@ -46,9 +46,6 @@ var devicesGroup = AutoSizeGroup();
     // you can also toggle "allowMultiple" true or false depending on your need
     FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
     //_files = await FilePicker.platform.pickFiles(allowMultiple: true);
-  
-    // if no file is picked
-    if (_files == null) return;
 
     if (result != null) {
       //files = result.paths.map((path) => File(path!)).toList();
@@ -58,24 +55,9 @@ var devicesGroup = AutoSizeGroup();
     } else {
       // User canceled the picker
     }
-  
-    // we will log the name, size and path of the
-    // first picked file (if multiple are selected)
-    // print(_files!.files.first.name);
-    // print(_files!.files.first.size);
-    // print(_files!.files.first.path);
-    // print(_files!.count);
-    // print(_files!.files[0]);
-    
   }
 
-  Widget _buildRow(String pair) {
-     return ListTile(
-       title: Text(
-         pair,
-       ),
-     );
-   } 
+
 
    @override
   Widget build(BuildContext context) {
@@ -159,9 +141,6 @@ var devicesGroup = AutoSizeGroup();
                 itemBuilder: (context, index) {
                   return Card(
                     color: Theme.of(context).scaffoldBackgroundColor,
-
-                    //
-                    //                 <-- Card widget
                     shape: ContinuousRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(10), // if you need this
@@ -190,27 +169,17 @@ var devicesGroup = AutoSizeGroup();
                                           0.45,
                                       child: AutoSizeText(
                                         basename(_files[index].path),
-                                        //style: Theme.of(context)
-                                        //.textTheme
-                                        // .headline3,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
-                                        //maxLines: 3,
                                         maxLines: 1,
-                                        //presetFontSizes: [25, 15, 5],
-                                        //minFontSize: 0,
                                         group: devicesGroup,
-                                        //overflowReplacement: Text(names[index].substring(0,2)+"..."),
                                         maxFontSize: 25,
                                         stepGranularity: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ))
                                 ],
                               )
-
-                              /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
                             ]),
-                        //subtitle: Text(subtitles[index]),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ChooseFiles(
