@@ -19,7 +19,8 @@ class StartScreen extends StatelessWidget {
 
               //Logo und Titel
               Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
+                
+                  width: MediaQuery.of(context).size.width * 0.8,
                   child: AutoSizeText("Willkommen bei",
                       style: TextStyle(
                           color: Theme.of(context).textTheme.headline4!.color),
@@ -29,7 +30,7 @@ class StartScreen extends StatelessWidget {
                       presetFontSizes: [22, 12, 6])),
               SizedBox(height: 20),
               Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   child: AutoSizeText("Share2Desktop",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -37,7 +38,7 @@ class StartScreen extends StatelessWidget {
                       textAlign: TextAlign.left,
                       maxLines: 1,
                       presetFontSizes: [32, 16, 10])),
-              //SizedBox(height: 20),
+              SizedBox(height: 20),
               Divider(
                 color: Theme.of(context)
                     .textTheme
@@ -45,10 +46,10 @@ class StartScreen extends StatelessWidget {
                     .color, //color of divider
                 height: 5, //height spacing of divider
                 thickness: 3, //thickness of divier line
-                indent: 25, //spacing at the start of divider
-                endIndent: 25, //spacing at the end of divider
+                indent: MediaQuery.of(context).size.width * 0.1, //spacing at the start of divider
+                endIndent: MediaQuery.of(context).size.width * 0.1, //spacing at the end of divider
               ),
-
+              SizedBox(height: 20),
               Container(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: AutoSizeText(
@@ -59,7 +60,7 @@ class StartScreen extends StatelessWidget {
                     maxLines: 2,
                     presetFontSizes: [22, 12, 6]),
               ),
-
+              SizedBox(height: 10),
               Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: AutoSizeText.rich(
@@ -72,6 +73,7 @@ class StartScreen extends StatelessWidget {
                     ),
                     style: TextStyle(color: Colors.blue),
                     presetFontSizes: [22, 12, 6],
+                     group: smallGroup,
                   )),
 
               Spacer(flex: 2),
@@ -96,8 +98,9 @@ class StartScreen extends StatelessWidget {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Spacer(),Container(
-                  width: MediaQuery.of(context).size.width * 0.4,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [Spacer(flex:1),Container(
+                  width: MediaQuery.of(context).size.width * 0.45,
                   child: AutoSizeText.rich(
                     TextSpan(
                       text: 'Nutzungsbedingungen',
@@ -107,13 +110,19 @@ class StartScreen extends StatelessWidget {
                         },
                     ),
                     style: TextStyle(color: Colors.blue),
+                    group: smallGroup,
+                    textAlign: TextAlign.center,
                     presetFontSizes: [22, 12, 6],
                     maxLines: 1,
                   )),
-
-                  SizedBox(width: 30),
+                 // Spacer(flex:1),
+                 SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+                  //VerticalDivider(),
+                  Text("|"),
+                  //Spacer(flex:1),
+                   SizedBox(width: MediaQuery.of(context).size.width * 0.01),
                   Container(
-                  width: MediaQuery.of(context).size.width * 0.4,
+                  width: MediaQuery.of(context).size.width * 0.45,
                   child: AutoSizeText.rich(
                     TextSpan(
                       text: 'Datenschutzerklärung',
@@ -123,11 +132,14 @@ class StartScreen extends StatelessWidget {
                         },
                     ),
                     maxLines: 1,
+                    group: smallGroup,
+                    textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.blue),
                     presetFontSizes: [22, 12, 6],
                   )),
-                  Spacer()],
-            )
+                  Spacer(flex:1)],
+            ),
+            SizedBox(height: 50)
             ])));
   }
 }
