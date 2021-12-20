@@ -100,7 +100,7 @@ class StartScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [Spacer(flex:1),Container(
-                  width: MediaQuery.of(context).size.width * 0.45,
+                  width: MediaQuery.of(context).size.width * 0.4,
                   child: AutoSizeText.rich(
                     TextSpan(
                       text: 'Nutzungsbedingungen',
@@ -122,7 +122,7 @@ class StartScreen extends StatelessWidget {
                   //Spacer(flex:1),
                    SizedBox(width: MediaQuery.of(context).size.width * 0.01),
                   Container(
-                  width: MediaQuery.of(context).size.width * 0.45,
+                  width: MediaQuery.of(context).size.width * 0.4,
                   child: AutoSizeText.rich(
                     TextSpan(
                       text: 'Datenschutzerklärung',
