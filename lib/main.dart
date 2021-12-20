@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:share2desktop/deviceSelection.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:share2desktop/startscreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -129,7 +130,7 @@ class MyApp extends StatelessWidget {
         title: 'Share2Desktop',
         theme: theme,
         darkTheme: darkTheme,
-        home: DeviceSelection(),
+        home: StartScreen(),
       ),
     );
   }
