@@ -26,7 +26,10 @@
     "yourDevice": "Your Device",
     "@yourDevice" : {
         "description": "For the Button where you show the QR code of your device"
-    }
+    },
+
+    "instructions1_header": "1. How it works and permissions",
+    "instructions1": "Share2Desktop does not save any of your data. You have to allow access to your files when asked though, so the app can function properly. The files go through our app for a short amount of time (this is why you need to grant access), then they are sent to the other device through a peer-to-peer (device to device) Connection; your data is then immediatly deleted from our app, we save nothing. You have to grant permission so you can transmit data."
 
     
 

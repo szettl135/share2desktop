@@ -23,7 +23,10 @@
     "chooseFiles": "Dateien auswählen",
     "receiveFiles":"Dateien empfangen",
     "acceptAll":"Alles annehmen",
-    "rejectAll":"Alles ablehnen"
+    "rejectAll":"Alles ablehnen",
+
+    "instructions1_header": "1. Funktionsweise und Berechtigungen",
+    "instructions1": "Share2Desktop speichert keine Ihrer Daten. Sie müssen jedoch Zugriff auf Ihre Daten erlauben, wenn danach gerfragt wird, damit die App funktioniert. Die Dateien gehen dann kurz durch unsere App durch (weswegen die Berechtigung benötigt wird), werden an das andere Geräte mit einer Peer-to-peer (Gerät zu Gerät) Verbindung übertragen und sofort gelöscht/nicht gespeichert. Sie müssen die Berechtigung gewähren, damit Sie Ihre Dateien übertragen können."
 
 
 }
