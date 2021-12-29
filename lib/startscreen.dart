@@ -28,8 +28,8 @@ class StartScreen extends StatelessWidget {
                       group: smallGroup,
                       textAlign: TextAlign.left,
                       maxLines: 1,
-                      minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis
-                      //presetFontSizes: [22, 12, 6]
+                     // minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis
+                      presetFontSizes: [22, 12, 6]
                       )),
               SizedBox(height: 20),
               Container(
@@ -40,8 +40,8 @@ class StartScreen extends StatelessWidget {
                           color: Theme.of(context).textTheme.headline4!.color),
                       textAlign: TextAlign.left,
                       maxLines: 1,
-                      minFontSize: 10, maxFontSize: 32, stepGranularity: 1,overflow: TextOverflow.ellipsis
-                      //presetFontSizes: [32, 16, 10]
+                      //minFontSize: 10, maxFontSize: 32, stepGranularity: 1,overflow: TextOverflow.ellipsis
+                      presetFontSizes: [32, 16, 10]
                       )),
               SizedBox(height: 20),
               Divider(
@@ -63,8 +63,8 @@ class StartScreen extends StatelessWidget {
                     group: smallGroup,
                     textAlign: TextAlign.left,
                     maxLines: 2,
-                    minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis
-                    //presetFontSizes: [22, 12, 6]
+                    //minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis
+                    presetFontSizes: [22, 12, 6]
                     ),
               ),
               SizedBox(height: 10),
@@ -79,8 +79,8 @@ class StartScreen extends StatelessWidget {
                         },
                     ),
                     style: TextStyle(color: Colors.blue),
-                    minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis,
-                    //presetFontSizes: [22, 12, 6],
+                   // minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis,
+                    presetFontSizes: [22, 12, 6],
                      group: smallGroup,
                   )),
 
@@ -120,8 +120,8 @@ class StartScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.blue),
                     group: smallGroup,
                     textAlign: TextAlign.center,
-                    minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis,
-                    //presetFontSizes: [22, 12, 6],
+                    //minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis,
+                    presetFontSizes: [22, 12, 6],
                     maxLines: 1,
                   )),
                  // Spacer(flex:1),
@@ -144,8 +144,8 @@ class StartScreen extends StatelessWidget {
                     group: smallGroup,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.blue),
-                    minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis,
-                    //presetFontSizes: [22, 12, 6],
+                    //minFontSize: 6, maxFontSize: 22, stepGranularity: 1,overflow: TextOverflow.ellipsis,
+                    presetFontSizes: [22, 12, 6],
                   )),
                   Spacer(flex:1)],
             ),
