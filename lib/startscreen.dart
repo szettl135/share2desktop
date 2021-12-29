@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:share2desktop/anleitung.dart';
 import 'package:share2desktop/deviceSelection.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -75,7 +76,10 @@ class StartScreen extends StatelessWidget {
                       text: AppLocalizations.of(context)!.instructions,
                       recognizer: new TapGestureRecognizer()
                         ..onTap = () {
-                          launch('http://share2desktop.com/');
+                          //launch('http://share2desktop.com/');
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Anleitung(
+                                  )));
                         },
                     ),
                     style: TextStyle(color: Colors.blue),

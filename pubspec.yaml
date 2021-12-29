@@ -48,6 +48,7 @@ dependencies:
   file_picker: ^4.2.8
   flutter_localizations:
     sdk: flutter
+  flutter_image_slideshow: any
     
 
   # The following adds the Cupertino Icons font to your application.
@@ -94,6 +95,10 @@ flutter:
   assets:
       - assets/icon.png
       - assets/qrtest.png
+      - assets/slideshow1.png
+      - assets/slideshow2.png
+      - assets/slideshow3.png
+      - assets/slideshow4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
