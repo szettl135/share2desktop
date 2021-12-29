@@ -8,10 +8,13 @@
     "lightTheme": "Helles Erscheinungsbild",
     "darkTheme": "Dunkles Erscheinungsbild",
     "settings": "Einstellungen",
-
-
+    "welcomeTo": "Willkommen bei",
+    "continuee": "Weiter",
+    "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutzerklärung",
+    "instructions": "Anleitung",
     "yourDevice": "Dein Gerät",
-
+    "installOnOtherDevices": "Installieren Sie bitte die Share2Desktop App auch auf Ihrem anderen Gerät.",
     "appearance": "Aussehen",
     "scanQR": "QR-Code einscannen",
     "toDevice": "Zum Gerät:",

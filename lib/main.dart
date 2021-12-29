@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,11 +14,24 @@ void main() {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+
+  static _MyAppState? of(BuildContext context) => context.findAncestorStateOfType<_MyAppState>();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale _locale =  window.locales[0];//new Locale("de");//new Locale(Platform.localeName.substring(0,2));//getCurrentLocale();//WidgetsBinding.instance!.window.locales[0];//findSystemLocale() as Locale;
+
+  void setLocale(Locale value) {
+    setState(() {
+      _locale = value;
+    });
+  }
 
   // This widget is the root of your application.
   @override
@@ -129,6 +145,7 @@ class MyApp extends StatelessWidget {
   supportedLocales: AppLocalizations.supportedLocales,
         title: 'Share2Desktop',
         theme: theme,
+        locale: _locale,
         darkTheme: darkTheme,
         home: StartScreen(),
       ),

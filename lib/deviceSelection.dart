@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:share2desktop/deviceInfo.dart';
+import 'package:share2desktop/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
@@ -111,9 +112,15 @@ class _DeviceSelection extends State<DeviceSelection> {
                 Text(AppLocalizations.of(context)!.settings,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                TextButton(child: Text("German"), onPressed: (){DeviceSelection.setLocale(context, Locale("de")); }),
+                TextButton(child: Text("German"), onPressed: (){
+                  //DeviceSelection.setLocale(context, Locale("de")); 
+                  MyApp.of(context)!.setLocale(Locale.fromSubtags(languageCode: 'de'));
+                  }),
                 SizedBox(height: 10),
-                TextButton(child: Text("English"), onPressed: (){DeviceSelection.setLocale(context, Locale("en")); })
+                TextButton(child: Text("English"), onPressed: (){
+                  //DeviceSelection.setLocale(context, Locale("en")); 
+                  MyApp.of(context)!.setLocale(Locale.fromSubtags(languageCode: 'en'));
+                  })
                 
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),

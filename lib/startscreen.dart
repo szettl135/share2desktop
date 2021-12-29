@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/deviceSelection.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartScreen extends StatelessWidget {
   final smallGroup = AutoSizeGroup();
@@ -21,7 +22,7 @@ class StartScreen extends StatelessWidget {
               Container(
                 
                   width: MediaQuery.of(context).size.width * 0.8,
-                  child: AutoSizeText("Willkommen bei",
+                  child: AutoSizeText(AppLocalizations.of(context)!.welcomeTo,
                       style: TextStyle(
                           color: Theme.of(context).textTheme.headline4!.color),
                       group: smallGroup,
@@ -53,7 +54,7 @@ class StartScreen extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: AutoSizeText(
-                    "Installieren Sie bitte die Share2Desktop App auch auf Ihrem anderen Gerät.",
+                    AppLocalizations.of(context)!.installOnOtherDevices,
                     style: TextStyle(color: Theme.of(context).textTheme.headline4!.color),
                     group: smallGroup,
                     textAlign: TextAlign.left,
@@ -65,7 +66,7 @@ class StartScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: AutoSizeText.rich(
                     TextSpan(
-                      text: 'Anleitung',
+                      text: AppLocalizations.of(context)!.instructions,
                       recognizer: new TapGestureRecognizer()
                         ..onTap = () {
                           launch('http://share2desktop.com/');
@@ -86,7 +87,7 @@ class StartScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(10),
                       width: MediaQuery.of(context).size.width * 0.5,
-                      child: AutoSizeText("Weiter",
+                      child: AutoSizeText(AppLocalizations.of(context)!.continuee,
                           maxLines: 1,
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
@@ -103,7 +104,7 @@ class StartScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: AutoSizeText.rich(
                     TextSpan(
-                      text: 'Nutzungsbedingungen',
+                      text: AppLocalizations.of(context)!.termsOfService,
                       recognizer: new TapGestureRecognizer()
                         ..onTap = () {
                           launch('http://share2desktop.com/');
@@ -125,7 +126,7 @@ class StartScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: AutoSizeText.rich(
                     TextSpan(
-                      text: 'Datenschutzerklärung',
+                      text: AppLocalizations.of(context)!.privacyPolicy,
                       recognizer: new TapGestureRecognizer()
                         ..onTap = () {
                           launch('http://share2desktop.com/');
