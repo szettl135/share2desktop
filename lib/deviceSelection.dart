@@ -63,7 +63,7 @@ class _DeviceSelection extends State<DeviceSelection> {
                       launch('http://share2desktop.com/');
                     },
                 )),
-                Text("2021-12-18")
+                Text("2021-12-29")
               ],
             ),
           ),
@@ -112,12 +112,12 @@ class _DeviceSelection extends State<DeviceSelection> {
                 Text(AppLocalizations.of(context)!.settings,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                TextButton(child: Text("German"), onPressed: (){
+                TextButton(child: Text(AppLocalizations.of(context)!.german), onPressed: (){
                   //DeviceSelection.setLocale(context, Locale("de")); 
                   MyApp.of(context)!.setLocale(Locale.fromSubtags(languageCode: 'de'));
                   }),
                 SizedBox(height: 10),
-                TextButton(child: Text("English"), onPressed: (){
+                TextButton(child: Text(AppLocalizations.of(context)!.english), onPressed: (){
                   //DeviceSelection.setLocale(context, Locale("en")); 
                   MyApp.of(context)!.setLocale(Locale.fromSubtags(languageCode: 'en'));
                   })

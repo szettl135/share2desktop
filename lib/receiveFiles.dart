@@ -37,7 +37,7 @@ final titel = [
               width: MediaQuery.of(context).size.width * 0.9,
               padding: EdgeInsets.only(top: 30),
               child: AutoSizeText(AppLocalizations.of(context)!.receiveFiles,
-                  style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center, maxLines: 1, presetFontSizes: [30, 15, 5])),
+                  style: Theme.of(context).textTheme.headline4, textAlign: TextAlign.center, maxLines: 1, minFontSize: 10, maxFontSize: 30, stepGranularity: 1,overflow: TextOverflow.ellipsis)),
           SizedBox(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
