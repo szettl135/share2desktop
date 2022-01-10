@@ -156,9 +156,18 @@ class _MyAppState extends State<MyApp> {
         title: 'Share2Desktop',
         theme: theme,
         locale: _locale,
+        scrollBehavior: AppScrollBehavior(),
         darkTheme: darkTheme,
         home: firstStart ? DeviceSelection() : StartScreen(),
       ),
     );
   }
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

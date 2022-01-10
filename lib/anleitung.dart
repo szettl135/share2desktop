@@ -46,53 +46,78 @@ class Anleitung extends StatefulWidget {
   ],),
 ];*/
 class _Anleitung extends State<Anleitung> {
-   final controller = PageController(
+  final controller = PageController(
     initialPage: 0,
   );
   int _current = 0;
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         appBar: new AppBar(title: new Text("Share2Desktop")),
         body: Container(
-          padding: EdgeInsets.all(15.0),
-          child: Column(children: [
-            Expanded(child: 
-            PageView(
-            controller: controller,
-            onPageChanged: (page) => {print(page.toString())},
-            pageSnapping: true,
-            scrollDirection: Axis.horizontal,
-  children: <Widget>[
-    Container(
-                  color: Colors.cyan,
-                  child: Center(
-                      child: Text(
-                    'This is Page 1',
-                    style: TextStyle(
-                        fontSize: 26,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ))),
-              Container(
-                  color: Colors.green,
-                  child: Center(
-                      child: Text(
-                    'This is Page 2',
-                    style: TextStyle(fontSize: 26, color: Colors.white),
-                  ))),
-              Container(
-                  color: Colors.purple,
-                  child: Center(
-                      child: Text(
-                    'This is Page 3',
-                    style: TextStyle(fontSize: 26, color: Colors.white),
-                  ))),
-   
-  ],
-)),
+            padding: EdgeInsets.all(15.0),
+            child: Column(children: [
+              Expanded(
+                  child: PageView(
+                controller: controller,
+                onPageChanged: (page) => {print(page.toString())},
+                pageSnapping: true,
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Container(
+                      padding: EdgeInsets.all(15.0),
+                      color: Colors.cyan,
+                      child: Center(
+                          child: 
+                          Column(children: [
+
+                          
+                          Spacer(),
+                          Text(
+                        AppLocalizations.of(context)!
+                                    .instructions1_header,
+                        style: TextStyle(
+                            fontSize: 26,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        AppLocalizations.of(context)!
+                                    .instructions1,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      FittedBox(
+                                fit: BoxFit.fill,
+                                child: Image.asset(
+                                  'assets/share2desktop1.png', height: MediaQuery.of(context).size.height * 0.2,
+                                )),
+
+                      Spacer()
+                      ]))
+                      
+                      
+                      ),
+                  Container(
+                      color: Colors.green,
+                      child: Center(
+                          child: Text(
+                        'This is Page 2',
+                        style: TextStyle(fontSize: 26, color: Colors.white),
+                      ))),
+                  Container(
+                      color: Colors.purple,
+                      child: Center(
+                          child: Text(
+                        'This is Page 3',
+                        style: TextStyle(fontSize: 26, color: Colors.white),
+                      ))),
+                ],
+              )),
               /*ListView(
                 shrinkWrap: true,
   // This next line does the trick.
@@ -129,8 +154,9 @@ class _Anleitung extends State<Anleitung> {
       )
   ]
 */
-
-    ])));}}
+            ])));
+  }
+}
            /* CarouselSlider(
                 items: list,
                 carouselController: _controller,
