@@ -53,37 +53,7 @@ class _Anleitung extends State<Anleitung> {
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
-    List<Widget> list = [
-      Container(height:  MediaQuery.of(context).size.height * 0.8, width:  MediaQuery.of(context).size.width * 0.8, child:
-      Column(children:[
-        Spacer(),
-        Text(
-               AppLocalizations.of(context)!.instructions1_header,
-               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
-        ),
-        SizedBox(height: 20),
-
-        Text(AppLocalizations.of(context)!.instructions1,
-              style: TextStyle(
-                  color: Theme.of(context).textTheme.headline4!.color),
-              textAlign: TextAlign.left,
-              maxLines: 20,
-              //presetFontSizes: [18, 8, 6]),
-        ),
-  
-        SizedBox(height: 10),
-        FittedBox(
-            fit: BoxFit.fill,
-            child: Image.asset(
-              'assets/share2desktop1.png',
-              height: MediaQuery.of(context).size.height * 0.2,
-            )),
-        Spacer(),
-      ])),
-      Column(
-        children: [Text("test2")],
-      )
-    ];
+    
     return Scaffold(
         appBar: new AppBar(title: new Text("Share2Desktop")),
         body: Container(
