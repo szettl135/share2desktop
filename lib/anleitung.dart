@@ -1,12 +1,120 @@
 import 'package:auto_size_text/auto_size_text.dart';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Anleitung extends StatelessWidget {
+class Anleitung extends StatefulWidget {
+  _Anleitung createState() => new _Anleitung();
+}
+
+/*final List<Widget> widgetList = [
+  Column(children: [
+    Expanded(child: 
+                            AutoSizeText(
+                                AppLocalizations.of(context)!
+                                    .instructions1_header,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .headline4!
+                                        .color),
+                                textAlign: TextAlign.left,
+                                maxLines: 1,
+                                presetFontSizes: [24, 10, 6])),
+                            SizedBox(height: 10),
+                            Expanded(child: 
+                            AutoSizeText(
+                                AppLocalizations.of(context)!
+                                    .instructions1,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .headline4!
+                                        .color),
+                                textAlign: TextAlign.left,
+                                maxLines: 8,
+                                presetFontSizes: [18, 8, 6]),
+                            ),
+                            SizedBox(height: 10),
+                            FittedBox(
+                                fit: BoxFit.fill,
+                                child: Image.asset(
+                                  'assets/share2desktop1.png', height: MediaQuery.of(context).size.height * 0.2,
+                                )),
+  ],),
+];*/
+class _Anleitung extends State<Anleitung> {
+  int _current = 0;
+  final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
+    List<Widget> list = [
+      //Container(height:  MediaQuery.of(context).size.height * 0.8, width:  MediaQuery.of(context).size.width * 0.8, child:
+      Column(children:[
+        Spacer(),
+        Text(
+               AppLocalizations.of(context)!.instructions1_header,
+               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
+        ),
+        SizedBox(height: 20),
+
+        Text(AppLocalizations.of(context)!.instructions1,
+              style: TextStyle(
+                  color: Theme.of(context).textTheme.headline4!.color),
+              textAlign: TextAlign.left,
+              maxLines: 20,
+              //presetFontSizes: [18, 8, 6]),
+        ),
+  
+        SizedBox(height: 10),
+        FittedBox(
+            fit: BoxFit.fill,
+            child: Image.asset(
+              'assets/share2desktop1.png',
+              height: MediaQuery.of(context).size.height * 0.2,
+            )),
+        Spacer(),
+      ]),
+      Column(
+        children: [Text("test2")],
+      )
+    ];
     return Scaffold(
+        appBar: new AppBar(title: new Text("Share2Desktop")),
+        body: //Container(
+          //padding: EdgeInsets.all(15.0),
+          //child: Column(children: [
+            CarouselSlider(
+                items: list,
+                carouselController: _controller,
+                options: CarouselOptions(
+                  height: double.infinity,
+                  //aspectRatio: 16 / 9,
+                  viewportFraction: 0.8,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: false,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  scrollDirection: Axis.horizontal,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _current = index;
+                    });
+                  },
+                )),
+            //Text(_current.toString())
+         // ]),
+        //));
+    );
+  }
+}
+/*return Scaffold(
       appBar: new AppBar(title: new Text("Share2Desktop")),
       body: Container(
           padding: EdgeInsets.all(15.0),
@@ -26,7 +134,24 @@ class Anleitung extends StatelessWidget {
                   endIndent: MediaQuery.of(context).size.width *
                       0.1, //spacing at the end of divider
                 ),
-                ImageSlideshow(
+                CarouselSlider(
+  options: CarouselOptions(height: 400.0),
+  items: [Column(children: [Text("Test")],)] {
+    return Builder(
+      builder: (BuildContext context) {
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: 5.0),
+          decoration: BoxDecoration(
+            color: Colors.amber
+          ),
+          child: Container(child: $i))
+        );
+      },
+    );
+  }).toList(),
+)
+                /*ImageSlideshow(
                   /// Width of the [ImageSlideshow].
                   width: double.infinity,
 
@@ -146,7 +271,7 @@ class Anleitung extends StatelessWidget {
 
                   /// Loops back to first slide.
                   isLoop: false,
-                ),
+                ),*/
                 Divider(
                   color: Theme.of(context)
                       .textTheme
@@ -163,3 +288,4 @@ class Anleitung extends StatelessWidget {
     );
   }
 }
+}*/
