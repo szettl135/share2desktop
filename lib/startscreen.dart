@@ -17,16 +17,9 @@ class StartScreen extends StatefulWidget {
 class _StartScreen extends State<StartScreen> with AfterLayoutMixin<StartScreen> {
    Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool _seen = (prefs.getBool('seen') ?? false);
+    await prefs.setBool('seen', true);
 
-    if (_seen) {
-      Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new DeviceSelection()));
-    } else {
-      await prefs.setBool('seen', true);
-      //Navigator.of(context).pushReplacement(
-      //    new MaterialPageRoute(builder: (context) => new IntroScreen()));
-    }
+
   }
 
    @override

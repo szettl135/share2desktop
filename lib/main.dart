@@ -8,6 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:share2desktop/deviceSelection.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share2desktop/startscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +33,15 @@ class _MyAppState extends State<MyApp> {
       _locale = value;
     });
   }
+
+  bool firstStart = false;
+  
+  _MyAppState() {
+  SharedPreferences.getInstance().then((value) => {
+    firstStart=  (value.getBool('seen') ?? false)
+    });
+  }
+ 
 
   // This widget is the root of your application.
   @override
@@ -147,7 +157,7 @@ class _MyAppState extends State<MyApp> {
         theme: theme,
         locale: _locale,
         darkTheme: darkTheme,
-        home: StartScreen(),
+        home: firstStart ? DeviceSelection() : StartScreen(),
       ),
     );
   }
