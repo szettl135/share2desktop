@@ -50,17 +50,48 @@ var devicesGroup = AutoSizeGroup();
     if (result != null) {
       //files = result.paths.map((path) => File(path!)).toList();
       setState(() {
-        _files = result.paths.map((path) => File(path!)).toList();
+        //_files = result.paths.map((path) => File(path!)).toList();
+        _files.addAll(result.paths.map((path) => File(path!)).toList());
       });
     } else {
       // User canceled the picker
     }
   }
 
+  void _clearFile() async {
+      
+    setState(() {
+        //_files = result.paths.map((path) => File(path!)).toList();
+        _files.clear();
+      });
+  }
+
 
 
    @override
   Widget build(BuildContext context) {
+
+    Widget buttonSection = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        OutlinedButton(onPressed: _clearFile ,child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
+                    
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: AutoSizeText(AppLocalizations.of(context)!.clear, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
+                    
+                    ),
+        OutlinedButton(onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ReceiveFiles()),
+                    )
+                  },child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
+                    
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: AutoSizeText(AppLocalizations.of(context)!.continuee, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
+                    ),
+      ],
+    );
     
 
     return Scaffold(
@@ -113,21 +144,10 @@ var devicesGroup = AutoSizeGroup();
           ),
         ),
         Spacer(flex:1),
-        OutlinedButton(onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ReceiveFiles()),
-                    )
-                  },child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
-                    
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: AutoSizeText(AppLocalizations.of(context)!.chooseFiles, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
-                    ),
-        Spacer(flex:1),
         OutlinedButton(onPressed: _pickFile ,child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
                     width: MediaQuery.of(context).size.width * 0.5,
-                    child: AutoSizeText("Dateien auswählen", maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
+                    child: AutoSizeText(AppLocalizations.of(context)!.chooseFiles, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
                     
                     ),
         Spacer(flex:2),
@@ -168,7 +188,7 @@ var devicesGroup = AutoSizeGroup();
                                       width: MediaQuery.of(context).size.width *
                                           0.45,
                                       child: AutoSizeText(
-                                        basename(_files[index].path),
+                                        basename(_files[index].path.toString()),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                         maxLines: 1,
@@ -189,8 +209,11 @@ var devicesGroup = AutoSizeGroup();
                   );
                 },
               )),
+              buttonSection
         
       ])
     );
   }
+
+  
 }
