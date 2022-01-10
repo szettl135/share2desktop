@@ -46,6 +46,9 @@ class Anleitung extends StatefulWidget {
   ],),
 ];*/
 class _Anleitung extends State<Anleitung> {
+   final controller = PageController(
+    initialPage: 0,
+  );
   int _current = 0;
   final CarouselController _controller = CarouselController();
   @override
@@ -87,31 +90,37 @@ class _Anleitung extends State<Anleitung> {
           padding: EdgeInsets.all(15.0),
           child: Column(children: [
             Expanded(child: 
-              ListView(
-  // This next line does the trick.
-  shrinkWrap: true,
-  scrollDirection: Axis.horizontal,
+            PageView(
+            controller: controller,
+            onPageChanged: (page) => {print(page.toString())},
+            pageSnapping: true,
+            scrollDirection: Axis.horizontal,
   children: <Widget>[
     Container(
-      width: 160.0,
-      color: Colors.red,
-    ),
-    Container(
-      width: 160.0,
-      color: Colors.blue,
-    ),
-    Container(
-      width: 160.0,
-      color: Colors.green,
-    ),
-    Container(
-      width: 160.0,
-      color: Colors.yellow,
-    ),
-    Container(
-      width: 160.0,
-      color: Colors.orange,
-    ),
+                  color: Colors.cyan,
+                  child: Center(
+                      child: Text(
+                    'This is Page 1',
+                    style: TextStyle(
+                        fontSize: 26,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ))),
+              Container(
+                  color: Colors.green,
+                  child: Center(
+                      child: Text(
+                    'This is Page 2',
+                    style: TextStyle(fontSize: 26, color: Colors.white),
+                  ))),
+              Container(
+                  color: Colors.purple,
+                  child: Center(
+                      child: Text(
+                    'This is Page 3',
+                    style: TextStyle(fontSize: 26, color: Colors.white),
+                  ))),
+   
   ],
 )),
               /*ListView(
