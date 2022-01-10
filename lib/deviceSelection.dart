@@ -8,6 +8,7 @@ import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:share2desktop/deviceInfo.dart';
 import 'package:share2desktop/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
@@ -37,6 +38,12 @@ class _DeviceSelection extends State<DeviceSelection> {
      });
     }
     
+    Future unsetShared() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('seen', false);
+
+
+  }
   //bool isSwitched = false;
   Object? selectedDevice = null;
   final ValueNotifier<ThemeMode> _notifier = ValueNotifier(ThemeMode.light);
@@ -120,8 +127,9 @@ class _DeviceSelection extends State<DeviceSelection> {
                 TextButton(child: Text(AppLocalizations.of(context)!.english), onPressed: (){
                   //DeviceSelection.setLocale(context, Locale("en")); 
                   MyApp.of(context)!.setLocale(Locale.fromSubtags(languageCode: 'en'));
-                  })
-                
+                  }),
+                  SizedBox(height: 10),
+                  TextButton(child: Text("Unset shared pref"),onPressed: () => unsetShared())
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
