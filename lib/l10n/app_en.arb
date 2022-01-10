@@ -24,6 +24,7 @@
     "acceptAll":"Accept all",
     "rejectAll":"Reject all",
     "yourDevice": "Your Device",
+    "clear": "Clear All",
     "@yourDevice" : {
         "description": "For the Button where you show the QR code of your device"
     },
