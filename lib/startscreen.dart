@@ -1,12 +1,39 @@
+
+
+import 'package:after_layout/after_layout.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/anleitung.dart';
 import 'package:share2desktop/deviceSelection.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class StartScreen extends StatelessWidget {
+class StartScreen extends StatefulWidget {
+  _StartScreen createState() => new _StartScreen();
+}
+
+class _StartScreen extends State<StartScreen> with AfterLayoutMixin<StartScreen> {
+   Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen) {
+      Navigator.of(context).pushReplacement(
+          new MaterialPageRoute(builder: (context) => new DeviceSelection()));
+    } else {
+      await prefs.setBool('seen', true);
+      //Navigator.of(context).pushReplacement(
+      //    new MaterialPageRoute(builder: (context) => new IntroScreen()));
+    }
+  }
+
+   @override
+  void afterFirstLayout(BuildContext context) => checkFirstSeen();
+
+
+
   final smallGroup = AutoSizeGroup();
   @override
   Widget build(BuildContext context) {
@@ -156,4 +183,6 @@ class StartScreen extends StatelessWidget {
             SizedBox(height: 50)
             ])));
   }
+
+
 }

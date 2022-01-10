@@ -49,6 +49,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_image_slideshow: any
+  shared_preferences: ^2.0.11
+  after_layout: ^1.1.0
     
 
   # The following adds the Cupertino Icons font to your application.
