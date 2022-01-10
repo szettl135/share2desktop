@@ -1,13 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:share2desktop/anleitung.dart';
 
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:share2desktop/deviceInfo.dart';
 import 'package:share2desktop/main.dart';
+import 'package:share2desktop/startscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,32 +18,29 @@ class DeviceSelection extends StatefulWidget {
   const DeviceSelection({Key? key}) : super(key: key);
 
   static void setLocale(BuildContext context, Locale newLocale) async {
-      _DeviceSelection? state = context.findAncestorStateOfType<_DeviceSelection>();
-        state!.changeLanguage(newLocale);
-     }
+    _DeviceSelection? state =
+        context.findAncestorStateOfType<_DeviceSelection>();
+    state!.changeLanguage(newLocale);
+  }
 
   @override
   _DeviceSelection createState() => _DeviceSelection();
-
-  
 }
 
 class _DeviceSelection extends State<DeviceSelection> {
-
   late Locale _locale;
 
-   changeLanguage(Locale locale) {
-     setState(() {
+  changeLanguage(Locale locale) {
+    setState(() {
       _locale = locale;
-     });
-    }
-    
-    Future unsetShared() async {
+    });
+  }
+
+  Future unsetShared() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('seen', false);
-
-
   }
+
   //bool isSwitched = false;
   Object? selectedDevice = null;
   final ValueNotifier<ThemeMode> _notifier = ValueNotifier(ThemeMode.light);
@@ -119,17 +116,42 @@ class _DeviceSelection extends State<DeviceSelection> {
                 Text(AppLocalizations.of(context)!.settings,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                TextButton(child: Text(AppLocalizations.of(context)!.german), onPressed: (){
-                  //DeviceSelection.setLocale(context, Locale("de")); 
-                  MyApp.of(context)!.setLocale(Locale.fromSubtags(languageCode: 'de'));
-                  }),
+                TextButton(
+                    child: Text(AppLocalizations.of(context)!.german),
+                    onPressed: () {
+                      //DeviceSelection.setLocale(context, Locale("de"));
+                      MyApp.of(context)!
+                          .setLocale(Locale.fromSubtags(languageCode: 'de'));
+                    }),
                 SizedBox(height: 10),
-                TextButton(child: Text(AppLocalizations.of(context)!.english), onPressed: (){
-                  //DeviceSelection.setLocale(context, Locale("en")); 
-                  MyApp.of(context)!.setLocale(Locale.fromSubtags(languageCode: 'en'));
-                  }),
-                  SizedBox(height: 10),
-                  TextButton(child: Text("Unset shared pref"),onPressed: () => unsetShared())
+                TextButton(
+                    child: Text(AppLocalizations.of(context)!.english),
+                    onPressed: () {
+                      //DeviceSelection.setLocale(context, Locale("en"));
+                      MyApp.of(context)!
+                          .setLocale(Locale.fromSubtags(languageCode: 'en'));
+                    }),
+                SizedBox(height: 10),
+                TextButton(
+                    child: Text("Startbildschirm nocheinmal anzeigen"),
+                    onPressed: () => unsetShared()),
+                SizedBox(height: 10),
+                TextButton(
+                  child: Text("Anleitung"),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Anleitung()));
+                  },
+                ),
+                SizedBox(height: 10,),
+                TextButton(
+                  child: Text("Startscreen"),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => StartScreen()));
+                  },
+                ),
+
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
@@ -239,7 +261,6 @@ class _DeviceSelection extends State<DeviceSelection> {
                 leading: Icon(Icons.info),
                 title: Text(AppLocalizations.of(context)!.aboutTheApp),
                 onTap: () {
-                  
                   _aboutDialog();
                   //das pop würden den dialog deleten
                   //Navigator.pop(context);
@@ -299,7 +320,8 @@ class _DeviceSelection extends State<DeviceSelection> {
                                   alignment: Alignment.center,
                                   width:
                                       MediaQuery.of(context).size.width * 0.25,
-                                  child: AutoSizeText(AppLocalizations.of(context)!.yourDevice,
+                                  child: AutoSizeText(
+                                      AppLocalizations.of(context)!.yourDevice,
                                       textAlign: TextAlign.center,
                                       maxLines: 1,
                                       minFontSize: 0,
@@ -484,11 +506,4 @@ class _DeviceSelection extends State<DeviceSelection> {
       backgroundColor: Color(0xffFFFFFF),
     );
   }
-
-  
-
-     
-
-  
 }
-

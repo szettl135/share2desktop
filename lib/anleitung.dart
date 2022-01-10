@@ -46,9 +46,10 @@ class Anleitung extends StatelessWidget {
                   /// Add the sample image file into the images folder
                   children: [
                     //1 page
-                    Container(
-                        width:  MediaQuery.of(context).size.height * 0.7,
-                        height: double.infinity,
+                    /*Container(
+                      
+                        width:  MediaQuery.of(context).size.width * 0.7,
+                        height: MediaQuery.of(context).size.height * 0.7,
                         padding: EdgeInsets.all(15.0),
                         child: Column(
                           children: [
@@ -85,8 +86,37 @@ class Anleitung extends StatelessWidget {
                                   'assets/share2desktop1.png', height: MediaQuery.of(context).size.height * 0.2,
                                 )),
                           ],
-                        )),
-
+                        )),*/
+                    Container(child: Column(children: [
+                      
+                            Text(
+                                AppLocalizations.of(context)!
+                                    .instructions1_header,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .headline4!
+                                        .color),
+                                textAlign: TextAlign.left),
+                            SizedBox(height: 10),
+      
+                            Text(
+                                AppLocalizations.of(context)!
+                                    .instructions1,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .headline4!
+                                        .color),
+                                textAlign: TextAlign.left),
+                            
+                            SizedBox(height: 10),
+                            FittedBox(
+                                fit: BoxFit.fill,
+                                child: Image.asset(
+                                  'assets/share2desktop1.png', height: MediaQuery.of(context).size.height * 0.2,
+                                )),
+                    ],)),
                     Image.asset(
                       'assets/slideshow1.png',
                       fit: BoxFit.cover,
