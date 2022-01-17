@@ -61,67 +61,78 @@ class _Anleitung extends State<Anleitung> {
             padding: EdgeInsets.all(15.0),
             child: Column(children: [
               Expanded(
-                  child: ScrollConfiguration(
-  behavior: AppScrollBehavior(),child: PageView(
-                controller: controller,
-                onPageChanged: (page) => {print(page.toString())},
-                pageSnapping: true,
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                      padding: EdgeInsets.all(15.0),
-                      color: Colors.cyan,
-                      child: Center(
-                          child: 
-                          Column(children: [
-
-                          
-                          Spacer(),
-                          Text(
-                        AppLocalizations.of(context)!
+                child: ScrollConfiguration(
+                    behavior: AppScrollBehavior(),
+                    child: PageView(
+                      controller: controller,
+                      onPageChanged: (page) => {_current=page},
+                      pageSnapping: true,
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        Container(
+                            padding: EdgeInsets.all(15.0),
+                            color: Colors.cyan,
+                            child: Center(
+                                child: Column(children: [
+                              Spacer(),
+                              Text(
+                                AppLocalizations.of(context)!
                                     .instructions1_header,
-                        style: TextStyle(
-                            fontSize: 26,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        AppLocalizations.of(context)!
-                                    .instructions1,
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      FittedBox(
-                                fit: BoxFit.fill,
-                                child: Image.asset(
-                                  'assets/share2desktop1.png', height: MediaQuery.of(context).size.height * 0.2,
-                                )),
-
-                      Spacer()
-                      ]))
-                      
-                      
-                      ),
-                  Container(
-                      color: Colors.green,
-                      child: Center(
-                          child: Text(
-                        'This is Page 2',
-                        style: TextStyle(fontSize: 26, color: Colors.white),
-                      ))),
-                  Container(
-                      color: Colors.purple,
-                      child: Center(
-                          child: Text(
-                        'This is Page 3',
-                        style: TextStyle(fontSize: 26, color: Colors.white),
-                      ))),
-                ],
-              )),
-              /*ListView(
+                                style: TextStyle(
+                                    fontSize: 26,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 20),
+                              Text(
+                                AppLocalizations.of(context)!.instructions1,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Image.asset(
+                                    'assets/share2desktop1.png',
+                                    height: MediaQuery.of(context).size.height *
+                                        0.2,
+                                  )),
+                              Spacer()
+                            ]))),
+                        Container(
+                            color: Colors.green,
+                            child: Center(
+                                child: Column(children: [
+                                  Spacer(),
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .instructions2_header,
+                                style: TextStyle(
+                                    fontSize: 26,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 20),
+                              Text(
+                                AppLocalizations.of(context)!.instructions2,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                                ] ))),
+                        Container(
+                            color: Colors.purple,
+                            child: Center(
+                                child: Text(
+                              'This is Page 3',
+                              style:
+                                  TextStyle(fontSize: 26, color: Colors.white),
+                            ))),
+                      ],
+                    )),
+                /*ListView(
                 shrinkWrap: true,
   // This next line does the trick.
   scrollDirection: Axis.horizontal, 
@@ -157,7 +168,8 @@ class _Anleitung extends State<Anleitung> {
       )
   ]
 */
-     ) ])));
+              )
+            ])));
   }
 }
            /* CarouselSlider(
