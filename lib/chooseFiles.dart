@@ -24,6 +24,7 @@ class ChooseFiles extends StatefulWidget {
 class _ChooseFiles extends State<ChooseFiles> {
  
 var devicesGroup = AutoSizeGroup();
+var buttonsGroup = AutoSizeGroup();
 
   
   late List<File> _files = [];
@@ -76,8 +77,9 @@ var devicesGroup = AutoSizeGroup();
       children: [
         OutlinedButton(onPressed: _clearFile ,child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: AutoSizeText(AppLocalizations.of(context)!.clear, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    child:  Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.30,
+                  child:AutoSizeText(AppLocalizations.of(context)!.clear, group: buttonsGroup, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))),
                     
                     ),
         OutlinedButton(onPressed: () => {
@@ -87,8 +89,9 @@ var devicesGroup = AutoSizeGroup();
                     )
                   },child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: AutoSizeText(AppLocalizations.of(context)!.continuee, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
+                    width: MediaQuery.of(context).size.width * 0.40,
+                    child:  Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.30,
+                  child:AutoSizeText(AppLocalizations.of(context)!.continuee, maxLines: 1, group: buttonsGroup, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 )))
                     ),
       ],
     );
@@ -209,7 +212,8 @@ var devicesGroup = AutoSizeGroup();
                   );
                 },
               )),
-              buttonSection
+              buttonSection,
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02)
         
       ])
     );
