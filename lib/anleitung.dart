@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:share2desktop/main.dart';
 
 class Anleitung extends StatefulWidget {
   _Anleitung createState() => new _Anleitung();
@@ -51,6 +52,7 @@ class _Anleitung extends State<Anleitung> {
   );
   int _current = 0;
   final CarouselController _controller = CarouselController();
+  final ScrollController controller2 = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +61,8 @@ class _Anleitung extends State<Anleitung> {
             padding: EdgeInsets.all(15.0),
             child: Column(children: [
               Expanded(
-                  child: PageView(
+                  child: ScrollConfiguration(
+  behavior: AppScrollBehavior(),child: PageView(
                 controller: controller,
                 onPageChanged: (page) => {print(page.toString())},
                 pageSnapping: true,
@@ -154,7 +157,7 @@ class _Anleitung extends State<Anleitung> {
       )
   ]
 */
-            ])));
+     ) ])));
   }
 }
            /* CarouselSlider(
