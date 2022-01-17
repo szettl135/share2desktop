@@ -29,7 +29,12 @@
     "instructions1_header": "1. Funktionsweise und Berechtigungen",
     "instructions1": "Share2Desktop speichert keine Ihrer Daten. Sie müssen jedoch Zugriff auf Ihre Daten erlauben, wenn danach gerfragt wird, damit die App funktioniert. Die Dateien gehen dann kurz durch unsere App durch (weswegen die Berechtigung benötigt wird), werden an das andere Geräte mit einer Peer-to-peer (Gerät zu Gerät) Verbindung übertragen und sofort gelöscht/nicht gespeichert. Sie müssen die Berechtigung gewähren, damit Sie Ihre Dateien übertragen können.",
     "instructions2_header": "2. Gerät wählen",
-    "instructions2": "Sie können das Empfangsgerät direkt aus der Liste wählen, oder den QR-Code des anderen Gerätes einscannen, mithilfe des Kamera-Knopfes. Den eigenen QR-Code bekommen Sie durch den Knopf 'Dein Gerät'."
+    "instructions2": "Sie können das Empfangsgerät direkt aus der Liste wählen, oder den QR-Code des anderen Gerätes einscannen, mithilfe des Kamera-Knopfes. Den eigenen QR-Code bekommen Sie durch den Knopf \"Dein Gerät\".",
+    "instructions3_header": "3. Dateien auswählen",
+    "instructions3": "Durch Drücken auf den Knopf \"Dateien auswählen\" wird ein Menü geöffnet, in welchem Sie mehrere Dateien aus Ihrem System auswählen können. Wählen Sie die Dateien, die Sie senden wollen.",
+    "instructions4_header": "4. Empfangen",
+    "instructions4": "Sie erhalten nach dem Empfang einer Datei eine Benachrichtigung. Wenn Sie diese antippen, kommen Sie zum Empfangsbildschirm. Dort können Sie entscheiden, ob und welche Dateien Sie annehmen oder ablehnen wollen. Wenn Sie annehmen wählen, werden die Dateien auf Ihrem Gerät gespeichert."
+
 
 
 }

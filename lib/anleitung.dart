@@ -60,10 +60,11 @@ class _Anleitung extends State<Anleitung> {
         body: Container(
             padding: EdgeInsets.all(15.0),
             child: Column(children: [
-              Expanded(
+              Container(
                 child: ScrollConfiguration(
                     behavior: AppScrollBehavior(),
-                    child: PageView(
+                    child: Expanded(child: PageView(
+                      
                       controller: controller,
                       onPageChanged: (page) => {_current=page},
                       pageSnapping: true,
@@ -101,6 +102,7 @@ class _Anleitung extends State<Anleitung> {
                               Spacer()
                             ]))),
                         Container(
+                            padding: EdgeInsets.all(15.0),
                             color: Colors.green,
                             child: Center(
                                 child: Column(children: [
@@ -121,55 +123,64 @@ class _Anleitung extends State<Anleitung> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
+                              Spacer()
                                 ] ))),
                         Container(
+                            padding: EdgeInsets.all(15.0),
                             color: Colors.purple,
                             child: Center(
-                                child: Text(
-                              'This is Page 3',
-                              style:
-                                  TextStyle(fontSize: 26, color: Colors.white),
-                            ))),
-                      ],
+                                child: Column(children: [
+                                  Spacer(),
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .instructions3_header,
+                                style: TextStyle(
+                                    fontSize: 26,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 20),
+                              Text(
+                                AppLocalizations.of(context)!.instructions3,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              
+                              Spacer()
+                                ]),
+                      
                     )),
-                /*ListView(
-                shrinkWrap: true,
-  // This next line does the trick.
-  scrollDirection: Axis.horizontal, 
-  children: <Widget>[
-       Container(width:  MediaQuery.of(context).size.width * 0.8, child:
-      Column(children:[
-        Spacer(),
-        Text(
-               AppLocalizations.of(context)!.instructions1_header,
-               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
-        ),
-        SizedBox(height: 20),
-
-        Text(AppLocalizations.of(context)!.instructions1,
-              style: TextStyle(
-                  color: Theme.of(context).textTheme.headline4!.color),
-              textAlign: TextAlign.left,
-              maxLines: 20,
-              //presetFontSizes: [18, 8, 6]),
-        ),
-  
-        SizedBox(height: 10),
-        FittedBox(
-            fit: BoxFit.fill,
-            child: Image.asset(
-              'assets/share2desktop1.png',
-              height: MediaQuery.of(context).size.height * 0.2,
-            )),
-        Spacer(),
-      ])),
-      Column(
-        children: [Text("test2")],
-      )
-  ]
-*/
-              )
-            ])));
+                    Container(
+                            padding: EdgeInsets.all(15.0),
+                            color: Colors.orange,
+                            child: Center(
+                                child: Column(children: [
+                                  Spacer(),
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .instructions4_header,
+                                style: TextStyle(
+                                    fontSize: 26,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 20),
+                              Text(
+                                AppLocalizations.of(context)!.instructions4,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                               Spacer()
+                                ]),
+                      
+                    )),
+          
+                      ]))
+        ))])));
   }
 }
            /* CarouselSlider(
