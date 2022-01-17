@@ -5,6 +5,7 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share2desktop/main.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Anleitung extends StatefulWidget {
   _Anleitung createState() => new _Anleitung();
@@ -180,7 +181,18 @@ class _Anleitung extends State<Anleitung> {
                     )),
           
                       ]))
-        ))])));
+        )),
+        
+        SmoothPageIndicator(  
+   controller: controller,  // PageController  
+   count:  4,  
+   effect:  WormEffect(),  // your preferred effect  
+   onDotClicked: (index){  
+         controller.jumpToPage(index);
+
+   }  
+)  
+        ])));
   }
 }
      
