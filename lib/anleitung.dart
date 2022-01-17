@@ -182,7 +182,8 @@ class _Anleitung extends State<Anleitung> {
           
                       ]))
         )),
-        
+        SizedBox(height: MediaQuery.of(context).size.width * 0.01),
+        Center(child: 
         SmoothPageIndicator(  
    controller: controller,  // PageController  
    count:  4,  
@@ -191,7 +192,7 @@ class _Anleitung extends State<Anleitung> {
          controller.jumpToPage(index);
 
    }  
-)  
+)  )
         ])));
   }
 }
