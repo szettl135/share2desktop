@@ -11,13 +11,23 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StartScreen extends StatefulWidget {
+  
   _StartScreen createState() => new _StartScreen();
 }
 
 class _StartScreen extends State<StartScreen> with AfterLayoutMixin<StartScreen> {
+ // @override
+  //void dispose() {
+  //  super.dispose();
+  //}
+  
    Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('seen', true);
+
+   // if (!mounted) {
+    //  Navigator.pop(context);
+  //}
 
 
   }
@@ -30,6 +40,7 @@ class _StartScreen extends State<StartScreen> with AfterLayoutMixin<StartScreen>
   final smallGroup = AutoSizeGroup();
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
         appBar: new AppBar(title: new Text("Share2Desktop")),
         body: Container(
