@@ -16,10 +16,11 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreen extends State<StartScreen> with AfterLayoutMixin<StartScreen> {
- // @override
-  //void dispose() {
-  //  super.dispose();
-  //}
+ @override
+void initState() {
+  // take data flag from database or somewhere else (file)
+  // and check it
+}
   
    Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
