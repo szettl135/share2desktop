@@ -5,6 +5,7 @@ import 'package:share2desktop/anleitung.dart';
 
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:share2desktop/connectionLost.dart';
 import 'package:share2desktop/deviceInfo.dart';
 import 'package:share2desktop/main.dart';
 import 'package:share2desktop/startscreen.dart';
@@ -151,7 +152,14 @@ class _DeviceSelection extends State<DeviceSelection> {
                         MaterialPageRoute(builder: (context) => StartScreen()));
                   },
                 ),
-
+                SizedBox(height: 10,),
+                TextButton(
+                  child: Text("Connection Lost"),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ConnectionLost()));
+                  },
+                ),
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,

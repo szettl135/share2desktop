@@ -33,7 +33,9 @@
     "instructions3_header": "3. Dateien auswählen",
     "instructions3": "Durch Drücken auf den Knopf \"Dateien auswählen\" wird ein Menü geöffnet, in welchem Sie mehrere Dateien aus Ihrem System auswählen können. Wählen Sie die Dateien, die Sie senden wollen.",
     "instructions4_header": "4. Empfangen",
-    "instructions4": "Sie erhalten nach dem Empfang einer Datei eine Benachrichtigung. Wenn Sie diese antippen, kommen Sie zum Empfangsbildschirm. Dort können Sie entscheiden, ob und welche Dateien Sie annehmen oder ablehnen wollen. Wenn Sie annehmen wählen, werden die Dateien auf Ihrem Gerät gespeichert."
+    "instructions4": "Sie erhalten nach dem Empfang einer Datei eine Benachrichtigung. Wenn Sie diese antippen, kommen Sie zum Empfangsbildschirm. Dort können Sie entscheiden, ob und welche Dateien Sie annehmen oder ablehnen wollen. Wenn Sie annehmen wählen, werden die Dateien auf Ihrem Gerät gespeichert.",
+    "connectionLost": "Verbindung verloren!",
+    "reconnect": "Verbindung wiederherstellen"
 
 
 
