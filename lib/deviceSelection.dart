@@ -19,16 +19,16 @@ class DeviceSelection extends StatefulWidget {
   const DeviceSelection({Key? key}) : super(key: key);
 
   static void setLocale(BuildContext context, Locale newLocale) async {
-    _DeviceSelection? state =
-        context.findAncestorStateOfType<_DeviceSelection>();
+    aDeviceSelection? state =
+        context.findAncestorStateOfType<aDeviceSelection>();
     state!.changeLanguage(newLocale);
   }
 
   @override
-  _DeviceSelection createState() => _DeviceSelection();
+  aDeviceSelection createState() => aDeviceSelection();
 }
 
-class _DeviceSelection extends State<DeviceSelection> {
+class aDeviceSelection extends State<DeviceSelection> {
   late Locale _locale;
 
   changeLanguage(Locale locale) {
@@ -37,6 +37,62 @@ class _DeviceSelection extends State<DeviceSelection> {
     });
   }
 
+  Future<void> connectionLostPopup() async {
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.grey[350],
+          //title: const Text('AlertDialog Title'),
+          content: Container( color: Colors.grey[350],
+            width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.4,child: Center(child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+      Icons.warning,
+      size: MediaQuery.of(context).size.width * 0.1,
+      color: Colors.black,
+    ),
+                  Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(10),
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.25,
+                      child: AutoSizeText(
+                        
+                          AppLocalizations.of(context)!.connectionLost,
+                          
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          minFontSize: 16,
+                          maxFontSize: 30,
+                          stepGranularity: 1,
+                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold))),
+
+                  OutlinedButton(onPressed: ()=>{} ,child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
+                    
+                    width: MediaQuery.of(context).size.width * 0.60,
+                    child:  Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.50,
+                  child:AutoSizeText(AppLocalizations.of(context)!.reconnect, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 12, maxFontSize: 25, stepGranularity: 1, style: TextStyle(color: Colors.black) ))),
+                  ),
+
+                  
+
+
+
+                ])))
+          );
+        
+      },
+    );
+  }
+
+  
   Future unsetShared() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('seen', false);
@@ -158,6 +214,13 @@ class _DeviceSelection extends State<DeviceSelection> {
                   onPressed: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => ConnectionLost()));
+                  },
+                ),
+                SizedBox(height: 10,),
+                TextButton(
+                  child: Text("Connection Lost Popup"),
+                  onPressed: () {
+                    connectionLostPopup();
                   },
                 ),
                 /*Image(
