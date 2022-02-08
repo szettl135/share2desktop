@@ -109,6 +109,10 @@ flutter:
       - assets/slideshow3.png
       - assets/slideshow4.png
       - assets/share2desktop1.png
+      - assets/share2desktop1_HD.png
+      - assets/anleitung2_1.png
+      - assets/anleitung2_2.png
+      - assets/anleitung4_1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

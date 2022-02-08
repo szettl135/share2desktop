@@ -83,18 +83,20 @@ class _Anleitung extends State<Anleitung> {
                         SizedBox(height: 20),
                         Text(
                           AppLocalizations.of(context)!.instructions1,
+                          textAlign: TextAlign.justify,
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
+                        Spacer(flex:1),
                         Container(
                             child: Image.asset(
-                          'assets/share2desktop1.png',
+                          'assets/share2desktop1_HD.png',
                           height: MediaQuery.of(context).size.height * 0.2,
                           fit: BoxFit.contain,
                         )),
-                        Spacer()
+                        Spacer(flex:3)
                       ]))),
                   Container(
                       padding: EdgeInsets.all(15.0),
@@ -103,7 +105,9 @@ class _Anleitung extends State<Anleitung> {
                           child: Column(children: [
                         Spacer(),
                         Text(
+                          
                           AppLocalizations.of(context)!.instructions2_header,
+                          
                           style: TextStyle(
                               fontSize: 26,
                               color: Colors.white,
@@ -112,12 +116,28 @@ class _Anleitung extends State<Anleitung> {
                         SizedBox(height: 20),
                         Text(
                           AppLocalizations.of(context)!.instructions2,
+                          textAlign: TextAlign.justify,
                           style: TextStyle(
+
                               fontSize: 16,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
-                        Spacer()
+                        Spacer(flex:1),
+                        Container(
+                            child: Image.asset(
+                          'assets/anleitung2_1.png',
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          fit: BoxFit.contain,
+                        )),
+                        Spacer(flex:1),
+                        Container(
+                            child: Image.asset(
+                          'assets/anleitung2_2.png',
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          fit: BoxFit.contain,
+                        )),
+                        Spacer(flex:3)
                       ]))),
                   Container(
                       padding: EdgeInsets.all(15.0),
@@ -135,6 +155,7 @@ class _Anleitung extends State<Anleitung> {
                           SizedBox(height: 20),
                           Text(
                             AppLocalizations.of(context)!.instructions3,
+                            textAlign: TextAlign.justify,
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -159,12 +180,20 @@ class _Anleitung extends State<Anleitung> {
                           SizedBox(height: 20),
                           Text(
                             AppLocalizations.of(context)!.instructions4,
+                            textAlign: TextAlign.justify,
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Spacer()
+                          Spacer(flex:1),
+                          Container(
+                            child: Image.asset(
+                          'assets/anleitung4_1.png',
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          fit: BoxFit.contain,
+                        )),
+                          Spacer(flex:3)
                         ]),
                       )),
                 ]),
