@@ -9,12 +9,17 @@ import 'package:share2desktop/deviceSelection.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share2desktop/startscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:window_size/window_size.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('Share2Desktop');
+    setWindowMaxSize(const Size(1536, 1064));
+    setWindowMinSize(const Size(1024, 776));
+  }
   runApp(MyApp());
 }
 

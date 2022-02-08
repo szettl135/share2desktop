@@ -146,14 +146,14 @@ var buttonsGroup = AutoSizeGroup();
             ],
           ),
         ),
-        Spacer(flex:1),
+        Spacer(flex:2),
         OutlinedButton(onPressed: _pickFile ,child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
                     
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: AutoSizeText(AppLocalizations.of(context)!.chooseFiles, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 5, maxFontSize: 30, stepGranularity: 1, style: Theme.of(context).textTheme.headline3 ))
                     
                     ),
-        Spacer(flex:2),
+        Spacer(flex:4),
         Container(
               padding: EdgeInsets.all(8),
               width: MediaQuery.of(context).size.width * 0.9,
@@ -213,7 +213,8 @@ var buttonsGroup = AutoSizeGroup();
                 },
               )),
               buttonSection,
-              SizedBox(height: MediaQuery.of(context).size.width * 0.02)
+              Spacer(flex:1)
+              //SizedBox(height: MediaQuery.of(context).size.width * 0.02)
         
       ])
     );
