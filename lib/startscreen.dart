@@ -158,7 +158,7 @@ void initState() {
                       text: AppLocalizations.of(context)!.termsOfService,
                       recognizer: new TapGestureRecognizer()
                         ..onTap = () {
-                          launch('http://share2desktop.com/');
+                          launch('https://projekte.tgm.ac.at/share2desktop/rechtliches.html#termsofuse');
                         },
                     ),
                     style: TextStyle(color: Colors.blue),
@@ -181,7 +181,7 @@ void initState() {
                       text: AppLocalizations.of(context)!.privacyPolicy,
                       recognizer: new TapGestureRecognizer()
                         ..onTap = () {
-                          launch('http://share2desktop.com/');
+                          launch('https://projekte.tgm.ac.at/share2desktop/rechtliches.html#privacypolicy');
                         },
                     ),
                     maxLines: 1,
