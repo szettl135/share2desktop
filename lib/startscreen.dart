@@ -36,7 +36,12 @@ void initState() {
    @override
   void afterFirstLayout(BuildContext context) => checkFirstSeen();
 
+  void setPrefs() async {
 
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('seen', true);
+    
+  }
 
   final smallGroup = AutoSizeGroup();
   @override
@@ -123,6 +128,9 @@ void initState() {
               Spacer(flex: 2),
               OutlinedButton(
                   onPressed: () {
+                   
+                    setPrefs();
+                    
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => DeviceSelection()));
                   },

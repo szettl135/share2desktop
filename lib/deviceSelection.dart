@@ -11,6 +11,7 @@ import 'package:share2desktop/main.dart';
 import 'package:share2desktop/startscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences_windows/shared_preferences_windows.dart';
 
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -124,7 +125,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                       launch('http://share2desktop.com/');
                     },
                 )),
-                Text("2021-12-29")
+                Text("2022-02-14")
               ],
             ),
           ),

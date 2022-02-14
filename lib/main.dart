@@ -6,6 +6,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences_windows/shared_preferences_windows.dart';
 import 'package:share2desktop/deviceSelection.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share2desktop/startscreen.dart';
@@ -43,11 +44,11 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  bool firstStart = false;
+  bool notFirstStart = false;
 
   _MyAppState() {
     SharedPreferences.getInstance()
-        .then((value) => {firstStart = (value.getBool('seen') ?? false)});
+        .then((value) => {notFirstStart = (value.getBool('seen') ?? false)});
   }
 
   // This widget is the root of your application.
@@ -165,7 +166,7 @@ class _MyAppState extends State<MyApp> {
         locale: _locale,
         scrollBehavior: AppScrollBehavior(),
         darkTheme: darkTheme,
-        home: firstStart ? DeviceSelection() : StartScreen(),
+        home: notFirstStart ? DeviceSelection() : StartScreen(),
       ),
     );
   }

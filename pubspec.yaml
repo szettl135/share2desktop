@@ -49,7 +49,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_image_slideshow: any
-  shared_preferences: ^2.0.11
+  shared_preferences: ^2.0.13
   after_layout: ^1.1.0
   carousel_slider: ^4.0.0
   smooth_page_indicator: ^1.0.0+2
@@ -58,7 +58,7 @@ dependencies:
     git:
       url: git://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
-    
+  shared_preferences_windows: ^2.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
