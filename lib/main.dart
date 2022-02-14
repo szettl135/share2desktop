@@ -16,10 +16,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-      if (kIsWeb) {
-  
-} else 
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+  if (kIsWeb) {
+  } else if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('Share2Desktop');
     setWindowMaxSize(const Size(1536, 1064));
     setWindowMinSize(const Size(1024, 776));
@@ -31,11 +29,13 @@ class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 
-  static _MyAppState? of(BuildContext context) => context.findAncestorStateOfType<_MyAppState>();
+  static _MyAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_MyAppState>();
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale =  window.locales[0];//new Locale("de");//new Locale(Platform.localeName.substring(0,2));//getCurrentLocale();//WidgetsBinding.instance!.window.locales[0];//findSystemLocale() as Locale;
+  Locale _locale = window.locales[
+      0]; //new Locale("de");//new Locale(Platform.localeName.substring(0,2));//getCurrentLocale();//WidgetsBinding.instance!.window.locales[0];//findSystemLocale() as Locale;
 
   void setLocale(Locale value) {
     setState(() {
@@ -44,13 +44,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   bool firstStart = false;
-  
+
   _MyAppState() {
-  SharedPreferences.getInstance().then((value) => {
-    firstStart=  (value.getBool('seen') ?? false)
-    });
+    SharedPreferences.getInstance()
+        .then((value) => {firstStart = (value.getBool('seen') ?? false)});
   }
- 
 
   // This widget is the root of your application.
   @override
@@ -161,7 +159,7 @@ class _MyAppState extends State<MyApp> {
       initial: AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-  supportedLocales: AppLocalizations.supportedLocales,
+        supportedLocales: AppLocalizations.supportedLocales,
         title: 'Share2Desktop',
         theme: theme,
         locale: _locale,
