@@ -12,7 +12,7 @@ class ConnectionObject {
   ///
   ///
   /// _channel is the connection to the server, the URL will change to the one of the actual server ofc
-  final _channel = WebSocketChannel.connect(
+   WebSocketChannel _channel = WebSocketChannel.connect(
     //Uri.parse('ws://localhost:8080/socket'),
     Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
   );
@@ -241,7 +241,12 @@ _sendToServer(var message, String id) {
   _channel.sink.add(messageDestination);
 }
 
-
+getInternalSocketid() {
+  _channel = WebSocketChannel.connect(
+    //Uri.parse('ws://localhost:8080/socket'),
+    Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
+  );
+}
 
 
 /// Json string Shenanigans
