@@ -6,6 +6,7 @@ import 'package:share2desktop/anleitung.dart';
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:share2desktop/connectionLost.dart';
+import 'package:share2desktop/connectionObject.dart';
 import 'package:share2desktop/deviceInfo.dart';
 import 'package:share2desktop/main.dart';
 import 'package:share2desktop/startscreen.dart';
@@ -32,6 +33,12 @@ class DeviceSelection extends StatefulWidget {
 class aDeviceSelection extends State<DeviceSelection> {
   late Locale _locale;
   final txtController = TextEditingController();
+  ConnectionObject connector = new ConnectionObject();
+  @override
+  ///Sets up everything at the start of the app
+  void initState() {
+    super.initState();
+  }
 
  @override
   void dispose() {
@@ -186,6 +193,8 @@ class aDeviceSelection extends State<DeviceSelection> {
                 ),
                 SizedBox(height: 20),
                 OutlinedButton(onPressed: ()=>{
+
+                  connector.connectOffer(txtController.text)
                   //txtController.text für den InputField text
                 }, child: Text("Verbinden"))
                 //CHRISTIAN hier noch qr code scanner einfügen; man kann ja beides haben ig
