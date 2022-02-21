@@ -60,6 +60,11 @@ dependencies:
       path: plugins/window_size
   shared_preferences_windows: ^2.1.0
 
+  
+  web_socket_channel:
+  flutter_webrtc:
+  sdp_transform:
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
