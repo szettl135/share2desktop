@@ -31,7 +31,14 @@ class DeviceSelection extends StatefulWidget {
 
 class aDeviceSelection extends State<DeviceSelection> {
   late Locale _locale;
+  final txtController = TextEditingController();
 
+ @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    txtController.dispose();
+    super.dispose();
+  }
   changeLanguage(Locale locale) {
     setState(() {
       _locale = locale;
@@ -153,6 +160,33 @@ class aDeviceSelection extends State<DeviceSelection> {
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
                     width: 400),*/
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _cameraFunc() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text("ID eingeben",
+                    style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 20),
+                TextField(
+                  controller: txtController,
+                ),
+                OutlinedButton(onPressed: ()=>{
+                  //txtController.text für den InputField text
+                }, child: Text("Verbinden"))
               ],
             ),
           ),
@@ -409,7 +443,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                           )),
                       Expanded(
                         child: IconButton(
-                            onPressed: () => (print("camera")),
+                            onPressed: () => (_cameraFunc()),
                             iconSize: 40.0,
                             icon: Icon(Icons.photo_camera)),
                       ),
