@@ -159,10 +159,10 @@ class aDeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(AppLocalizations.of(context)!.yourQR,
+                Text(AppLocalizations.of(context)!.yourQR+" : "+connector.internalSocketId,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                Container(child: getQRCodeImage(deviceData.id), width: 400),
+                Container(child: getQRCodeImage(connector.internalSocketId), width: 400),
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
