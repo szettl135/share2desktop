@@ -184,9 +184,11 @@ class aDeviceSelection extends State<DeviceSelection> {
                 TextField(
                   controller: txtController,
                 ),
+                SizedBox(height: 20),
                 OutlinedButton(onPressed: ()=>{
                   //txtController.text für den InputField text
                 }, child: Text("Verbinden"))
+                //CHRISTIAN hier noch qr code scanner einfügen; man kann ja beides haben ig
               ],
             ),
           ),
