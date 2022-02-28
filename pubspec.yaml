@@ -109,11 +109,6 @@ flutter:
   assets:
       - assets/icon.png
       - assets/qrtest.png
-      - assets/slideshow1.png
-      - assets/slideshow2.png
-      - assets/slideshow3.png
-      - assets/slideshow4.png
-      - assets/share2desktop1.png
       - assets/share2desktop1_HD.png
       - assets/anleitung2_1.png
       - assets/anleitung2_2.png

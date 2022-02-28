@@ -422,7 +422,9 @@ class aDeviceSelection extends State<DeviceSelection> {
                           style: OutlinedButton.styleFrom(
                               primary: Colors.black,
                               padding: EdgeInsets.all(12)),
-                          onPressed: () => {
+                          onPressed: ()  => {
+                            
+                            print("qr button"),
                             connector.getInternalSocketid(),
                             _qrDialog()
                           },
