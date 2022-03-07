@@ -9,6 +9,7 @@ import 'package:share2desktop/connectionLost.dart';
 import 'package:share2desktop/connectionObject.dart';
 import 'package:share2desktop/deviceInfo.dart';
 import 'package:share2desktop/main.dart';
+import 'package:share2desktop/settings.dart';
 import 'package:share2desktop/startscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -267,6 +268,14 @@ class aDeviceSelection extends State<DeviceSelection> {
                   child: Text("Connection Lost Popup"),
                   onPressed: () {
                     connectionLostPopup();
+                  },
+                ),
+                SizedBox(height: 10,),
+                TextButton(
+                  child: Text("Neue Settings"),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SettingsScreen()));
                   },
                 ),
                 /*Image(

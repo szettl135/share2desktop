@@ -45,6 +45,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   bool notFirstStart = false;
+  
+  String speicherpfad = "";
 
   _MyAppState() {
     SharedPreferences.getInstance()
