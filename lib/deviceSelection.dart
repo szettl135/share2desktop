@@ -36,17 +36,19 @@ class aDeviceSelection extends State<DeviceSelection> {
   final txtController = TextEditingController();
   ConnectionObject connector = new ConnectionObject();
   @override
+
   ///Sets up everything at the start of the app
   void initState() {
     super.initState();
   }
 
- @override
+  @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     txtController.dispose();
     super.dispose();
   }
+
   changeLanguage(Locale locale) {
     setState(() {
       _locale = locale;
@@ -54,61 +56,67 @@ class aDeviceSelection extends State<DeviceSelection> {
   }
 
   Future<void> connectionLostPopup() async {
-
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.grey[350],
-          //title: const Text('AlertDialog Title'),
-          content: Container( color: Colors.grey[350],
-            width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.4,child: Center(child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-      Icons.warning,
-      size: MediaQuery.of(context).size.width * 0.1,
-      color: Colors.black,
-    ),
-                  Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(10),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.25,
-                      child: AutoSizeText(
-                        
-                          AppLocalizations.of(context)!.connectionLost,
-                          
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          minFontSize: 16,
-                          maxFontSize: 30,
-                          stepGranularity: 1,
-                          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold))),
-
-                  OutlinedButton(onPressed: ()=>{} ,child: Container(alignment: Alignment.center, padding: EdgeInsets.all(10),
-                    
-                    width: MediaQuery.of(context).size.width * 0.60,
-                    child:  Container(alignment: Alignment.center, width: MediaQuery.of(context).size.width * 0.50,
-                  child:AutoSizeText(AppLocalizations.of(context)!.reconnect, maxLines: 1, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, minFontSize: 12, maxFontSize: 25, stepGranularity: 1, style: TextStyle(color: Colors.black) ))),
-                  ),
-
-                  
-
-
-
-                ])))
-          );
-        
+            backgroundColor: Colors.grey[350],
+            //title: const Text('AlertDialog Title'),
+            content: Container(
+                color: Colors.grey[350],
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.4,
+                child: Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                      Icon(
+                        Icons.warning,
+                        size: MediaQuery.of(context).size.width * 0.1,
+                        color: Colors.black,
+                      ),
+                      Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.all(10),
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          child: AutoSizeText(
+                              AppLocalizations.of(context)!.connectionLost,
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              minFontSize: 16,
+                              maxFontSize: 30,
+                              stepGranularity: 1,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold))),
+                      OutlinedButton(
+                        onPressed: () => {},
+                        child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(10),
+                            width: MediaQuery.of(context).size.width * 0.60,
+                            child: Container(
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width * 0.50,
+                                child: AutoSizeText(
+                                    AppLocalizations.of(context)!.reconnect,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                    minFontSize: 12,
+                                    maxFontSize: 25,
+                                    stepGranularity: 1,
+                                    style: TextStyle(color: Colors.black)))),
+                      ),
+                    ]))));
       },
     );
   }
 
-  
   Future unsetShared() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('seen', false);
@@ -131,6 +139,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 Text(AppLocalizations.of(context)!.fromTeamS2D),
+                SizedBox(height: 20),
                 RichText(
                     text: new TextSpan(
                   text: 'share2desktop.com',
@@ -140,7 +149,8 @@ class aDeviceSelection extends State<DeviceSelection> {
                       launch('http://share2desktop.com/');
                     },
                 )),
-                Text("2022-02-14")
+                SizedBox(height: 20),
+                Text("2022-03-13")
               ],
             ),
           ),
@@ -160,10 +170,15 @@ class aDeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(AppLocalizations.of(context)!.yourQR+" : "+connector.internalSocketId,
+                Text(
+                    AppLocalizations.of(context)!.yourQR +
+                        " : " +
+                        connector.internalSocketId,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                Container(child: getQRCodeImage(connector.internalSocketId), width: 400),
+                Container(
+                    child: getQRCodeImage(connector.internalSocketId),
+                    width: 400),
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
@@ -193,11 +208,12 @@ class aDeviceSelection extends State<DeviceSelection> {
                   controller: txtController,
                 ),
                 SizedBox(height: 20),
-                OutlinedButton(onPressed: ()=>{
-
-                  connector.connectOffer(txtController.text)
-                  //txtController.text für den InputField text
-                }, child: Text("Verbinden"))
+                OutlinedButton(
+                    onPressed: () => {
+                          connector.connectOffer(txtController.text)
+                          //txtController.text für den InputField text
+                        },
+                    child: Text("Verbinden"))
                 //CHRISTIAN hier noch qr code scanner einfügen; man kann ja beides haben ig
               ],
             ),
@@ -247,7 +263,9 @@ class aDeviceSelection extends State<DeviceSelection> {
                         MaterialPageRoute(builder: (context) => Anleitung()));
                   },
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 TextButton(
                   child: Text("Startscreen"),
                   onPressed: () {
@@ -255,27 +273,33 @@ class aDeviceSelection extends State<DeviceSelection> {
                         MaterialPageRoute(builder: (context) => StartScreen()));
                   },
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 TextButton(
                   child: Text("Connection Lost"),
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => ConnectionLost()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ConnectionLost()));
                   },
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 TextButton(
                   child: Text("Connection Lost Popup"),
                   onPressed: () {
                     connectionLostPopup();
                   },
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 TextButton(
                   child: Text("Neue Settings"),
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => SettingsScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => SettingsScreen()));
                   },
                 ),
                 /*Image(
@@ -371,15 +395,18 @@ class aDeviceSelection extends State<DeviceSelection> {
                   // Update the state of the app
                   // ...
                   // Then close the drawer
-                  _settings();
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SettingsScreen()));
                   //Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.visibility),
-                title: Text(AppLocalizations.of(context)!.appearance),
+                leading: Icon(Icons.help),
+                title: Text(AppLocalizations.of(context)!.instructions),
                 onTap: () {
-                  _selectTheme();
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Anleitung()));
+                  //_selectTheme();
                   //Navigator.pop(context);
                 },
               ),
@@ -419,24 +446,23 @@ class aDeviceSelection extends State<DeviceSelection> {
           SizedBox(height: 20),
           Row(
             children: [
-              Spacer(flex: 1),
-              Container(
+              Spacer(flex: 2),
+              /*Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   padding: EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Spacer(),
+                    children: [*/
+                    
                       OutlinedButton(
                           style: OutlinedButton.styleFrom(
                               primary: Colors.black,
                               padding: EdgeInsets.all(12)),
-                          onPressed: ()  => {
-                            
-                            print("qr button"),
-                            connector.getInternalSocketid(),
-                            _qrDialog()
-                          },
+                          onPressed: () => {
+                                print("qr button"),
+                                connector.getInternalSocketid(),
+                                _qrDialog()
+                              },
                           //shape:RectangleBorder(
                           //borderRadius: BorderRadius.circular(16))),
                           child: Row(
@@ -466,16 +492,34 @@ class aDeviceSelection extends State<DeviceSelection> {
                               Icon(Icons.qr_code, color: Colors.transparent),
                             ],
                           )),
-                      Expanded(
-                        child: IconButton(
-                            onPressed: () => (_cameraFunc()),
+                         // SizedBox(width: 30),
+                        Container(child: 
+                        IconButton(
+                            onPressed: () => {print("camera"), _cameraFunc()},
+                            splashColor: Colors.purple,
+                            constraints: BoxConstraints(
+                      minHeight: 100,
+                      minWidth: 100,
+                      maxHeight: double.infinity,
+                      maxWidth: double.infinity
+                      
+                    ),
                             iconSize: 40.0,
                             icon: Icon(Icons.photo_camera)),
-                      ),
-                    ],
-                  )),
-              Spacer(flex: 1)
-            ],
+                       /* child: 
+                        OutlinedButton(
+                            onPressed: () {
+                              _cameraFunc();
+                            },
+                            child: Text("📷")
+                            ),*/
+                    //  ),
+                      //  ),
+                      
+                        ),
+                          Spacer(flex:1),],
+                
+            
           ),
 
           //Abstand

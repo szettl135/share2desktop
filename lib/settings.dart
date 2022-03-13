@@ -16,8 +16,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool notificationsEnabled = true;
   bool themeSwitch = false;
 
-
- Future<void> _sprache() async {
+  Future<void> _sprache() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -26,9 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
-              
               children: <Widget>[
-                
                 TextButton(
                     child: Text(AppLocalizations.of(context)!.german),
                     onPressed: () {
@@ -44,7 +41,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       MyApp.of(context)!
                           .setLocale(Locale.fromSubtags(languageCode: 'en'));
                     }),
-            
               ],
             ),
           ),
@@ -53,29 +49,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-
-
-
-  void initState(){
+  void initState() {
     super.initState();
     AdaptiveTheme.getThemeMode().then((value) => {
-      print(value),
-      if (value == AdaptiveThemeMode.light) {
-        print("false gestzt"),
-        setState(() {
-      themeSwitch = false;
-       })
-    } else {
-      print("true gestze"),
-      setState(() {
-                    themeSwitch = true;
-                  })
-      
-    }
-  
-    });
-
-    
+          if (value == AdaptiveThemeMode.light)
+            {
+              setState(() {
+                themeSwitch = false;
+              })
+            }
+          else
+            {
+              setState(() {
+                themeSwitch = true;
+              })
+            }
+        });
   }
 
   @override
@@ -109,8 +98,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: Text("Reset App"),
                 leading: Icon(Icons.restore),
                 onPressed: (context) async {
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('seen', false);
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.setBool('seen', false);
                 },
               ),
             ],
@@ -121,7 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingsTile.switchTile(
                 title: Text('Theme'),
                 leading: Icon(Icons.format_paint),
-                initialValue: themeSwitch,//themeSwitch,
+                initialValue: themeSwitch, //themeSwitch,
                 onToggle: (bool value) {
                   print("test");
                   setState(() {
