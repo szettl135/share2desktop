@@ -444,84 +444,70 @@ class aDeviceSelection extends State<DeviceSelection> {
             ],
           ),*/
           SizedBox(height: 20),
+          //Center(child:
+
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(flex: 2),
+              Spacer(),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.1),
               /*Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   padding: EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [*/
-                    
-                      OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                              primary: Colors.black,
-                              padding: EdgeInsets.all(12)),
-                          onPressed: () => {
-                                print("qr button"),
-                                connector.getInternalSocketid(),
-                                _qrDialog()
-                              },
-                          //shape:RectangleBorder(
-                          //borderRadius: BorderRadius.circular(16))),
-                          child: Row(
-                            children: [
-                              Icon(Icons.qr_code,
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .headline4!
-                                      .color),
-                              SizedBox(width: 10),
-                              Container(
-                                  alignment: Alignment.center,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.25,
-                                  child: AutoSizeText(
-                                      AppLocalizations.of(context)!.yourDevice,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 1,
-                                      minFontSize: 0,
-                                      maxFontSize: 30,
-                                      //presetFontSizes: [30, 15, 5],
-                                      stepGranularity: 1,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline4)),
-                              SizedBox(width: 10),
-                              Icon(Icons.qr_code, color: Colors.transparent),
-                            ],
-                          )),
-                         // SizedBox(width: 30),
-                        Container(child: 
-                        IconButton(
-                            onPressed: () => {print("camera"), _cameraFunc()},
-                            splashColor: Colors.purple,
-                            constraints: BoxConstraints(
-                      minHeight: 100,
-                      minWidth: 100,
-                      maxHeight: double.infinity,
-                      maxWidth: double.infinity
-                      
-                    ),
-                            iconSize: 40.0,
-                            icon: Icon(Icons.photo_camera)),
-                       /* child: 
-                        OutlinedButton(
-                            onPressed: () {
-                              _cameraFunc();
-                            },
-                            child: Text("📷")
-                            ),*/
-                    //  ),
-                      //  ),
-                      
-                        ),
-                          Spacer(flex:1),],
-                
-            
-          ),
 
+              OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      primary: Colors.black, padding: EdgeInsets.all(12)),
+                  onPressed: () => {
+                        print("qr button"),
+                        connector.getInternalSocketid(),
+                        _qrDialog()
+                      },
+                  //shape:RectangleBorder(
+                  //borderRadius: BorderRadius.circular(16))),
+                  child: Row(
+                    children: [
+                      Icon(Icons.qr_code,
+                          color: Theme.of(context).textTheme.headline4!.color),
+                      SizedBox(width: 10),
+                      Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width * 0.25,
+                          child: AutoSizeText(
+                              AppLocalizations.of(context)!.yourDevice,
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              minFontSize: 0,
+                              maxFontSize: 30,
+                              //presetFontSizes: [30, 15, 5],
+                              stepGranularity: 1,
+                              style: Theme.of(context).textTheme.headline4)),
+                      SizedBox(width: 10),
+                      Icon(Icons.qr_code, color: Colors.transparent),
+                    ],
+                  )),
+              // SizedBox(width: 30),
+              Container(
+                child: IconButton(
+                    onPressed: () => {print("camera"), _cameraFunc()},
+                    splashColor: Colors.purple,
+                    constraints: BoxConstraints(
+                        minHeight: 100,
+                        minWidth: 100,
+                        maxHeight: double.infinity,
+                        maxWidth: double.infinity),
+                    iconSize: 40.0,
+                    icon: Icon(Icons.photo_camera)),
+              ),
+              Spacer(),
+              //SizedBox(width: MediaQuery.of(context).size.width * 0.2)
+            ],
+
+            //),
+          ),
           //Abstand
           Spacer(flex: 1),
           AutoSizeText(AppLocalizations.of(context)!.nearbyDevices,
