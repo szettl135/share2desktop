@@ -234,12 +234,13 @@ class aDeviceSelection extends State<DeviceSelection> {
                 Text(AppLocalizations.of(context)!.connectionReq,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 30),
+                Center(child: SizedBox(width: MediaQuery.of(context).size.width*0.1,
+                  child:
                  CircularProgressIndicator(
                    
                 backgroundColor: Colors.grey,
                 color: Colors.purple,
-                strokeWidth: 10,
-                ),
+                strokeWidth: 5,                ))),
                 SizedBox(height: 30),
                 Text(AppLocalizations.of(context)!.waitingOn +
                     " " +
