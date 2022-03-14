@@ -79,9 +79,26 @@ class _MyAppState extends State<MyApp> {
                 Text(AppLocalizations.of(context)!.connectionReq,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
-                Text(AppLocalizations.of(context)!.device+" "+id+" "AppLocalizations.of(context)!.wantsToConnect),
+                Text(AppLocalizations.of(context)!.device +
+                    " " +
+                    id +
+                    " " +
+                    AppLocalizations.of(context)!.wantsToConnect),
                 SizedBox(height: 20),
-                
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  OutlinedButton(
+                      onPressed: () => {
+                            print("dumbass")
+                            
+                          },
+                      child: Text(AppLocalizations.of(context)!.accept)),
+                      SizedBox(width: 10),
+                      OutlinedButton(
+                      onPressed: () => {
+                            print("ich hasse alles hier")
+                          },
+                      child: Text(AppLocalizations.of(context)!.reject)),
+                ])
               ],
             ),
           ),
@@ -90,10 +107,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-
-
   bool notFirstStart = false;
-  
+
   String speicherpfad = "";
 
   _MyAppState() {

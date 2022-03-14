@@ -49,7 +49,9 @@
     "wantsToConnect": "wants to connect.",
     "accept": "Accept",
     "reject": "Reject",
-    "connectionReq": "Connection request"
+    "connectionReq": "Connection request",
+    "enterID": "Enter ID",
+    "connect": "Connect"
 
 
     

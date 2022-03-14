@@ -201,7 +201,7 @@ class aDeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text("ID eingeben",
+                Text(AppLocalizations.of(context)!.enterID,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 TextField(
@@ -213,7 +213,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                           connector.connectOffer(txtController.text)
                           //txtController.text für den InputField text
                         },
-                    child: Text("Verbinden"))
+                    child: Text(AppLocalizations.of(context)!.connect))
                 //CHRISTIAN hier noch qr code scanner einfügen; man kann ja beides haben ig
               ],
             ),

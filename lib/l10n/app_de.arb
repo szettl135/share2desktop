@@ -46,7 +46,9 @@
     "wantsToConnect": "möchte sich verbinden.",
     "accept": "Annehmen",
     "reject": "Ablehnen",
-    "connectionReq": "Verbindungsanfrage"
+    "connectionReq": "Verbindungsanfrage",
+    "enterID": "ID eingeben",
+    "connect": "Verbinden"
 
 
 
