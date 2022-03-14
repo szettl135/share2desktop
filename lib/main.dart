@@ -165,6 +165,7 @@ class _MyAppState extends State<MyApp> {
         supportedLocales: AppLocalizations.supportedLocales,
         title: 'Share2Desktop',
         theme: theme,
+        debugShowCheckedModeBanner: false,
         locale: _locale,
         scrollBehavior: AppScrollBehavior(),
         darkTheme: darkTheme,

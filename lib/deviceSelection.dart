@@ -449,8 +449,8 @@ class aDeviceSelection extends State<DeviceSelection> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.1),
+              Spacer(flex: 4),
+              //SizedBox(width: MediaQuery.of(context).size.width * 0.1),
               /*Container(
                   width: MediaQuery.of(context).size.width * 0.6,
                   padding: EdgeInsets.all(10),
@@ -490,6 +490,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                     ],
                   )),
               // SizedBox(width: 30),
+              Spacer(flex:1),
               Container(
                 child: IconButton(
                     onPressed: () => {print("camera"), _cameraFunc()},
@@ -502,7 +503,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                     iconSize: 40.0,
                     icon: Icon(Icons.photo_camera)),
               ),
-              Spacer(),
+              Spacer(flex:4),
               //SizedBox(width: MediaQuery.of(context).size.width * 0.2)
             ],
 
