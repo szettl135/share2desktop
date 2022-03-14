@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:share2desktop/anleitung.dart';
+import 'package:share2desktop/main.dart';
 
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
@@ -344,6 +345,24 @@ class aDeviceSelection extends State<DeviceSelection> {
                         builder: (context) => SettingsScreen()));
                   },
                 ),
+                 TextButton(
+                  child: Text("test"),
+                  onPressed: () {
+                      waitingForConnection("1234");
+                  },
+                ),
+                TextButton(
+                  child: Text("test222"),
+                  onPressed: () {
+                      disconnectPopup(context,"reason");
+                  },
+                ),
+                TextButton(
+                  child: Text("test333"),
+                  onPressed: () {
+                      acceptRejectConnection(context,"weezer");
+                  },
+                ),
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),
                     alignment: Alignment.center,
@@ -434,12 +453,10 @@ class aDeviceSelection extends State<DeviceSelection> {
                 leading: Icon(Icons.settings),
                 title: Text(AppLocalizations.of(context)!.settings),
                 onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SettingsScreen()));
-                  //Navigator.pop(context);
+                 _settings();
+                  /*Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SettingsScreen()));*/
+                
                 },
               ),
               ListTile(
