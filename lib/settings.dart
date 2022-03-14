@@ -26,6 +26,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
+                 Text(AppLocalizations.of(context)!.chooseLang,
+                    style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 20),
                 TextButton(
                     child: Text(AppLocalizations.of(context)!.german),
                     onPressed: () {
@@ -73,17 +76,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
         appBar: AppBar(title: Text('Share2Desktop')),
         body: SettingsList(sections: [
           SettingsSection(
-            title: Text("Einstellungen"),
+            title: Text(AppLocalizations.of(context)!.settings),
             tiles: [
-              SettingsTile.navigation(
-                title: Text('Sprache'),
+              SettingsTile(
+                title: Text(AppLocalizations.of(context)!.lang),
+
                 leading: Icon(Icons.language),
                 onPressed: (context) {
                   _sprache();
                 },
               ),
               SettingsTile(
-                title: Text('Speicherpfad'),
+                title: Text(AppLocalizations.of(context)!.savepath),
+                description: Text(AppLocalizations.of(context)!.savepath_desc),
                 leading: Icon(Icons.save),
                 onPressed: (context) async {
                   String? selectedDirectory =
@@ -95,25 +100,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               SettingsTile(
-                title: Text("Reset App"),
+                title: Text(AppLocalizations.of(context)!.resetApp),
+                description: Text(AppLocalizations.of(context)!.resetApp_desc),
                 leading: Icon(Icons.restore),
                 onPressed: (context) async {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   await prefs.setBool('seen', false);
+                  AdaptiveTheme.of(context).reset();
                 },
               ),
             ],
           ),
           SettingsSection(
-            title: Text("Theme"),
+            title: Text(AppLocalizations.of(context)!.appearance),
             tiles: [
               SettingsTile.switchTile(
-                title: Text('Theme'),
+                title: Text(AppLocalizations.of(context)!.appearance),
                 leading: Icon(Icons.format_paint),
                 initialValue: themeSwitch, //themeSwitch,
                 onToggle: (bool value) {
-                  print("test");
+                 // print("test");
                   setState(() {
                     themeSwitch = value;
                   });

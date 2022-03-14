@@ -38,7 +38,13 @@
     "instructions4_header": "4. Receive files",
     "instructions4": "You will receive a notification after receiving a file. If you tap it, the app will open with the Receive Screen. There you can decide which files you want to accept or decline. If you accept, the file will be saved on your device.",
     "connectionLost": "Connection lost!",
-    "reconnect": "Reconnect"
+    "reconnect": "Reconnect",
+    "chooseLang": "Choose a language",
+     "lang": "Language",
+     "savepath": "Filepath",
+    "savepath_desc": "Default path to save received files to",
+    "resetApp": "Reset App",
+    "resetApp_desc": "Reset App to factory settings"
 
 
     

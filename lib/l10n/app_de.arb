@@ -17,7 +17,7 @@
     "instructions": "Anleitung",
     "yourDevice": "Dein Gerät",
     "installOnOtherDevices": "Installieren Sie bitte die Share2Desktop App auch auf Ihrem anderen Gerät.",
-    "appearance": "Aussehen",
+    "appearance": "Erscheinungsbild",
     "scanQR": "QR-Code einscannen",
     "toDevice": "Zum Gerät:",
     "chooseFiles": "Dateien auswählen",
@@ -35,7 +35,13 @@
     "instructions4_header": "4. Empfangen",
     "instructions4": "Sie erhalten nach dem Empfang einer Datei eine Benachrichtigung. Wenn Sie diese antippen, kommen Sie zum Empfangsbildschirm. Dort können Sie entscheiden, ob und welche Dateien Sie annehmen oder ablehnen wollen. Wenn Sie annehmen wählen, werden die Dateien auf Ihrem Gerät gespeichert.",
     "connectionLost": "Verbindung verloren!",
-    "reconnect": "Verbindung wiederherstellen"
+    "reconnect": "Verbindung wiederherstellen",
+    "chooseLang": "Wähle eine Sprache",
+    "lang": "Sprache",
+    "savepath": "Speicherpfad",
+    "savepath_desc": "Standard-Speicherort für empfangene Dateien festlegen",
+    "resetApp": "App zurücksetzen",
+    "resetApp_desc": "Setze die App auf Standardeinstellungen zurück"
 
 
 
