@@ -229,19 +229,23 @@ class aDeviceSelection extends State<DeviceSelection> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
+         return WillPopScope(
+      onWillPop: () async => false,
+      child: AlertDialog(
           //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text(AppLocalizations.of(context)!.connectionReq,
                     style: Theme.of(context).textTheme.bodyText1),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
                  CircularProgressIndicator(
+                   
                 backgroundColor: Colors.grey,
                 color: Colors.purple,
                 strokeWidth: 10,
                 ),
+                SizedBox(height: 30),
                 Text(AppLocalizations.of(context)!.waitingOn +
                     " " +
                     id +
@@ -261,7 +265,7 @@ class aDeviceSelection extends State<DeviceSelection> {
               ],
             ),
           ),
-        );
+        ));
       },
     );
   }
@@ -362,6 +366,14 @@ class aDeviceSelection extends State<DeviceSelection> {
                   onPressed: () {
                       acceptRejectConnection(context,"weezer");
                   },
+                  
+                ),
+                TextButton(
+                  child: Text("test444"),
+                  onPressed: () {
+                      AdaptiveTheme.of(context).toggleThemeMode();
+                  },
+                   
                 ),
                 /*Image(
                     image: AssetImage("assets/qrtest.png"),

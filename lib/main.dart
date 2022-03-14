@@ -52,9 +52,11 @@ Future<void> disconnectPopup(BuildContext context, String reason) async {
   Future<void> acceptRejectConnection(BuildContext context, String id) async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: true,
+      barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
+         return WillPopScope(
+      onWillPop: () async => false,
+      child: AlertDialog(
           //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
@@ -78,14 +80,15 @@ Future<void> disconnectPopup(BuildContext context, String reason) async {
                       SizedBox(width: 10),
                       OutlinedButton(
                       onPressed: () => {
-                            print("ich hasse alles hier")
+                            print("ich hasse alles hier"),
+                            Navigator.of(context, rootNavigator: true).pop('dialog')
                           },
                       child: Text(AppLocalizations.of(context)!.reject)),
                 ])
               ],
             ),
           ),
-        );
+        ));
       },
     );
   }
