@@ -44,6 +44,54 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Future<void> disconnectPopup(String reason) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(AppLocalizations.of(context)!.connectionLost,
+                    style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 20),
+                Text(reason)
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> acceptRejectConnection(String id) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(AppLocalizations.of(context)!.connectionReq,
+                    style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 20),
+                Text(AppLocalizations.of(context)!.device+" "+id+" "AppLocalizations.of(context)!.wantsToConnect),
+                SizedBox(height: 20),
+                
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
+
   bool notFirstStart = false;
   
   String speicherpfad = "";

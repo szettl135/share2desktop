@@ -41,7 +41,12 @@
     "savepath": "Speicherpfad",
     "savepath_desc": "Standard-Speicherort für empfangene Dateien festlegen",
     "resetApp": "App zurücksetzen",
-    "resetApp_desc": "Setze die App auf Standardeinstellungen zurück"
+    "resetApp_desc": "Setze die App auf Standardeinstellungen zurück",
+    "device": "Gerät",
+    "wantsToConnect": "möchte sich verbinden.",
+    "accept": "Annehmen",
+    "reject": "Ablehnen",
+    "connectionReq": "Verbindungsanfrage"
 
 
 

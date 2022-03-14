@@ -44,7 +44,12 @@
      "savepath": "Filepath",
     "savepath_desc": "Default path to save received files to",
     "resetApp": "Reset App",
-    "resetApp_desc": "Reset App to factory settings"
+    "resetApp_desc": "Reset App to factory settings",
+    "device": "Device",
+    "wantsToConnect": "wants to connect.",
+    "accept": "Accept",
+    "reject": "Reject",
+    "connectionReq": "Connection request"
 
 
     
