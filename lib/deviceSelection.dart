@@ -132,7 +132,7 @@ class aDeviceSelection extends State<DeviceSelection> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          //title: const Text('AlertDialog Title'),
+
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -167,7 +167,7 @@ class aDeviceSelection extends State<DeviceSelection> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          //title: const Text('AlertDialog Title'),
+
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -180,10 +180,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                 Container(
                     child: getQRCodeImage(connector.internalSocketId),
                     width: 400),
-                /*Image(
-                    image: AssetImage("assets/qrtest.png"),
-                    alignment: Alignment.center,
-                    width: 400),*/
+               
               ],
             ),
           ),
@@ -198,7 +195,6 @@ class aDeviceSelection extends State<DeviceSelection> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -232,7 +228,6 @@ class aDeviceSelection extends State<DeviceSelection> {
          return WillPopScope(
       onWillPop: () async => false,
       child: AlertDialog(
-          //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -276,7 +271,6 @@ class aDeviceSelection extends State<DeviceSelection> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -286,7 +280,6 @@ class aDeviceSelection extends State<DeviceSelection> {
                 TextButton(
                     child: Text(AppLocalizations.of(context)!.german),
                     onPressed: () {
-                      //DeviceSelection.setLocale(context, Locale("de"));
                       MyApp.of(context)!
                           .setLocale(Locale.fromSubtags(languageCode: 'de'));
                     }),
@@ -375,10 +368,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                   },
                    
                 ),
-                /*Image(
-                    image: AssetImage("assets/qrtest.png"),
-                    alignment: Alignment.center,
-                    width: 400),*/
+            
               ],
             ),
           ),
@@ -393,7 +383,6 @@ class aDeviceSelection extends State<DeviceSelection> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -412,7 +401,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                       AdaptiveTheme.of(context).setDark();
                     }),
 
-                //TextButton(child: Text("mspaint"), onPressed:  () {_notifier.value = mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light}),
+               
               ],
             ),
           ),
@@ -466,6 +455,8 @@ class aDeviceSelection extends State<DeviceSelection> {
                 title: Text(AppLocalizations.of(context)!.settings),
                 onTap: () {
                  _settings();
+
+                 //altes menü ist drinnen zum testen
                   /*Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => SettingsScreen()));*/
                 
@@ -477,8 +468,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => Anleitung()));
-                  //_selectTheme();
-                  //Navigator.pop(context);
+
                 },
               ),
               ListTile(
@@ -486,8 +476,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                 title: Text(AppLocalizations.of(context)!.aboutTheApp),
                 onTap: () {
                   _aboutDialog();
-                  //das pop würden den dialog deleten
-                  //Navigator.pop(context);
+        
                 },
               ),
             ],
@@ -495,39 +484,15 @@ class aDeviceSelection extends State<DeviceSelection> {
         ),
         appBar: new AppBar(title: new Text("Share2Desktop")),
         body: Column(children: [
-          //Einstellungen
-          /*Row(
-            children: [
-              Spacer(flex: 1),
-              Container(
-                  //width: MediaQuery.of(context).size.width * 0.4,
-                  padding: EdgeInsets.all(30),
-                  alignment: Alignment.center,
-                  child: OutlinedButton(
-                    child: Row(children: [
-                      Icon(Icons.qr_code),
-                      SizedBox(width: 10),
-                      Text("Dein Gerät", style: Theme.of(context).textTheme.headline4),
-                    ]),
-                    onPressed: () => {_qrDialog()},
-                  )),
-              Spacer(flex: 1)
-            ],
-          ),*/
+         
           SizedBox(height: 20),
-          //Center(child:
+
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Spacer(flex: 4),
-              //SizedBox(width: MediaQuery.of(context).size.width * 0.1),
-              /*Container(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [*/
+
 
               OutlinedButton(
                   style: OutlinedButton.styleFrom(
@@ -597,8 +562,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                   return Card(
                     color: Theme.of(context).scaffoldBackgroundColor,
 
-                    //
-                    //                 <-- Card widget
+  
                     shape: ContinuousRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(10), // if you need this
@@ -627,17 +591,14 @@ class aDeviceSelection extends State<DeviceSelection> {
                                           0.45,
                                       child: AutoSizeText(
                                         names[index],
-                                        //style: Theme.of(context)
-                                        //.textTheme
-                                        // .headline3,
+                                     
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
-                                        //maxLines: 3,
+                                     
                                         maxLines: 1,
-                                        //presetFontSizes: [25, 15, 5],
-                                        //minFontSize: 0,
+                                       
                                         group: devicesGroup,
-                                        //overflowReplacement: Text(names[index].substring(0,2)+"..."),
+            
                                         maxFontSize: 25,
                                         stepGranularity: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -645,9 +606,9 @@ class aDeviceSelection extends State<DeviceSelection> {
                                 ],
                               )
 
-                              /*Icon(icons[index]), SizedBox(width: 30),*/ /*, SizedBox(width: 30)*/
+                 
                             ]),
-                        //subtitle: Text(subtitles[index]),
+        
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ChooseFiles(
@@ -657,75 +618,9 @@ class aDeviceSelection extends State<DeviceSelection> {
                   );
                 },
               )),
-          //Row(children: [
-          //SizedBox(width: 100),
-          /*Container(
-            
-              padding: EdgeInsets.all(50),
-              height: MediaQuery.of(context).size.height * 0.5,
-              child: ListView(
-                padding: const EdgeInsets.all(8),
-                children: <Widget>[
-                  //https://protocoderspoint.com/flutter-listview-ontap-selected-item-send-data-to-new-screen/
-                  //Weiter button weg und einfach wen man device wählt weiter
-                  //jo das passt mal wir brauchen noch dynamisches adden dieser dinger damit das workt
-
-                  ListTile(
-                      leading: const Icon(Icons.computer),
-                      title: const Text("Computer 1"),
-                      subtitle: Text("Windows-PC von JUMBO"),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ChooseFiles(
-                                  targetDeviceName: 'computer 1',
-                                )));
-                      }),
-                  ListTile(
-                      leading: const Icon(Icons.computer),
-                      title: const Text("Computer 2"),
-                      subtitle: Text("Windows-PC von Schreiner"),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ChooseFiles(
-                                  targetDeviceName: 'computer 2',
-                                )));
-                      }),
-                  ListTile(
-                      leading: const Icon(Icons.phone_iphone),
-                      title: const Text("Smartphone"),
-                      subtitle: Text("iPhone von Fabian"),
-                      onTap: () {
-                        print("bc 1");
-                      }),
-                  ListTile(
-                      leading: const Icon(Icons.phone_iphone),
-                      title: const Text("Smartphone"),
-                      subtitle: Text("iPhone SE von Lennart"),
-                      onTap: () {
-                        print("bc 1");
-                      }),
-                  ListTile(
-                      leading: const Icon(Icons.phone_iphone),
-                      title: const Text("Smartphone"),
-                      subtitle: Text("iPhone 12 von Lennart"),
-                      onTap: () {
-                        print("bc 1");
-                      }),
-                ],
-              )),
-
-          //],
-
-          //),*/
+         
           SizedBox(height: 20),
-          /*OutlinedButton(
-              onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChooseFiles()),
-                    )
-                  },
-              child: Text("Weiter"))*/
+         
           Spacer(flex: 1),
         ]));
   }
