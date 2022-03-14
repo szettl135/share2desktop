@@ -223,6 +223,48 @@ class aDeviceSelection extends State<DeviceSelection> {
     );
   }
 
+  Future<void> waitingForConnection(String id) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: const Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(AppLocalizations.of(context)!.connectionReq,
+                    style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 20),
+                 CircularProgressIndicator(
+                backgroundColor: Colors.grey,
+                color: Colors.purple,
+                strokeWidth: 10,
+                ),
+                Text(AppLocalizations.of(context)!.waitingOn +
+                    " " +
+                    id +
+                    "..."),
+                SizedBox(height: 20),
+                  OutlinedButton(
+                      onPressed: () => {
+                            print("cancel"),
+                            Navigator.of(context, rootNavigator: true).pop('dialog')
+                          },
+                      child: Text(AppLocalizations.of(context)!.cancel)),
+                      SizedBox(width: 10),
+                  
+
+
+
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> _settings() async {
     return showDialog<void>(
       context: context,

@@ -48,7 +48,9 @@
     "reject": "Ablehnen",
     "connectionReq": "Verbindungsanfrage",
     "enterID": "ID eingeben",
-    "connect": "Verbinden"
+    "connect": "Verbinden",
+    "waitingOn": "Warten auf",
+    "cancel": "Abbrechen"
 
 
 
