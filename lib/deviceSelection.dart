@@ -354,13 +354,13 @@ class aDeviceSelection extends State<DeviceSelection> {
                 TextButton(
                   child: Text("test222"),
                   onPressed: () {
-                      disconnectPopup(context,"reason");
+                      disconnectPopup("reason");
                   },
                 ),
                 TextButton(
                   child: Text("test333"),
                   onPressed: () {
-                      acceptRejectConnection(context,"weezer");
+                      acceptRejectConnection("weezer");
                   },
                   
                 ),

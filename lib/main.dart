@@ -13,6 +13,8 @@ import 'package:share2desktop/startscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_size/window_size.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -27,11 +29,11 @@ void main() {
 }
 
 
-Future<void> disconnectPopup(BuildContext context, String reason) async {
+Future<void> disconnectPopup(String reason) async {
     return showDialog<void>(
-      context: context,
+      context: navigatorKey.currentContext as BuildContext,
       barrierDismissible: true,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           //title: const Text('AlertDialog Title'),
           content: SingleChildScrollView(
@@ -49,9 +51,9 @@ Future<void> disconnectPopup(BuildContext context, String reason) async {
     );
   }
 
-  Future<void> acceptRejectConnection(BuildContext context, String id) async {
+  Future<void> acceptRejectConnection(String id) async {
     return showDialog<void>(
-      context: context,
+      context: navigatorKey.currentContext as BuildContext,
       barrierDismissible: false,
       builder: (BuildContext context) {
          return WillPopScope(
@@ -73,14 +75,14 @@ Future<void> disconnectPopup(BuildContext context, String reason) async {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   OutlinedButton(
                       onPressed: () => {
-                            print("dumbass")
-                            
+                            print("Accept"),
+                            Navigator.of(context, rootNavigator: true).pop('dialog')
                           },
                       child: Text(AppLocalizations.of(context)!.accept)),
                       SizedBox(width: 10),
                       OutlinedButton(
                       onPressed: () => {
-                            print("ich hasse alles hier"),
+                            print("Reject"),
                             Navigator.of(context, rootNavigator: true).pop('dialog')
                           },
                       child: Text(AppLocalizations.of(context)!.reject)),
@@ -300,6 +302,7 @@ class _MyAppState extends State<MyApp> {
         scrollBehavior: AppScrollBehavior(),
         darkTheme: darkTheme,
         home: notFirstStart ? DeviceSelection() : StartScreen(),
+        navigatorKey: navigatorKey
       ),
     );
   }
