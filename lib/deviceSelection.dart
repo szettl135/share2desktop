@@ -171,7 +171,7 @@ class aDeviceSelection extends State<DeviceSelection> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(
+                SelectableText(
                     AppLocalizations.of(context)!.yourQR +
                         " : " +
                         Provider.of<ConnectionObject>(context).internalSocketId,
