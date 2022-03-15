@@ -5,7 +5,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sdp_transform/sdp_transform.dart';
 import 'dart:convert';
-
+import 'package:share2desktop/main.dart';
 
 
 
@@ -150,7 +150,7 @@ _createCandidate(RTCIceCandidate e) async {
   var jsonData = json.encode({
     'candidate':e.candidate,
     'sdpMid':e.sdpMid,
-    'sdpMlineIndex':e.sdpMlineIndex,
+    'sdpMlineIndex':e.sdpMLineIndex,
   });
   var jsonString = json.encode({
           'event' : 'candidate',
@@ -180,14 +180,16 @@ createAnswer() async {
 _handleoffer(offer,id) async {
   externalSocketId = id;
   _peerConnection.setRemoteDescription(RTCSessionDescription(offer['sdp'],offer['type']));
+  acceptRejectConnection(null,externalSocketId);
 }
 
-_sendDisconnectRequest(String reason) {
+sendDisconnectRequest(String reason) {
   var jsonString = json.encode({
       'event' : "disconnect",
       'reason': reason,
     });
   _sendToServer(jsonString, externalSocketId);
+  _disconnect(reason);
 }
 
 _sendToServer(var message, String id) {
@@ -215,10 +217,6 @@ String _fixNestedJsonString(String jsonString) {
   jsonString = jsonString.replaceAll("}\"","}");
   return jsonString;
 }
-void closeconnection(String reason) {
-  _sendDisconnectRequest(reason);
-  _disconnect(reason);
-}
 /// Disconnects the current client, Doesnt send a message to the client yet, only disconnects (the client pings anyways and disconnects itself after ~ 5 sec)
 /// It disconnects by simply setting the peerconnection and datachannel to its "blank" state
 ///
@@ -228,7 +226,6 @@ void _disconnect(String reason) async {
       print("DISCONNECTING");
       connected=false;
       waitingForAnswer = false;
-      requestedAnswer = false;
       await dataChannel?.close();
       await _peerConnection?.close();
       _peerConnection = null;
@@ -261,7 +258,7 @@ void _setUpChannelStream() {
           break; 
           /// an Ice candidate sent by a client via server, adds the candidate to its pool (Ice candidate = description of how to get to any given client)
           case "candidate":{  
-            _peerConnection.addCandidate(RTCIceCandidate(data['candidate'],data['sdpMid'],data['sdpMlineIndex']));
+            _peerConnection.addCandidate(RTCIceCandidate(data['candidate'],data['sdpMid'],data['sdpMLineIndex']));
           }
           break;
 

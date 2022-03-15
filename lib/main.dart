@@ -12,7 +12,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:share2desktop/startscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_size/window_size.dart';
-
+import 'package:share2desktop/connectionObject.dart';
+import 'package:provider/provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -23,7 +24,12 @@ void main() {
     setWindowMaxSize(const Size(1536, 1064));
     setWindowMinSize(const Size(1024, 776));
   }
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ConnectionObject(context),
+      child: MyApp(),
+    ),
+  );
 }
 
 
@@ -73,14 +79,14 @@ Future<void> disconnectPopup(BuildContext context, String reason) async {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   OutlinedButton(
                       onPressed: () => {
-                            print("dumbass")
-                            
+                            Provider.of<ConnectionObject>(context,listen:false).createAnswer(),
+                            Navigator.of(context, rootNavigator: true).pop('dialog')
                           },
                       child: Text(AppLocalizations.of(context)!.accept)),
                       SizedBox(width: 10),
                       OutlinedButton(
                       onPressed: () => {
-                            print("ich hasse alles hier"),
+                            Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("rejection"),
                             Navigator.of(context, rootNavigator: true).pop('dialog')
                           },
                       child: Text(AppLocalizations.of(context)!.reject)),
@@ -111,68 +117,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  /*Future<void> disconnectPopup(String reason) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          //title: const Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(AppLocalizations.of(context)!.connectionLost,
-                    style: Theme.of(context).textTheme.bodyText1),
-                SizedBox(height: 20),
-                Text(reason)
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }*/
 
-  /*Future<void> acceptRejectConnection(String id) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          //title: const Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(AppLocalizations.of(context)!.connectionReq,
-                    style: Theme.of(context).textTheme.bodyText1),
-                SizedBox(height: 20),
-                Text(AppLocalizations.of(context)!.device +
-                    " " +
-                    id +
-                    " " +
-                    AppLocalizations.of(context)!.wantsToConnect),
-                SizedBox(height: 20),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  OutlinedButton(
-                      onPressed: () => {
-                            print("dumbass")
-                            
-                          },
-                      child: Text(AppLocalizations.of(context)!.accept)),
-                      SizedBox(width: 10),
-                      OutlinedButton(
-                      onPressed: () => {
-                            print("ich hasse alles hier")
-                          },
-                      child: Text(AppLocalizations.of(context)!.reject)),
-                ])
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }*/
+ 
 
   bool notFirstStart = false;
 
