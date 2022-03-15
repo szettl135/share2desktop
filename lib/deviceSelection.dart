@@ -16,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences_windows/shared_preferences_windows.dart';
 
+import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -35,7 +36,6 @@ class DeviceSelection extends StatefulWidget {
 class aDeviceSelection extends State<DeviceSelection> {
   late Locale _locale;
   final txtController = TextEditingController();
-  ConnectionObject connector = new ConnectionObject();
   @override
 
   ///Sets up everything at the start of the app
@@ -174,11 +174,11 @@ class aDeviceSelection extends State<DeviceSelection> {
                 Text(
                     AppLocalizations.of(context)!.yourQR +
                         " : " +
-                        connector.internalSocketId,
+                        Provider.of<ConnectionObject>(context).internalSocketId,
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 Container(
-                    child: getQRCodeImage(connector.internalSocketId),
+                    child: getQRCodeImage(Provider.of<ConnectionObject>(context).internalSocketId),
                     width: 400),
                
               ],
@@ -207,7 +207,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                 SizedBox(height: 20),
                 OutlinedButton(
                     onPressed: () => {
-                          connector.connectOffer(txtController.text)
+                          Provider.of<ConnectionObject>(context,listen:false).connectOffer(txtController.text)
                           //txtController.text für den InputField text
                         },
                     child: Text(AppLocalizations.of(context)!.connect))
@@ -502,7 +502,6 @@ class aDeviceSelection extends State<DeviceSelection> {
                       primary: Colors.black, padding: EdgeInsets.all(12)),
                   onPressed: () => {
                         print("qr button"),
-                        connector.getInternalSocketid(),
                         _qrDialog()
                       },
                   //shape:RectangleBorder(
