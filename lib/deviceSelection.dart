@@ -240,7 +240,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                  CircularProgressIndicator(
                    
                 backgroundColor: Colors.grey,
-                color: Colors.purple,
+                color: Theme.of(context).primaryColor, //Colors.purple,
                 strokeWidth: 10,                ))),
                 SizedBox(height: 30),
                 Text(AppLocalizations.of(context)!.waitingOn +
@@ -255,6 +255,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                           },
                       child: Text(AppLocalizations.of(context)!.cancel)),
                       SizedBox(width: 10),
+                      
                   
 
 
@@ -532,7 +533,7 @@ class aDeviceSelection extends State<DeviceSelection> {
               Container(
                 child: IconButton(
                     onPressed: () => {print("camera"), _cameraFunc()},
-                    splashColor: Colors.purple,
+                   // splashColor: Colors.purple,
                     constraints: BoxConstraints(
                         minHeight: 100,
                         minWidth: 100,
