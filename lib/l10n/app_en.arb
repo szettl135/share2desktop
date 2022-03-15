@@ -51,7 +51,9 @@
     "reject": "Reject",
     "connectionReq": "Connection request",
     "enterID": "Enter ID",
-    "connect": "Connect"
+    "connect": "Connect",
+    "waitingOn": "Waiting on",
+    "cancel": "Cancel"
 
 
     
