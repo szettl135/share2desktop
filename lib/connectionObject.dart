@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
@@ -7,14 +9,21 @@ import 'dart:convert';
 
 
 
-class ConnectionObject {
+class ConnectionObject extends ChangeNotifier{
+  static final ConnectionObject _connector = ConnectionObject._internal();
+   factory ConnectionObject() {
+    return _connector;
+  }
+
+  
+
   /// These are all the important variables
   ///
   ///
   /// _channel is the connection to the server, the URL will change to the one of the actual server ofc
    WebSocketChannel _channel = WebSocketChannel.connect(
-    //Uri.parse('ws://localhost:8080/socket'),
-    Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
+    Uri.parse('ws://localhost:8080/socket'),
+    //Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
   );
   /// peerconnection is a description on how the connection works
   var _peerConnection;
@@ -31,42 +40,18 @@ class ConnectionObject {
   String lastmessage = "";
 
   //state
-  String _state = "";
-
+  String state = "";
+  bool connected = false;
+  bool waitingForAnswer = false;
   int _counter = 0;
-  /// sends a message to the client it is connected to with a "hello" and a counter that keeps updating to make sure the messages are the right ones and in order
-  void _incrementCounter() {
-      _counter++;
-      print('AAAAA $_counter');
-      dataChannel.send(RTCDataChannelMessage('Hello! $_counter'));
-  
-  }
 
-/// Disconnects the current client, Doesnt send a message to the client yet, only disconnects (the client pings anyways and disconnects itself after ~ 5 sec)
-/// It disconnects by simply setting the peerconnection and datachannel to its "blank" state
-///
-///
-void _disconnect() async {
-    try {
-      await _peerConnection?.close();
-      await dataChannel.close();
-      _peerConnection = null;
-      await _createPeerConnecion().then((pc) {
-        _peerConnection=pc;
-        _createDataChannel(_peerConnection).then((dataChannel) {
-          dataChannel = dataChannel;
-        });
-      });
-    
-    } catch (e) {
-      print(e.toString());
-    }
-    
-  }
+
   
   @override
   ///Sets up everything at the start of the app
-  ConnectionObject() {
+  ConnectionObject._internal() {
+    _peerConnection = null;
+    dataChannel = null;
     /// creates peer connection and the underlying datachannel
     _createPeerConnecion().then((pc) {
       _peerConnection = pc;
@@ -76,42 +61,7 @@ void _disconnect() async {
     });
     /// listens to messages from the server, the messages from the server are always in a "event" and "data" json object
     /// The "data" json object itself often includes json objects
-    _channel.stream.listen((message) {
-      Map<String, dynamic> content = jsonDecode(message);
-      print(message);
-      var data = content['data'];
-      switch(content['event']) { 
-          /// Answer send by client via server, sets up a connection
-          case "answer": {
-             _peerConnection.setRemoteDescription(RTCSessionDescription(data['sdp'],data['type']));
-          } 
-          break; 
-          /// an Ice candidate sent by a client via server, adds the candidate to its pool (Ice candidate = description of how to get to any given client)
-          case "candidate":{  
-            _peerConnection.addCandidate(RTCIceCandidate(data['candidate'],data['sdpMid'],data['sdpMlineIndex']));
-          }
-          break;
-
-          /// right now in case of an offer it simply immediatly sends a client
-          case "offer": {
-            _handleoffer(data,content['id']);
-          }
-          break;
-
-          /// A message sent directly by the server, includes the socketId of the client who received the message
-          case "socketId": {
-            internalSocketId=data['id'];
-            break;
-          }
-          /// a message directly by the Server, in case the client (somehow) enters a Socket ID that no longer exists.
-          case "wrongId": {
-            _disconnect();
-            break;
-          }
-          default: { print("this event (${content['event']}) isnt valid!"); } 
-          break; 
-      } 
-    }); 
+    _setUpChannelStream();
   }
 
 /// creates a peer connection, and configures it
@@ -138,13 +88,17 @@ void _disconnect() async {
         
       }
     };
-    ///If the  connection changes (disconnects most likely) do something
+    ///If the  connection changes do something
     pc.onIceConnectionState = (e) {
+      state = e.toString();
       if(e==RTCIceConnectionState.RTCIceConnectionStateDisconnected) {
-        _disconnect();
+        connected=false;
+        _disconnect("Connection Lost!");
       }
-      print(e.toString());
-      _state= e.toString();
+      if(e==RTCIceConnectionState.RTCIceConnectionStateConnected) {
+        connected=true;
+      }
+      notifyListeners();
     };
 
     pc.onDataChannel = (e) {
@@ -163,6 +117,7 @@ void _disconnect() async {
     dataChannel.onMessage = (event) {
         print("message: ${event.text}");
         lastmessage = event.text;
+        notifyListeners();
     };
     
 
@@ -172,6 +127,7 @@ void _disconnect() async {
 
 connectOffer(String Socketid) async {
     externalSocketId = Socketid;
+    notifyListeners();   
     var offer = await _peerConnection.createOffer();
     var jsonData = json.encode({
         'sdp' : offer.sdp,
@@ -186,13 +142,15 @@ connectOffer(String Socketid) async {
       jsonString,externalSocketId
     );
     _peerConnection.setLocalDescription(offer);
+    waitingForAnswer = true;
+    notifyListeners();   
 }
 
 _createCandidate(RTCIceCandidate e) async {
   var jsonData = json.encode({
     'candidate':e.candidate,
     'sdpMid':e.sdpMid,
-    'sdpMlineIndex':e.sdpMLineIndex,
+    'sdpMlineIndex':e.sdpMlineIndex,
   });
   var jsonString = json.encode({
           'event' : 'candidate',
@@ -203,7 +161,9 @@ _createCandidate(RTCIceCandidate e) async {
   _sendToServer(jsonString,externalSocketId);
 }
 
-createAnswer(answer) {
+createAnswer() async {
+  var answer = await _peerConnection.createAnswer();
+  _peerConnection.setLocalDescription(answer);
   String answerData = json.encode({
         'sdp' : answer.sdp,
         'type' : answer.type,
@@ -218,13 +178,11 @@ createAnswer(answer) {
   );
 }
 _handleoffer(offer,id) async {
+  externalSocketId = id;
   _peerConnection.setRemoteDescription(RTCSessionDescription(offer['sdp'],offer['type']));
-  var answer = await _peerConnection.createAnswer();
-  _peerConnection.setLocalDescription(answer);
-  createAnswer(answer);
 }
 
-sendDisconnectRequest(String reason) {
+_sendDisconnectRequest(String reason) {
   var jsonString = json.encode({
       'event' : "disconnect",
       'reason': reason,
@@ -243,8 +201,8 @@ _sendToServer(var message, String id) {
 
 getInternalSocketid() {
   _channel = WebSocketChannel.connect(
-    //Uri.parse('ws://localhost:8080/socket'),
-    Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
+    Uri.parse('ws://localhost:8080/socket'),
+    //Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
   );
 }
 
@@ -257,12 +215,88 @@ String _fixNestedJsonString(String jsonString) {
   jsonString = jsonString.replaceAll("}\"","}");
   return jsonString;
 }
-
-
-
-
-
-
-
-
+void closeconnection(String reason) {
+  _sendDisconnectRequest(reason);
+  _disconnect(reason);
 }
+/// Disconnects the current client, Doesnt send a message to the client yet, only disconnects (the client pings anyways and disconnects itself after ~ 5 sec)
+/// It disconnects by simply setting the peerconnection and datachannel to its "blank" state
+///
+///
+void _disconnect(String reason) async {
+    try {
+      print("DISCONNECTING");
+      connected=false;
+      waitingForAnswer = false;
+      requestedAnswer = false;
+      await dataChannel?.close();
+      await _peerConnection?.close();
+      _peerConnection = null;
+      await _createPeerConnecion().then((pc) {
+        _peerConnection=pc;
+        _createDataChannel(_peerConnection).then((dataChannel) {
+          dataChannel = dataChannel;
+        });
+      });
+      externalSocketId = "";
+      notifyListeners();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+void _setUpChannelStream() {
+  _channel.stream.listen((message) {
+      Map<String, dynamic> content = jsonDecode(message);
+      var data = content['data'];
+      print(content['event']);
+      switch(content['event']) { 
+          /// Answer sent by client via server, sets up a connection
+          case "answer": {
+            if(content['id'] == externalSocketId) {
+              waitingForAnswer = false;
+              _peerConnection.setRemoteDescription(RTCSessionDescription(data['sdp'],data['type']));
+            }
+          } 
+          break; 
+          /// an Ice candidate sent by a client via server, adds the candidate to its pool (Ice candidate = description of how to get to any given client)
+          case "candidate":{  
+            _peerConnection.addCandidate(RTCIceCandidate(data['candidate'],data['sdpMid'],data['sdpMlineIndex']));
+          }
+          break;
+
+          /// right now in case of an offer it simply immediatly sends an answer
+          case "offer": {
+            if(externalSocketId=="") {
+            _handleoffer(data,content['id']);
+            }
+          }
+          break;
+
+          /// A message sent directly by the server, includes the socketId of the client who received the message
+          case "socketId": {
+            internalSocketId=data['id'];
+            break;
+          }
+          /// a message directly by the Server, in case the client (somehow) enters a Socket ID that no longer exists.
+          case "wrongId": {
+            _disconnect("Wrong ID!");
+            break;
+          }
+          case "disconnect": {
+            if(content['id'] == externalSocketId) {
+              _disconnect(content['reason']);
+            }
+            break;
+          }
+          default: { print("this event (${content['event']}) isnt valid!"); } 
+          break; 
+      } 
+      notifyListeners();
+    }); 
+  }
+}
+
+
+
+
