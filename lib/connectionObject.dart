@@ -97,6 +97,7 @@ class ConnectionObject extends ChangeNotifier{
       }
       if(e==RTCIceConnectionState.RTCIceConnectionStateConnected) {
         connected=true;
+        print("CONNECTED");
       }
       notifyListeners();
     };
@@ -180,7 +181,8 @@ createAnswer() async {
 _handleoffer(offer,id) async {
   externalSocketId = id;
   _peerConnection.setRemoteDescription(RTCSessionDescription(offer['sdp'],offer['type']));
-  acceptRejectConnection(null,externalSocketId);
+  Navigator.of(navigatorKey.currentContext as BuildContext, rootNavigator: true).pop('dialog');
+  acceptRejectConnection(externalSocketId);
 }
 
 sendDisconnectRequest(String reason) {
