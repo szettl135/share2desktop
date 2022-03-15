@@ -235,12 +235,13 @@ class aDeviceSelection extends State<DeviceSelection> {
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 30),
                 Center(child: SizedBox(width: MediaQuery.of(context).size.width*0.1,
+                height: MediaQuery.of(context).size.width*0.1,
                   child:
                  CircularProgressIndicator(
                    
                 backgroundColor: Colors.grey,
-                color: Colors.purple,
-                strokeWidth: 5,                ))),
+                color: Theme.of(context).primaryColor, //Colors.purple,
+                strokeWidth: 10,                ))),
                 SizedBox(height: 30),
                 Text(AppLocalizations.of(context)!.waitingOn +
                     " " +
@@ -254,6 +255,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                           },
                       child: Text(AppLocalizations.of(context)!.cancel)),
                       SizedBox(width: 10),
+                      
                   
 
 
@@ -530,7 +532,7 @@ class aDeviceSelection extends State<DeviceSelection> {
               Container(
                 child: IconButton(
                     onPressed: () => {print("camera"), _cameraFunc()},
-                    splashColor: Colors.purple,
+                   // splashColor: Colors.purple,
                     constraints: BoxConstraints(
                         minHeight: 100,
                         minWidth: 100,
