@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 
 
 final navigatorKey = GlobalKey<NavigatorState>();
+bool dialogOpen = false;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -37,6 +38,7 @@ void main() {
 
 
 Future<void> disconnectPopup(String reason) async {
+   dialogOpen = true;
     return showDialog<void>(
       context: navigatorKey.currentContext as BuildContext,
       barrierDismissible: true,
@@ -55,10 +57,11 @@ Future<void> disconnectPopup(String reason) async {
           ),
         );
       },
-    );
+    ).then((value) => dialogOpen = false);
   }
 
   Future<void> acceptRejectConnection(String id) async {
+    dialogOpen = true;
     return showDialog<void>(
       context: navigatorKey.currentContext as BuildContext,
       barrierDismissible: false,
@@ -102,7 +105,7 @@ Future<void> disconnectPopup(String reason) async {
           ),
         ));
       },
-    );
+    ).then((value) => dialogOpen = false);
   }
 
 class MyApp extends StatefulWidget {

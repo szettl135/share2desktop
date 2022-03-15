@@ -57,6 +57,7 @@ class aDeviceSelection extends State<DeviceSelection> {
   }
 
   Future<void> connectionLostPopup() async {
+    dialogOpen = true;
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -115,7 +116,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                       ),
                     ]))));
       },
-    );
+    ).then((value) => dialogOpen = false);
   }
 
   Future unsetShared() async {
@@ -127,6 +128,7 @@ class aDeviceSelection extends State<DeviceSelection> {
   Object? selectedDevice = null;
   final ValueNotifier<ThemeMode> _notifier = ValueNotifier(ThemeMode.light);
   Future<void> _aboutDialog() async {
+    dialogOpen = true;
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -157,10 +159,11 @@ class aDeviceSelection extends State<DeviceSelection> {
           ),
         );
       },
-    );
+    ).then((value) => dialogOpen = false);
   }
 
   Future<void> _qrDialog() async {
+    dialogOpen = true;
     var deviceData = await getDeviceInfo();
     return showDialog<void>(
       context: context,
@@ -186,10 +189,11 @@ class aDeviceSelection extends State<DeviceSelection> {
           ),
         );
       },
-    );
+    ).then((value) => dialogOpen = false);
   }
 
   Future<void> _cameraFunc() async {
+    dialogOpen = true;
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -217,10 +221,11 @@ class aDeviceSelection extends State<DeviceSelection> {
           ),
         );
       },
-    );
+    ).then((value) => dialogOpen = false);
   }
 
   Future<void> waitingForConnection(String id) async {
+    dialogOpen = true;
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -265,10 +270,11 @@ class aDeviceSelection extends State<DeviceSelection> {
           ),
         ));
       },
-    );
+    ).then((value) => dialogOpen = false);
   }
 
   Future<void> _settings() async {
+    dialogOpen = true;
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -377,10 +383,11 @@ class aDeviceSelection extends State<DeviceSelection> {
           ),
         );
       },
-    );
+    ).then((value) => dialogOpen = false);
   }
 
   Future<void> _selectTheme() async {
+    
     return showDialog<void>(
       context: context,
       barrierDismissible: true,

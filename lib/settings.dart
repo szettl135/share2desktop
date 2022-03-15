@@ -17,6 +17,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool themeSwitch = false;
 
   Future<void> _sprache() async {
+    dialogOpen = true;
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -49,7 +50,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         );
       },
-    );
+    ).then((value) => dialogOpen = false);
   }
 
   void initState() {
