@@ -99,6 +99,9 @@ class ConnectionObject extends ChangeNotifier{
       if(e==RTCIceConnectionState.RTCIceConnectionStateConnected) {
         connected=true;
         print("CONNECTED");
+        if(dialogOpen) {
+          Navigator.of(navigatorKey.currentContext as BuildContext, rootNavigator: true).pop('dialog');
+        }
          Navigator.of(navigatorKey.currentContext as BuildContext).push(MaterialPageRoute(
                               builder: (context) => ChooseFiles(
                                     targetDeviceName: externalSocketId,
