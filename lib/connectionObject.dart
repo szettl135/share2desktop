@@ -138,7 +138,7 @@ class ConnectionObject extends ChangeNotifier {
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
         print(decodedJSON['name']);
 
-        if(decodedJSON.containsKey("finished")) {
+        if(decodedJSON['finished'] as bool==true) {
       
 
         Directory? downdir = await getDownloadsDirectory();
