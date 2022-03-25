@@ -73,13 +73,16 @@ class _ChooseFiles extends State<ChooseFiles> {
   }
 
   void _sendFile() async {
+    print('test');
     for (File file in _files) {
+      print('file: ' + basename(file.path));
       var fileBytes = await file.readAsBytes();
       var data = jsonEncode({"name": basename(file.path), "bytes": fileBytes});
       Provider.of<ConnectionObject>(navigatorKey.currentContext as BuildContext,
               listen: false)
           .dataChannel
           .send(RTCDataChannelMessage(data));
+      print('file should be sent');
     }
     setState(() {});
   }

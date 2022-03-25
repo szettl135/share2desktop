@@ -130,6 +130,7 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
+      print('akjsghdjklagshasf');
       try {
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
         print(decodedJSON['name']);
@@ -144,6 +145,7 @@ class ConnectionObject extends ChangeNotifier {
         print("message: ${event.text}");
         lastmessage = event.text;
       }
+      print('send is done');
       notifyListeners();
     };
 
