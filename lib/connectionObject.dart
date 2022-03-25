@@ -40,7 +40,8 @@ class ConnectionObject extends ChangeNotifier {
   /// the last message the client has recieved from another client (not the server)
   String lastmessage = "";
 
- late  List<dynamic> buffer;
+  //late Map<String, List<dynamic>> buffer;
+  late List<dynamic> buffer;
 
   //state
   String state = "";
@@ -140,19 +141,25 @@ class ConnectionObject extends ChangeNotifier {
         print(decodedJSON['name']);
         print(decodedJSON['finished']);
 
-        if(decodedJSON['finished']=="true") {
+        if (decodedJSON['finished'] == "true") {
           print("finished");
-      
 
-        Directory? downdir = await getDownloadsDirectory();
+          Directory? downdir = await getDownloadsDirectory();
 
-        File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
-        print(newFile.path);
-        newFile.writeAsBytes(buffer.cast<int>());
-         buffer.clear();
+          File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
+          print(newFile.path);
+          //print(buffer);
+          print("cast int");
+          print(buffer.cast<int>());
+          await newFile.writeAsBytes(buffer.cast<int>(), flush:true);
+          buffer.clear();
         } else {
           print("buffer add");
-          buffer.add(decodedJSON['bytes']);
+          //buffer.add(decodedJSON['bytes'].cast<int>());
+         // String finalStr = decodedJSON["bytes"].reduce((value, element) {
+           // return value + ", " + element;
+          //});
+          buffer = buffer + decodedJSON["bytes"];
           //print(buffer);
         }
       } on FormatException catch (e) {
