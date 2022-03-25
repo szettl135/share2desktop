@@ -79,31 +79,33 @@ class _ChooseFiles extends State<ChooseFiles> {
       print('file: ' + basename(file.path));
       var fileBytes = await file.readAsBytes();
 
-
       var data = jsonEncode(
           {"name": basename(file.path), "bytes": fileBytes as Uint8List});
 
       int size = fileBytes.length;
       print(size);
-      for (int i = 0; i < size; i + 64) {
+      for (int i = 0; i < size;) {
+        print(i);
         if ((size - i) > 64) {
           var data = jsonEncode({
             "name": basename(file.path),
             "bytes": fileBytes.sublist(i, i + 64) as Uint8List,
-            'finished': false
+            'finished': "false"
           });
         } else {
           var data = jsonEncode({
             "name": basename(file.path),
             "bytes": fileBytes.sublist(i) as Uint8List,
-            'finished': true
+            'finished': "true"
           });
         }
+        print("going to send");
         Provider.of<ConnectionObject>(
                 navigatorKey.currentContext as BuildContext,
                 listen: false)
             .dataChannel
             .send(RTCDataChannelMessage(data));
+        i = i + 64;
       }
 
       print('file should be sent');
