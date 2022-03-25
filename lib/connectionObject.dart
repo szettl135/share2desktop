@@ -40,8 +40,8 @@ class ConnectionObject extends ChangeNotifier {
   /// the last message the client has recieved from another client (not the server)
   String lastmessage = "";
 
-  //late Map<String, List<dynamic>> buffer;
-  late List<dynamic> buffer;
+  late Map<String, List<dynamic>> buffer;
+  //late List<dynamic> buffer;
 
   //state
   String state = "";
@@ -55,7 +55,7 @@ class ConnectionObject extends ChangeNotifier {
   ConnectionObject._internal() {
     _peerConnection = null;
     dataChannel = null;
-    buffer = List.filled(0, "na", growable: true);
+    buffer = Map();
 
     /// creates peer connection and the underlying datachannel
     _createPeerConnecion().then((pc) {
@@ -150,8 +150,8 @@ class ConnectionObject extends ChangeNotifier {
           print(newFile.path);
           //print(buffer);
           print("cast int");
-          print(buffer.cast<int>());
-          await newFile.writeAsBytes(buffer.cast<int>(), flush:true);
+          //print(buffer.cast<int>());
+          await newFile.writeAsBytes(buffer["name"]!.cast<int>(), flush:true);
           buffer.clear();
         } else {
           print("buffer add");
@@ -159,7 +159,9 @@ class ConnectionObject extends ChangeNotifier {
          // String finalStr = decodedJSON["bytes"].reduce((value, element) {
            // return value + ", " + element;
           //});
-          buffer = buffer + decodedJSON["bytes"];
+          //buffer = buffer + decodedJSON["bytes"];
+          buffer.putIfAbsent(decodedJSON["name"], () => List.filled(0, "na", growable: true));
+          buffer.update(decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
           //print(buffer);
         }
       } on FormatException catch (e) {
