@@ -78,6 +78,8 @@ class _ChooseFiles extends State<ChooseFiles> {
     for (File file in _files) {
       print('file: ' + basename(file.path));
       var fileBytes = await file.readAsBytes();
+
+
       var data = jsonEncode(
           {"name": basename(file.path), "bytes": fileBytes as Uint8List});
 
