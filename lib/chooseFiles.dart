@@ -110,10 +110,11 @@ class _ChooseFiles extends State<ChooseFiles> {
         ),
         OutlinedButton(
             onPressed: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ReceiveFiles()),
-                  )
+                  _sendFile()
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => ReceiveFiles()),
+                  // )
                 },
             child: Container(
                 alignment: Alignment.center,
