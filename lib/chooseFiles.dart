@@ -87,16 +87,16 @@ class _ChooseFiles extends State<ChooseFiles> {
       for (int i = 0; i < size;) {
         print(i);
         if ((size - i) > 64) {
-          var data = jsonEncode({
+          data = jsonEncode({
             "name": basename(file.path),
             "bytes": fileBytes.sublist(i, i + 64) as Uint8List,
-            'finished': "false"
+            "finished": "false"
           });
         } else {
-          var data = jsonEncode({
+          data = jsonEncode({
             "name": basename(file.path),
             "bytes": fileBytes.sublist(i) as Uint8List,
-            'finished': "true"
+            "finished": "true"
           });
         }
         print("going to send");
