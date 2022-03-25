@@ -81,32 +81,29 @@ class _ChooseFiles extends State<ChooseFiles> {
       var data = jsonEncode(
           {"name": basename(file.path), "bytes": fileBytes as Uint8List});
 
-      Directory? downdir = await getDownloadsDirectory();
+      int size = fileBytes.length;
+      print(size);
+      for (int i = 0; i < size; i + 64) {
+        if ((size - i) > 64) {
+          var data = jsonEncode({
+            "name": basename(file.path),
+            "bytes": fileBytes.sublist(i, i + 64) as Uint8List,
+            'finished': false
+          });
+        } else {
+          var data = jsonEncode({
+            "name": basename(file.path),
+            "bytes": fileBytes.sublist(i) as Uint8List,
+            'finished': true
+          });
+        }
+        Provider.of<ConnectionObject>(
+                navigatorKey.currentContext as BuildContext,
+                listen: false)
+            .dataChannel
+            .send(RTCDataChannelMessage(data));
+      }
 
-      var decodedJSON = json.decode(data) as Map<String, dynamic>;
-
-      File newFile = File(downdir!.path + "\\" + basename(file.path));
-      print(newFile.path);
-
-      print(fileBytes.runtimeType);
-
-      //print(decodedJSON['bytes'].toString());
-      //print(decodedJSON['bytes'].runtimeType);
-
-      //print('bytes type: ' + decodedJSON['bytes']);
-
-      // List<int> list1 = json.decode(decodedJSON['bytes'].toString());
-      // Uint8List b = Uint8List.fromList(list1);
-      newFile.writeAsBytes(decodedJSON['bytes'].cast<int>());
-
-      Provider.of<ConnectionObject>(navigatorKey.currentContext as BuildContext,
-              listen: false)
-          .dataChannel
-          .send(RTCDataChannelMessage('data'));
-      Provider.of<ConnectionObject>(navigatorKey.currentContext as BuildContext,
-              listen: false)
-          .dataChannel
-          .send(RTCDataChannelMessage(data));
       print('file should be sent');
     }
     setState(() {});
