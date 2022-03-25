@@ -40,6 +40,8 @@ class ConnectionObject extends ChangeNotifier {
   /// the last message the client has recieved from another client (not the server)
   String lastmessage = "";
 
+  late List<dynamic> buffer;
+
   //state
   String state = "";
   bool connected = false;
@@ -131,15 +133,23 @@ class ConnectionObject extends ChangeNotifier {
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
       print('akjsghdjklagshasf');
+      print("GLGGLGLGLGLGLGLG keerokkkkkk war hier");
       try {
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
         print(decodedJSON['name']);
+
+        if(decodedJSON['finished'] as bool==true) {
+      
 
         Directory? downdir = await getDownloadsDirectory();
 
         File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
         print(newFile.path);
         newFile.writeAsBytes(decodedJSON['bytes'].cast<int>());
+         buffer.clear();
+        } else {
+          buffer.add(decodedJSON['bytes']);
+        }
       } on FormatException catch (e) {
         print('The provided string is not valid JSON');
         print("message: ${event.text}");
