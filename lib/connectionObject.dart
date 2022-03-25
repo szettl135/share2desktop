@@ -139,7 +139,7 @@ class ConnectionObject extends ChangeNotifier {
 
         File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
         print(newFile.path);
-        newFile.writeAsBytes(decodedJSON['bytes']);
+        newFile.writeAsBytes(decodedJSON['bytes'].cast<int>());
       } on FormatException catch (e) {
         print('The provided string is not valid JSON');
         print("message: ${event.text}");

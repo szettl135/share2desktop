@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,31 @@ class _ChooseFiles extends State<ChooseFiles> {
     for (File file in _files) {
       print('file: ' + basename(file.path));
       var fileBytes = await file.readAsBytes();
-      var data = jsonEncode({"name": basename(file.path), "bytes": fileBytes});
+      var data = jsonEncode(
+          {"name": basename(file.path), "bytes": fileBytes as Uint8List});
+
+      Directory? downdir = await getDownloadsDirectory();
+
+      var decodedJSON = json.decode(data) as Map<String, dynamic>;
+
+      File newFile = File(downdir!.path + "\\" + basename(file.path));
+      print(newFile.path);
+
+      print(fileBytes.runtimeType);
+
+      //print(decodedJSON['bytes'].toString());
+      //print(decodedJSON['bytes'].runtimeType);
+
+      //print('bytes type: ' + decodedJSON['bytes']);
+
+      // List<int> list1 = json.decode(decodedJSON['bytes'].toString());
+      // Uint8List b = Uint8List.fromList(list1);
+      newFile.writeAsBytes(decodedJSON['bytes'].cast<int>());
+
+      Provider.of<ConnectionObject>(navigatorKey.currentContext as BuildContext,
+              listen: false)
+          .dataChannel
+          .send(RTCDataChannelMessage('data'));
       Provider.of<ConnectionObject>(navigatorKey.currentContext as BuildContext,
               listen: false)
           .dataChannel
