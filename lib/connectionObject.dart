@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:share2desktop/chooseFiles.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sdp_transform/sdp_transform.dart';
@@ -22,8 +23,8 @@ class ConnectionObject extends ChangeNotifier{
   ///
   /// _channel is the connection to the server, the URL will change to the one of the actual server ofc
    WebSocketChannel _channel = WebSocketChannel.connect(
-    Uri.parse('ws://localhost:8080/socket'),
-    //Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
+    //Uri.parse('ws://localhost:8080/socket'),
+    Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
   );
   /// peerconnection is a description on how the connection works
   var _peerConnection;
@@ -98,6 +99,10 @@ class ConnectionObject extends ChangeNotifier{
       if(e==RTCIceConnectionState.RTCIceConnectionStateConnected) {
         connected=true;
         print("CONNECTED");
+         Navigator.of(navigatorKey.currentContext as BuildContext).push(MaterialPageRoute(
+                              builder: (context) => ChooseFiles(
+                                    targetDeviceName: externalSocketId,
+                                  )));
       }
       notifyListeners();
     };
@@ -181,7 +186,9 @@ createAnswer() async {
 _handleoffer(offer,id) async {
   externalSocketId = id;
   _peerConnection.setRemoteDescription(RTCSessionDescription(offer['sdp'],offer['type']));
-  Navigator.of(navigatorKey.currentContext as BuildContext, rootNavigator: true).pop('dialog');
+  if (dialogOpen) {
+     Navigator.of(navigatorKey.currentContext as BuildContext, rootNavigator: true).pop('dialog');
+  }
   acceptRejectConnection(externalSocketId);
 }
 
@@ -205,8 +212,8 @@ _sendToServer(var message, String id) {
 
 getInternalSocketid() {
   _channel = WebSocketChannel.connect(
-    Uri.parse('ws://localhost:8080/socket'),
-    //Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
+    //Uri.parse('ws://localhost:8080/socket'),
+    Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
   );
 }
 

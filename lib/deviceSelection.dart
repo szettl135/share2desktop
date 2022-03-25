@@ -211,7 +211,9 @@ class aDeviceSelection extends State<DeviceSelection> {
                 SizedBox(height: 20),
                 OutlinedButton(
                     onPressed: () => {
-                          Provider.of<ConnectionObject>(context,listen:false).connectOffer(txtController.text)
+                          Provider.of<ConnectionObject>(context,listen:false).connectOffer(txtController.text),
+                          Navigator.of(context, rootNavigator: true).pop('dialog'),
+                          waitingForConnection(txtController.text)
                           //txtController.text für den InputField text
                         },
                     child: Text(AppLocalizations.of(context)!.connect))
@@ -256,6 +258,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                   OutlinedButton(
                       onPressed: () => {
                             print("cancel"),
+                            Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("User hat Verbindung getrennt!"),
                             Navigator.of(context, rootNavigator: true).pop('dialog')
                           },
                       child: Text(AppLocalizations.of(context)!.cancel)),
