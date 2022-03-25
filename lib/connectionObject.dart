@@ -40,7 +40,7 @@ class ConnectionObject extends ChangeNotifier {
   /// the last message the client has recieved from another client (not the server)
   String lastmessage = "";
 
-  late List<dynamic> buffer;
+ late  List<dynamic> buffer;
 
   //state
   String state = "";
@@ -54,6 +54,7 @@ class ConnectionObject extends ChangeNotifier {
   ConnectionObject._internal() {
     _peerConnection = null;
     dataChannel = null;
+    buffer = List.filled(0, "na", growable: true);
 
     /// creates peer connection and the underlying datachannel
     _createPeerConnecion().then((pc) {
@@ -137,8 +138,10 @@ class ConnectionObject extends ChangeNotifier {
       try {
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
         print(decodedJSON['name']);
+        print(decodedJSON['finished']);
 
-        if(decodedJSON['finished'] as bool==true) {
+        if(decodedJSON['finished']=="true") {
+          print("finished");
       
 
         Directory? downdir = await getDownloadsDirectory();
@@ -148,6 +151,7 @@ class ConnectionObject extends ChangeNotifier {
         newFile.writeAsBytes(decodedJSON['bytes'].cast<int>());
          buffer.clear();
         } else {
+          print("buffer add");
           buffer.add(decodedJSON['bytes']);
         }
       } on FormatException catch (e) {
