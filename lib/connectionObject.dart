@@ -134,27 +134,29 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
-      print('akjsghdjklagshasf');
-      print("GLGGLGLGLGLGLGLG keerokkkkkk war hier");
+     // print('akjsghdjklagshasf');
+     // print("GLGGLGLGLGLGLGLG keerokkkkkk war hier");
       try {
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
-        print(decodedJSON['name']);
-        print(decodedJSON['finished']);
+        //print(decodedJSON['name']);
+       // print(decodedJSON['finished']);
 
         if (decodedJSON['finished'] == "true") {
-          print("finished");
+         // print("finished");
 
           Directory? downdir = await getDownloadsDirectory();
 
           File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
-          print(newFile.path);
+        //  print(newFile.path);
           //print(buffer);
-          print("cast int");
+         // print("cast int");
           //print(buffer.cast<int>());
-          await newFile.writeAsBytes(buffer["name"]!.cast<int>(), flush:true);
+          //buffer.entries
+        
+          await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(), flush:true);
           buffer.clear();
         } else {
-          print("buffer add");
+          //print("buffer add");
           //buffer.add(decodedJSON['bytes'].cast<int>());
          // String finalStr = decodedJSON["bytes"].reduce((value, element) {
            // return value + ", " + element;
