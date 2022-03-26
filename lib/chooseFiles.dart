@@ -77,7 +77,7 @@ class _ChooseFiles extends State<ChooseFiles> {
     });
   }
 
-  int packSize = 16000;
+  int packSize = 65536;
 
   void _sendFile() async {
     for (File file in _files) {
@@ -87,6 +87,10 @@ class _ChooseFiles extends State<ChooseFiles> {
       var data = jsonEncode({"name": basename(file.path), "bytes": fileBytes});
 
       int size = fileBytes.length;
+      int speed = 60;
+      if (size >= 10000) {
+        speed=200;
+      }
       for (int i = 0; i < size;) {
         if ((size - i) >= packSize) {
           data = jsonEncode({
@@ -103,6 +107,7 @@ class _ChooseFiles extends State<ChooseFiles> {
           });
           print('to big: ' + i.toString());
         }
+        await Future.delayed(Duration(milliseconds: speed), (){});
         await Provider.of<ConnectionObject>(
                 navigatorKey.currentContext as BuildContext,
                 listen: false)

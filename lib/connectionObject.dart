@@ -174,7 +174,7 @@ class ConnectionObject extends ChangeNotifier {
           print("buffer wird geadded");
           await buffer.putIfAbsent(
               decodedJSON["name"], () => List.filled(0, "na", growable: true));
-          await buffer.update(
+          buffer.update(
               decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
         }
       } on FormatException catch (e) {
