@@ -77,6 +77,8 @@ class _ChooseFiles extends State<ChooseFiles> {
     });
   }
 
+  int packSize = 16000;
+
   void _sendFile() async {
     for (File file in _files) {
       print('file: ' + basename(file.path));
@@ -86,10 +88,10 @@ class _ChooseFiles extends State<ChooseFiles> {
 
       int size = fileBytes.length;
       for (int i = 0; i < size;) {
-        if ((size - i) >= 65536) {
+        if ((size - i) >= packSize) {
           data = jsonEncode({
             "name": basename(file.path),
-            "bytes": fileBytes.sublist(i, i + 65536),
+            "bytes": fileBytes.sublist(i, i + packSize),
             "finished": "false"
           });
           print('big enough: ' + i.toString());
@@ -101,12 +103,12 @@ class _ChooseFiles extends State<ChooseFiles> {
           });
           print('to big: ' + i.toString());
         }
-        Provider.of<ConnectionObject>(
+        await Provider.of<ConnectionObject>(
                 navigatorKey.currentContext as BuildContext,
                 listen: false)
             .dataChannel
             .send(RTCDataChannelMessage(data));
-        i = i + 65536;
+        i = i + packSize;
         print('Current i: ' + i.toString());
       }
     }
