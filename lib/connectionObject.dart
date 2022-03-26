@@ -134,44 +134,35 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
-     // print('akjsghdjklagshasf');
-     // print("GLGGLGLGLGLGLGLG keerokkkkkk war hier");
       try {
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
         //print(decodedJSON['name']);
-       // print(decodedJSON['finished']);
+        // print(decodedJSON['finished']);
 
         if (decodedJSON['finished'] == "true") {
-         // print("finished");
-
           Directory? downdir = await getDownloadsDirectory();
 
           File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
-        //  print(newFile.path);
-          //print(buffer);
-         // print("cast int");
-          //print(buffer.cast<int>());
-          //buffer.entries
-        
-          await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(), flush:true);
+
+          await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
+              flush: true);
           buffer.removeWhere((key, value) => key == decodedJSON['name']);
         } else {
-          //print("buffer add");
           //buffer.add(decodedJSON['bytes'].cast<int>());
-         // String finalStr = decodedJSON["bytes"].reduce((value, element) {
-           // return value + ", " + element;
+          // String finalStr = decodedJSON["bytes"].reduce((value, element) {
+          // return value + ", " + element;
           //});
           //buffer = buffer + decodedJSON["bytes"];
-          buffer.putIfAbsent(decodedJSON["name"], () => List.filled(0, "na", growable: true));
-          buffer.update(decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
-          //print(buffer);
+          buffer.putIfAbsent(
+              decodedJSON["name"], () => List.filled(0, "na", growable: true));
+          buffer.update(
+              decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
         }
       } on FormatException catch (e) {
         print('The provided string is not valid JSON');
         print("message: ${event.text}");
         lastmessage = event.text;
       }
-      //print('send is done');
       notifyListeners();
     };
 
