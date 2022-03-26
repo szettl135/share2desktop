@@ -25,19 +25,28 @@ class ChooseFiles extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ChooseFiles createState() => _ChooseFiles();
+  aChooseFiles createState() => aChooseFiles();
 }
 
-class _ChooseFiles extends State<ChooseFiles> {
+
+class aChooseFiles extends State<ChooseFiles> {
   var devicesGroup = AutoSizeGroup();
   var buttonsGroup = AutoSizeGroup();
-  double progress = 0;
+  static double progress = 0;
+  static bool empfangen = false;
   @override
   void initState() {
 
     super.initState();
     progress = 0;
+    empfangen = false;
   }
+  void setEmpfangen(bool ye) {
+  setState(() {
+    empfangen = ye;
+  });
+}
+
 
   late List<File> _files = [];
   @override
@@ -174,14 +183,8 @@ class _ChooseFiles extends State<ChooseFiles> {
          
               
             
-          (Provider.of<ConnectionObject>(
-                navigatorKey.currentContext as BuildContext,
-                listen: false)
-            .empfangen)? Spacer(flex:1) : SizedBox(height:10),
-           (Provider.of<ConnectionObject>(
-                navigatorKey.currentContext as BuildContext,
-                listen: false)
-            .empfangen)? Text("Eine Datei wird gerade übertragen..."): Text("Gerade wird nichts empfangen."),
+          (empfangen)? Spacer(flex:1) : SizedBox(height:10),
+           (empfangen)? Text("Eine Datei wird gerade übertragen..."): Text("Gerade wird nichts empfangen."),
           SizedBox(height: 20),
           Spacer(flex: 2),
           OutlinedButton(

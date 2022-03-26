@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share2desktop/chooseFiles.dart';
+import 'package:share2desktop/chooseFiles.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sdp_transform/sdp_transform.dart';
@@ -49,7 +50,7 @@ class ConnectionObject extends ChangeNotifier {
   bool connected = false;
   bool waitingForAnswer = false;
   int _counter = 0;
-  bool empfangen = false;
+  //bool empfangen = false;
 
   @override
 
@@ -136,7 +137,8 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
-      empfangen=true;
+     // setEmpfangen(true);
+     aChooseFiles.empfangen = true;
       print("paket empfangen");
       try {
 
@@ -169,7 +171,7 @@ class ConnectionObject extends ChangeNotifier {
           if (buffer.containsKey(decodedJSON["name"])) {
             buffer.removeWhere((key, value) => key == decodedJSON['name']);
           }
-          empfangen=false;
+          aChooseFiles.empfangen = false;
         } else {
           if (!buffer.containsKey(decodedJSON["name"])) {
             SmartDialog.showToast(
