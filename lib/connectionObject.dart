@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -140,23 +141,34 @@ class ConnectionObject extends ChangeNotifier {
         // print(decodedJSON['finished']);
 
         if (decodedJSON['finished'] == "true") {
+
+         // print("finished");
+         if (!buffer.containsKey(decodedJSON["name"])) {
+         buffer.putIfAbsent(decodedJSON["name"], () => List.filled(0, "na", growable: true));
+         }
+          buffer.update(decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
           Directory? downdir = await getDownloadsDirectory();
 
           File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
+        
+          print("file wird geschrieben");
+          SmartDialog.showToast("Datei "+decodedJSON["name"]+" gespeichert.");
+          await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(), flush:true);
 
-          await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
-              flush: true);
-          buffer.removeWhere((key, value) => key == decodedJSON['name']);
+          if (buffer.containsKey(decodedJSON["name"])) {
+            buffer.removeWhere((key, value) => key == decodedJSON['name']);
+          }
+
         } else {
-          //buffer.add(decodedJSON['bytes'].cast<int>());
-          // String finalStr = decodedJSON["bytes"].reduce((value, element) {
-          // return value + ", " + element;
-          //});
-          //buffer = buffer + decodedJSON["bytes"];
-          buffer.putIfAbsent(
-              decodedJSON["name"], () => List.filled(0, "na", growable: true));
-          buffer.update(
-              decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
+
+          if (!buffer.containsKey(decodedJSON["name"])) {
+            SmartDialog.showToast("Datei "+decodedJSON["name"]+" wird empfangen...");
+          }
+          print("buffer wird geadded");
+          buffer.putIfAbsent(decodedJSON["name"], () => List.filled(0, "na", growable: true));
+          buffer.update(decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
+
+
         }
       } on FormatException catch (e) {
         print('The provided string is not valid JSON');
