@@ -87,10 +87,10 @@ class _ChooseFiles extends State<ChooseFiles> {
 
       int size = fileBytes.length;
       for (int i = 0; i < size;) {
-        if ((size - i) > 64) {
+        if ((size - i) > 65536) {
           data = jsonEncode({
             "name": basename(file.path),
-            "bytes": fileBytes.sublist(i, i + 64) as Uint8List,
+            "bytes": fileBytes.sublist(i, i + 65536) as Uint8List,
             "finished": "false"
           });
         } else {
@@ -105,7 +105,7 @@ class _ChooseFiles extends State<ChooseFiles> {
                 listen: false)
             .dataChannel
             .send(RTCDataChannelMessage(data));
-        i = i + 64;
+        i = i + 65536;
       }
     }
     setState(() {});
