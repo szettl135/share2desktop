@@ -138,7 +138,7 @@ class ConnectionObject extends ChangeNotifier {
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
      // setEmpfangen(true);
-     aChooseFiles.empfangen = true;
+     //aChooseFiles.empfangen = true;
       print("paket empfangen");
       try {
 
@@ -171,7 +171,7 @@ class ConnectionObject extends ChangeNotifier {
           if (buffer.containsKey(decodedJSON["name"])) {
             buffer.removeWhere((key, value) => key == decodedJSON['name']);
           }
-          aChooseFiles.empfangen = false;
+          //aChooseFiles.empfangen = false;
         } else {
           if (!buffer.containsKey(decodedJSON["name"])) {
             SmartDialog.showToast(
