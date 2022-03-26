@@ -28,11 +28,61 @@ class ChooseFiles extends StatefulWidget {
   _ChooseFiles createState() => _ChooseFiles();
 }
 
+
+
+
+
 class _ChooseFiles extends State<ChooseFiles> {
+
+
+
+
+
+
+  
   var devicesGroup = AutoSizeGroup();
   var buttonsGroup = AutoSizeGroup();
+  double progress = 0;
 
   late List<File> _files = [];
+
+  Future<void> waitingForConnection() async {
+    dialogOpen = true;
+    return showDialog<void>(
+      context: navigatorKey.currentContext as BuildContext,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+         return WillPopScope(
+      onWillPop: () async => false,
+      child: AlertDialog(
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text("Daten werden gesendet...",
+                    style: Theme.of(context).textTheme.bodyText1),
+                SizedBox(height: 30),
+                Center(child: SizedBox(width: MediaQuery.of(context).size.width*0.1,
+                height: MediaQuery.of(context).size.width*0.1,
+                  child:
+                 CircularProgressIndicator(
+                   value: progress,
+                backgroundColor: Colors.grey,
+                color: Theme.of(context).primaryColor, //Colors.purple,
+                strokeWidth: 10,                ))),
+                SizedBox(height: 30),
+                
+                      
+                  
+
+
+
+              ],
+            ),
+          ),
+        ));
+      },
+    ).then((value) => dialogOpen = false);
+  }
 
   void _pickFile() async {
     FilePickerResult? result =
@@ -80,6 +130,7 @@ class _ChooseFiles extends State<ChooseFiles> {
   int packSize = 65536;
 
   void _sendFile() async {
+    waitingForConnection();
     for (File file in _files) {
       print('file: ' + basename(file.path));
       var fileBytes = await file.readAsBytes();
@@ -114,12 +165,20 @@ class _ChooseFiles extends State<ChooseFiles> {
             .dataChannel
             .send(RTCDataChannelMessage(data));
         i = i + packSize;
+        setState(() {
+          progress = (i/size);
+        });
         print('Current i: ' + i.toString());
       }
     }
     setState(() {
       _clearFiles();
     });
+    if (dialogOpen) {
+      Navigator.of(navigatorKey.currentContext as BuildContext,
+              rootNavigator: true)
+          .pop('dialog');
+    }
   }
 
   @override
