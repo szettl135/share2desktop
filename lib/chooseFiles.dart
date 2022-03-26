@@ -57,6 +57,13 @@ class _ChooseFiles extends State<ChooseFiles> {
       //files = result.paths.map((path) => File(path!)).toList();
       setState(() {
         //_files = result.paths.map((path) => File(path!)).toList();
+
+        // _files.forEach((u) {
+        //   if (_files.contains(File()))
+        //     print("duplicate ${u["name"]}");
+        //   else
+        //     names.add(u["name"]);
+        // });
         _files.addAll(result.paths.map((path) => File(path!)).toList());
 
         //var existingItem = _files.firstWhere((result) => result..link == _files., orElse: () => null);
@@ -66,10 +73,17 @@ class _ChooseFiles extends State<ChooseFiles> {
     }
   }
 
-  void _clearFile() async {
+  void _clearFiles() async {
     setState(() {
       //_files = result.paths.map((path) => File(path!)).toList();
       _files.clear();
+    });
+  }
+
+  void _deleteFile(int index) async {
+    setState(() {
+      //_files = result.paths.map((path) => File(path!)).toList();
+      _files.removeAt(index);
     });
   }
 
@@ -83,9 +97,7 @@ class _ChooseFiles extends State<ChooseFiles> {
           {"name": basename(file.path), "bytes": fileBytes as Uint8List});
 
       int size = fileBytes.length;
-      print(size);
       for (int i = 0; i < size;) {
-        print(i);
         if ((size - i) > 64) {
           data = jsonEncode({
             "name": basename(file.path),
@@ -99,7 +111,6 @@ class _ChooseFiles extends State<ChooseFiles> {
             "finished": "true"
           });
         }
-        print("going to send");
         Provider.of<ConnectionObject>(
                 navigatorKey.currentContext as BuildContext,
                 listen: false)
@@ -119,7 +130,7 @@ class _ChooseFiles extends State<ChooseFiles> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         OutlinedButton(
-          onPressed: _clearFile,
+          onPressed: _clearFiles,
           child: Container(
               alignment: Alignment.center,
               padding: EdgeInsets.all(10),
@@ -280,10 +291,11 @@ class _ChooseFiles extends State<ChooseFiles> {
                     ),
                     child: ListTile(
                         leading: Container(
-                            height: double.infinity, child: Icon(icons[index])),
+                            height: double.infinity,
+                            child: Icon(Icons.insert_drive_file_outlined)),
                         trailing: Container(
                             height: double.infinity,
-                            child: Icon(Icons.arrow_right_alt)),
+                            child: Icon(Icons.highlight_remove)),
                         title: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -310,10 +322,7 @@ class _ChooseFiles extends State<ChooseFiles> {
                               )
                             ]),
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ChooseFiles(
-                                    targetDeviceName: _files[index].toString(),
-                                  )));
+                          _deleteFile(index);
                         }),
                   );
                 },
