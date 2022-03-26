@@ -171,6 +171,18 @@ class _ChooseFiles extends State<ChooseFiles> {
               ],
             ),
           ),
+         
+              
+            
+          (Provider.of<ConnectionObject>(
+                navigatorKey.currentContext as BuildContext,
+                listen: false)
+            .empfangen)? Spacer(flex:1) : SizedBox(height:10),
+           (Provider.of<ConnectionObject>(
+                navigatorKey.currentContext as BuildContext,
+                listen: false)
+            .empfangen)? Text("Eine Datei wird gerade übertragen..."): Text("Gerade wird nichts empfangen."),
+          SizedBox(height: 20),
           Spacer(flex: 2),
           OutlinedButton(
               onPressed: _pickFile,

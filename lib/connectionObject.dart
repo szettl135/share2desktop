@@ -49,6 +49,7 @@ class ConnectionObject extends ChangeNotifier {
   bool connected = false;
   bool waitingForAnswer = false;
   int _counter = 0;
+  bool empfangen = false;
 
   @override
 
@@ -135,6 +136,7 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
+      empfangen=true;
       print("paket empfangen");
       try {
 
@@ -162,10 +164,12 @@ class ConnectionObject extends ChangeNotifier {
               "Datei " + decodedJSON["name"] + " gespeichert.");
           await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
               flush: true);
+            
 
           if (buffer.containsKey(decodedJSON["name"])) {
             buffer.removeWhere((key, value) => key == decodedJSON['name']);
           }
+          empfangen=false;
         } else {
           if (!buffer.containsKey(decodedJSON["name"])) {
             SmartDialog.showToast(
