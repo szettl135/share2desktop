@@ -33,37 +33,27 @@ class _ChooseFiles extends State<ChooseFiles> {
   var buttonsGroup = AutoSizeGroup();
 
   late List<File> _files = [];
-  final icons = [
-    Icons.computer,
-    Icons.computer,
-    Icons.phone_iphone,
-    Icons.phone_iphone,
-    Icons.computer,
-    Icons.phone_iphone,
-    Icons.phone_iphone,
-    Icons.phone_iphone,
-    Icons.phone_iphone
-  ];
 
   void _pickFile() async {
-    // opens storage to pick files and the picked file or files
-    // are assigned into result and if no file is chosen result is null.
-    // you can also toggle "allowMultiple" true or false depending on your need
     FilePickerResult? result =
         await FilePicker.platform.pickFiles(allowMultiple: true);
-    //_files = await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (result != null) {
       //files = result.paths.map((path) => File(path!)).toList();
       setState(() {
         //_files = result.paths.map((path) => File(path!)).toList();
 
-        // _files.forEach((u) {
-        //   if (_files.contains(File()))
-        //     print("duplicate ${u["name"]}");
-        //   else
-        //     names.add(u["name"]);
-        // });
+        for (PlatformFile file in result.files) {
+          for (File u in _files) {
+            if (u.path == file.path) {
+              _files.remove(u);
+              //_files.add(File(file.path!));
+              break;
+            }
+          }
+          ;
+        }
+
         _files.addAll(result.paths.map((path) => File(path!)).toList());
 
         //var existingItem = _files.firstWhere((result) => result..link == _files., orElse: () => null);
@@ -88,7 +78,6 @@ class _ChooseFiles extends State<ChooseFiles> {
   }
 
   void _sendFile() async {
-    print('test');
     for (File file in _files) {
       print('file: ' + basename(file.path));
       var fileBytes = await file.readAsBytes();
@@ -118,8 +107,6 @@ class _ChooseFiles extends State<ChooseFiles> {
             .send(RTCDataChannelMessage(data));
         i = i + 64;
       }
-
-      print('file should be sent');
     }
     setState(() {});
   }
