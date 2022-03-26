@@ -154,7 +154,7 @@ class ConnectionObject extends ChangeNotifier {
           //buffer.entries
         
           await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(), flush:true);
-          buffer.clear();
+          buffer.removeWhere((key, value) => key == decodedJSON['name']);
         } else {
           //print("buffer add");
           //buffer.add(decodedJSON['bytes'].cast<int>());
@@ -171,7 +171,7 @@ class ConnectionObject extends ChangeNotifier {
         print("message: ${event.text}");
         lastmessage = event.text;
       }
-      print('send is done');
+      //print('send is done');
       notifyListeners();
     };
 
