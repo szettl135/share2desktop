@@ -28,159 +28,18 @@ class ChooseFiles extends StatefulWidget {
   _ChooseFiles createState() => _ChooseFiles();
 }
 
-
-
-
-
 class _ChooseFiles extends State<ChooseFiles> {
-
-
-
-
-
-
-  
   var devicesGroup = AutoSizeGroup();
   var buttonsGroup = AutoSizeGroup();
   double progress = 0;
+  @override
+  void initState() {
+
+    super.initState();
+    progress = 0;
+  }
 
   late List<File> _files = [];
-
-  Future<void> waitingForConnection() async {
-    dialogOpen = true;
-    return showDialog<void>(
-      context: navigatorKey.currentContext as BuildContext,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-         return WillPopScope(
-      onWillPop: () async => false,
-      child: AlertDialog(
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text("Daten werden gesendet...",
-                    style: Theme.of(context).textTheme.bodyText1),
-                SizedBox(height: 30),
-                Center(child: SizedBox(width: MediaQuery.of(context).size.width*0.1,
-                height: MediaQuery.of(context).size.width*0.1,
-                  child:
-                 CircularProgressIndicator(
-                   value: progress,
-                backgroundColor: Colors.grey,
-                color: Theme.of(context).primaryColor, //Colors.purple,
-                strokeWidth: 10,                ))),
-                SizedBox(height: 30),
-                
-                      
-                  
-
-
-
-              ],
-            ),
-          ),
-        ));
-      },
-    ).then((value) => dialogOpen = false);
-  }
-
-  void _pickFile() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: true);
-
-    if (result != null) {
-      //files = result.paths.map((path) => File(path!)).toList();
-      setState(() {
-        //_files = result.paths.map((path) => File(path!)).toList();
-
-        for (PlatformFile file in result.files) {
-          for (File u in _files) {
-            if (u.path == file.path) {
-              _files.remove(u);
-              //_files.add(File(file.path!));
-              break;
-            }
-          }
-          ;
-        }
-
-        _files.addAll(result.paths.map((path) => File(path!)).toList());
-
-        //var existingItem = _files.firstWhere((result) => result..link == _files., orElse: () => null);
-      });
-    } else {
-      // User canceled the picker
-    }
-  }
-
-  void _clearFiles() async {
-    setState(() {
-      //_files = result.paths.map((path) => File(path!)).toList();
-      _files.clear();
-    });
-  }
-
-  void _deleteFile(int index) async {
-    setState(() {
-      //_files = result.paths.map((path) => File(path!)).toList();
-      _files.removeAt(index);
-    });
-  }
-
-  int packSize = 65536;
-
-  void _sendFile() async {
-    waitingForConnection();
-    for (File file in _files) {
-      print('file: ' + basename(file.path));
-      var fileBytes = await file.readAsBytes();
-
-      var data = jsonEncode({"name": basename(file.path), "bytes": fileBytes});
-
-      int size = fileBytes.length;
-      int speed = 60;
-      if (size >= 10000) {
-        speed=200;
-      }
-      for (int i = 0; i < size;) {
-        if ((size - i) >= packSize) {
-          data = jsonEncode({
-            "name": basename(file.path),
-            "bytes": fileBytes.sublist(i, i + packSize),
-            "finished": "false"
-          });
-          print('big enough: ' + i.toString());
-        } else {
-          data = jsonEncode({
-            "name": basename(file.path),
-            "bytes": fileBytes.sublist(i),
-            "finished": "true"
-          });
-          print('to big: ' + i.toString());
-        }
-        await Future.delayed(Duration(milliseconds: speed), (){});
-        await Provider.of<ConnectionObject>(
-                navigatorKey.currentContext as BuildContext,
-                listen: false)
-            .dataChannel
-            .send(RTCDataChannelMessage(data));
-        i = i + packSize;
-        setState(() {
-          progress = (i/size);
-        });
-        print('Current i: ' + i.toString());
-      }
-    }
-    setState(() {
-      _clearFiles();
-    });
-    if (dialogOpen) {
-      Navigator.of(navigatorKey.currentContext as BuildContext,
-              rootNavigator: true)
-          .pop('dialog');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     Widget buttonSection = Row(
@@ -388,5 +247,139 @@ class _ChooseFiles extends State<ChooseFiles> {
           Spacer(flex: 1)
           //SizedBox(height: MediaQuery.of(context).size.width * 0.02)
         ]));
+  }
+
+  void _pickFile() async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
+
+    if (result != null) {
+      //files = result.paths.map((path) => File(path!)).toList();
+      setState(() {
+        //_files = result.paths.map((path) => File(path!)).toList();
+
+        for (PlatformFile file in result.files) {
+          for (File u in _files) {
+            if (u.path == file.path) {
+              _files.remove(u);
+              //_files.add(File(file.path!));
+              break;
+            }
+          }
+          ;
+        }
+
+        _files.addAll(result.paths.map((path) => File(path!)).toList());
+
+        //var existingItem = _files.firstWhere((result) => result..link == _files., orElse: () => null);
+      });
+    } else {
+      // User canceled the picker
+    }
+  }
+
+  void _clearFiles() async {
+    setState(() {
+      //_files = result.paths.map((path) => File(path!)).toList();
+      _files.clear();
+    });
+  }
+
+  void _deleteFile(int index) async {
+    setState(() {
+      //_files = result.paths.map((path) => File(path!)).toList();
+      _files.removeAt(index);
+    });
+  }
+
+  int packSize = 65536;
+  Future<void> waitingForFile() async {
+    dialogOpen = true;
+    return showDialog<void>(
+      context: navigatorKey.currentContext as BuildContext,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        
+        return WillPopScope(
+            onWillPop: () async => false,
+            child: AlertDialog(
+              content: SingleChildScrollView(
+              
+                child: ListBody(
+                  children: <Widget>[
+                    Text("Daten werden gesendet...",
+                        style: Theme.of(context).textTheme.bodyText1),
+                    SizedBox(height: 30),
+                    Center(
+                        child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.1,
+                            height: MediaQuery.of(context).size.width * 0.1,
+                            child: CircularProgressIndicator(
+                              //value: progress,
+                              backgroundColor: Colors.grey,
+                              color: Theme.of(context)
+                                  .primaryColor, //Colors.purple,
+                              strokeWidth: 10,
+                            ))),
+                    SizedBox(height: 30),
+                  ],
+                ),
+              ),
+            ));
+      },
+    ).then((value) => dialogOpen = false);
+  }
+
+  void _sendFile() async {
+    waitingForFile();
+    for (File file in _files) {
+      print('file: ' + basename(file.path));
+      var fileBytes = await file.readAsBytes();
+
+      var data = jsonEncode({"name": basename(file.path), "bytes": fileBytes});
+
+      int size = fileBytes.length;
+      int speed = 60;
+      if (size >= 10000) {
+        speed = 200;
+      }
+      for (int i = 0; i < size;) {
+        if ((size - i) >= packSize) {
+          data = jsonEncode({
+            "name": basename(file.path),
+            "bytes": fileBytes.sublist(i, i + packSize),
+            "finished": "false"
+          });
+          print('big enough: ' + i.toString());
+        } else {
+          data = jsonEncode({
+            "name": basename(file.path),
+            "bytes": fileBytes.sublist(i),
+            "finished": "true"
+          });
+          print('to big: ' + i.toString());
+        }
+        await Future.delayed(Duration(milliseconds: speed), () {});
+        await Provider.of<ConnectionObject>(
+                navigatorKey.currentContext as BuildContext,
+                listen: false)
+            .dataChannel
+            .send(RTCDataChannelMessage(data));
+        i = i + packSize;
+        setState(() {
+          progress = (i / size);
+          print(progress);
+        });
+        print('Current i: ' + i.toString());
+      }
+    }
+    setState(() {
+      _clearFiles();
+    });
+    if (dialogOpen) {
+      Navigator.of(navigatorKey.currentContext as BuildContext,
+              rootNavigator: true)
+          .pop('dialog');
+    }
   }
 }
