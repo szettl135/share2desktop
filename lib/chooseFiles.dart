@@ -82,23 +82,24 @@ class _ChooseFiles extends State<ChooseFiles> {
       print('file: ' + basename(file.path));
       var fileBytes = await file.readAsBytes();
 
-      var data = jsonEncode(
-          {"name": basename(file.path), "bytes": fileBytes as Uint8List});
+      var data = jsonEncode({"name": basename(file.path), "bytes": fileBytes});
 
       int size = fileBytes.length;
       for (int i = 0; i < size;) {
-        if ((size - i) > 65536) {
+        if ((size - i) >= 65536) {
           data = jsonEncode({
             "name": basename(file.path),
-            "bytes": fileBytes.sublist(i, i + 65536) as Uint8List,
+            "bytes": fileBytes.sublist(i, i + 65536),
             "finished": "false"
           });
+          print('big enough: ' + i.toString());
         } else {
           data = jsonEncode({
             "name": basename(file.path),
-            "bytes": fileBytes.sublist(i) as Uint8List,
+            "bytes": fileBytes.sublist(i),
             "finished": "true"
           });
+          print('to big: ' + i.toString());
         }
         Provider.of<ConnectionObject>(
                 navigatorKey.currentContext as BuildContext,
@@ -106,9 +107,12 @@ class _ChooseFiles extends State<ChooseFiles> {
             .dataChannel
             .send(RTCDataChannelMessage(data));
         i = i + 65536;
+        print('Current i: ' + i.toString());
       }
     }
-    setState(() {});
+    setState(() {
+      _clearFiles();
+    });
   }
 
   @override
