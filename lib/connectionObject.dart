@@ -135,14 +135,13 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
-     // print('akjsghdjklagshasf');
-     // print("GLGGLGLGLGLGLGLG keerokkkkkk war hier");
       try {
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
         //print(decodedJSON['name']);
-       // print(decodedJSON['finished']);
+        // print(decodedJSON['finished']);
 
         if (decodedJSON['finished'] == "true") {
+
          // print("finished");
          if (!buffer.containsKey(decodedJSON["name"])) {
          buffer.putIfAbsent(decodedJSON["name"], () => List.filled(0, "na", growable: true));
@@ -151,11 +150,7 @@ class ConnectionObject extends ChangeNotifier {
           Directory? downdir = await getDownloadsDirectory();
 
           File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
-        //  print(newFile.path);
-          //print(buffer);
-         // print("cast int");
-          //print(buffer.cast<int>());
-          //buffer.entries
+        
           print("file wird geschrieben");
           SmartDialog.showToast("Datei "+decodedJSON["name"]+" gespeichert.");
           await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(), flush:true);
@@ -163,27 +158,23 @@ class ConnectionObject extends ChangeNotifier {
           if (buffer.containsKey(decodedJSON["name"])) {
             buffer.removeWhere((key, value) => key == decodedJSON['name']);
           }
+
         } else {
-          //print("buffer add");
-          //buffer.add(decodedJSON['bytes'].cast<int>());
-         // String finalStr = decodedJSON["bytes"].reduce((value, element) {
-           // return value + ", " + element;
-          //});
-          //buffer = buffer + decodedJSON["bytes"];
+
           if (!buffer.containsKey(decodedJSON["name"])) {
             SmartDialog.showToast("Datei "+decodedJSON["name"]+" wird empfangen...");
           }
           print("buffer wird geadded");
           buffer.putIfAbsent(decodedJSON["name"], () => List.filled(0, "na", growable: true));
           buffer.update(decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
-          //print(buffer);
+
+
         }
       } on FormatException catch (e) {
         print('The provided string is not valid JSON');
         print("message: ${event.text}");
         lastmessage = event.text;
       }
-      //print('send is done');
       notifyListeners();
     };
 
