@@ -103,7 +103,6 @@ class aChooseFiles extends State<ChooseFiles> {
 
      return WillPopScope(
     onWillPop: () {
-      print('Backbutton pressed (device or appbar button), do whatever you want.');
       Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("User hat die Verbindung getrennt!");
       //trigger leaving and use own data
       Navigator.pop(context, false);
