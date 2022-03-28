@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
@@ -23,8 +24,8 @@ class ConnectionObject extends ChangeNotifier {
   ///
   /// _channel is the connection to the server, the URL will change to the one of the actual server ofc
   WebSocketChannel _channel = WebSocketChannel.connect(
-    //Uri.parse('ws://localhost:8080/socket'),
-    Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
+    Uri.parse('ws://localhost:8080/socket'),
+    //Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
   );
 
   /// peerconnection is a description on how the connection works
@@ -56,6 +57,7 @@ class ConnectionObject extends ChangeNotifier {
 
   ///Sets up everything at the start of the app
   ConnectionObject._internal() {
+    Timer timer = Timer.periodic(Duration(seconds: 15), (Timer t) => ping());
     _peerConnection = null;
     dataChannel = null;
     buffer = Map();
@@ -254,7 +256,7 @@ class ConnectionObject extends ChangeNotifier {
     }
     acceptRejectConnection(externalSocketId);
   }
-
+  
   sendDisconnectRequest(String reason) {
     var jsonString = json.encode({
       'event': "disconnect",
@@ -272,13 +274,16 @@ class ConnectionObject extends ChangeNotifier {
     messageDestination = _fixNestedJsonString(messageDestination);
     _channel.sink.add(messageDestination);
   }
-
-  getInternalSocketid() {
+ ping() {
+   _channel.sink.add("Ping");
+   print("PING");
+ }
+ /* getInternalSocketid() {
     _channel = WebSocketChannel.connect(
       //Uri.parse('ws://localhost:8080/socket'),
       Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
     );
-  }
+  }*/
 
   /// Json string Shenanigans
   String _fixNestedJsonString(String jsonString) {

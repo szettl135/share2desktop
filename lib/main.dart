@@ -29,6 +29,7 @@ void main() {
     setWindowMaxSize(const Size(1536, 1064));
     setWindowMinSize(const Size(1024, 776));
   }
+  ConnectionObject();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ConnectionObject(),
