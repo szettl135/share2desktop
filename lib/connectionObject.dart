@@ -365,7 +365,7 @@ class ConnectionObject extends ChangeNotifier {
         /// a message directly by the Server, in case the client (somehow) enters a Socket ID that no longer exists.
         case "wrongId":
           {
-            _disconnect("Wrong ID!");
+            _disconnect("Falsche ID!");
             break;
           }
         case "disconnect":
