@@ -258,7 +258,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                   OutlinedButton(
                       onPressed: () => {
                             print("cancel"),
-                            Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("User hat Verbindung getrennt!"),
+                            Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("User hat die Verbindung abgebrochen!"),
                             Navigator.of(context, rootNavigator: true).pop('dialog')
                           },
                       child: Text(AppLocalizations.of(context)!.cancel)),

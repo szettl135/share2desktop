@@ -7,6 +7,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:share2desktop/chooseFiles.dart';
+import 'package:share2desktop/deviceSelection.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sdp_transform/sdp_transform.dart';
@@ -106,7 +107,7 @@ class ConnectionObject extends ChangeNotifier {
       state = e.toString();
       if (e == RTCIceConnectionState.RTCIceConnectionStateDisconnected) {
         connected = false;
-        _disconnect("Connection Lost!");
+        _disconnect("Client Timed out");
       }
       if (e == RTCIceConnectionState.RTCIceConnectionStateConnected) {
         connected = true;
@@ -263,7 +264,7 @@ class ConnectionObject extends ChangeNotifier {
       'reason': reason,
     });
     _sendToServer(jsonString, externalSocketId);
-    _disconnect(reason);
+    _disconnect("chosen");
   }
 
   _sendToServer(var message, String id) {
@@ -277,12 +278,6 @@ class ConnectionObject extends ChangeNotifier {
  ping() {
    _channel.sink.add("Ping");
  }
- /* getInternalSocketid() {
-    _channel = WebSocketChannel.connect(
-      //Uri.parse('ws://localhost:8080/socket'),
-      Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
-    );
-  }*/
 
   /// Json string Shenanigans
   String _fixNestedJsonString(String jsonString) {
@@ -313,6 +308,13 @@ class ConnectionObject extends ChangeNotifier {
       });
       externalSocketId = "";
       notifyListeners();
+      Navigator.of(navigatorKey.currentContext as BuildContext)
+            .push(MaterialPageRoute(
+                builder: (context) => DeviceSelection(
+                    )));
+      if(reason != "chosen") {
+        disconnectPopup(reason);
+      }
     } catch (e) {
       print(e.toString());
     }

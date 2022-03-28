@@ -97,7 +97,7 @@ Future<void> disconnectPopup(String reason) async {
                       OutlinedButton(
                       onPressed: () => {
                             print("Reject"),
-                            Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("rejection"),
+                            Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("Benutzer hat die Anfrage abgelehnt"),
                             Navigator.of(context, rootNavigator: true).pop('dialog')
                           },
                       child: Text(AppLocalizations.of(context)!.reject)),

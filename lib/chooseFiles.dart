@@ -51,6 +51,7 @@ class aChooseFiles extends State<ChooseFiles> {
   late List<File> _files = [];
   @override
   Widget build(BuildContext context) {
+    
     Widget buttonSection = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -100,7 +101,17 @@ class aChooseFiles extends State<ChooseFiles> {
       ],
     );
 
-    return Scaffold(
+     return WillPopScope(
+    onWillPop: () {
+      print('Backbutton pressed (device or appbar button), do whatever you want.');
+      Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("User hat die Verbindung getrennt!");
+      //trigger leaving and use own data
+      Navigator.pop(context, false);
+
+      //we need to return a future
+      return Future.value(false);
+    },
+    child: Scaffold(
         appBar: new AppBar(title: new Text("Share2Desktop")),
         body: Column(children: [
           Container(
@@ -261,7 +272,7 @@ class aChooseFiles extends State<ChooseFiles> {
           buttonSection,
           Spacer(flex: 1)
           //SizedBox(height: MediaQuery.of(context).size.width * 0.02)
-        ]));
+        ])));
   }
 
   void _pickFile() async {
