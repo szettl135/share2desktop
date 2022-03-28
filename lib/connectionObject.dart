@@ -24,8 +24,8 @@ class ConnectionObject extends ChangeNotifier {
   ///
   /// _channel is the connection to the server, the URL will change to the one of the actual server ofc
   WebSocketChannel _channel = WebSocketChannel.connect(
-    Uri.parse('ws://localhost:8080/socket'),
-    //Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
+    //Uri.parse('ws://localhost:8080/socket'),
+    Uri.parse('wss://share2desktop-signalling.herokuapp.com/socket'),
   );
 
   /// peerconnection is a description on how the connection works
@@ -276,7 +276,6 @@ class ConnectionObject extends ChangeNotifier {
   }
  ping() {
    _channel.sink.add("Ping");
-   print("PING");
  }
  /* getInternalSocketid() {
     _channel = WebSocketChannel.connect(
