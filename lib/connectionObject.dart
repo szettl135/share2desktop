@@ -346,7 +346,7 @@ class ConnectionObject extends ChangeNotifier {
             print(message.toString()+ "MESSAGE RECEIVD");
             print(data.toString() + "DATA RECEIVED");
             _peerConnection.addCandidate(RTCIceCandidate(
-                data['candidate'], data['sdpMid'], data['sdpMLineIndex']));
+                data['candidate'], data['sdpMid'], data['sdpMlineIndex']));
           }
           break;
 
