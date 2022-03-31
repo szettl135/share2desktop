@@ -12,6 +12,7 @@ import 'package:share2desktop/connectionLost.dart';
 import 'package:share2desktop/connectionObject.dart';
 import 'package:share2desktop/deviceInfo.dart';
 import 'package:share2desktop/main.dart';
+import 'package:share2desktop/qrcodeScanner.dart';
 import 'package:share2desktop/settings.dart';
 import 'package:share2desktop/startscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -195,6 +196,10 @@ class aDeviceSelection extends State<DeviceSelection> {
   Future<void> _cameraFunc() async {
     if (Platform.isIOS || Platform.isAndroid) {
       // TODO open camera
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => QRCodeScanner()),
+      );
     } else {
       dialogOpen = true;
       return showDialog<void>(
@@ -533,7 +538,10 @@ class aDeviceSelection extends State<DeviceSelection> {
               Spacer(flex: 1),
               Container(
                 child: IconButton(
-                    onPressed: () => {print("camera"), _cameraFunc()},
+                    onPressed: () => {
+                          print("camera"),
+                          _cameraFunc(),
+                        },
                     // splashColor: Colors.purple,
                     constraints: BoxConstraints(
                         minHeight: 100,
