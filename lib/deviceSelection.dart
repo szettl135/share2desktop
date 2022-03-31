@@ -223,7 +223,6 @@ class aDeviceSelection extends State<DeviceSelection> {
                             //txtController.text für den InputField text
                           },
                       child: Text(AppLocalizations.of(context)!.connect))
-                  //CHRISTIAN hier noch qr code scanner einfügen; man kann ja beides haben ig
                 ],
               ),
             ),
