@@ -13,6 +13,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sdp_transform/sdp_transform.dart';
 import 'dart:convert';
 import 'package:share2desktop/main.dart';
+import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 
 class ConnectionObject extends ChangeNotifier {
   static final ConnectionObject _connector = ConnectionObject._internal();
@@ -140,11 +141,10 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
-     // setEmpfangen(true);
-     //aChooseFiles.empfangen = true;
+      // setEmpfangen(true);
+      //aChooseFiles.empfangen = true;
       print("paket empfangen");
       try {
-
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
         //print(decodedJSON['name']);
         // print(decodedJSON['finished']);
@@ -159,17 +159,43 @@ class ConnectionObject extends ChangeNotifier {
 
           await buffer.update(
               decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
+          if (Platform.isWindows) {
+            Directory? downdir = await getDownloadsDirectory();
 
-          Directory? downdir = await getDownloadsDirectory();
+            File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
 
-          File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
+            print("file wird geschrieben");
+            SmartDialog.showToast(
+                "Datei " + decodedJSON["name"] + " gespeichert.");
+            await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
+                flush: true);
+          } else if (Platform.isMacOS || Platform.isLinux) {
 
-          print("file wird geschrieben");
-          SmartDialog.showToast(
-              "Datei " + decodedJSON["name"] + " gespeichert.");
-          await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
-              flush: true);
-            
+             Directory? downdir = await getDownloadsDirectory();
+
+            File newFile = File(downdir!.path + "/" + decodedJSON['name']);
+
+            print("file wird geschrieben");
+            SmartDialog.showToast(
+                "Datei " + decodedJSON["name"] + " gespeichert.");
+            await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
+                flush: true);
+
+          } else if (Platform.isAndroid || Platform.isIOS) {
+            DownloadsPathProvider.downloadsDirectory.then((downloadDir) async {
+              File newFile =
+                  File(downloadDir!.path + "/" + decodedJSON['name']);
+
+              print("file wird geschrieben");
+              SmartDialog.showToast(
+                  "Datei " + decodedJSON["name"] + " gespeichert.");
+              await newFile.writeAsBytes(
+                  buffer[decodedJSON['name']]!.cast<int>(),
+                  flush: true);
+              
+            });
+          }
+
 
           if (buffer.containsKey(decodedJSON["name"])) {
             buffer.removeWhere((key, value) => key == decodedJSON['name']);
@@ -222,14 +248,14 @@ class ConnectionObject extends ChangeNotifier {
       'sdpMid': e.sdpMid,
       'sdpMlineIndex': e.sdpMLineIndex,
     });
-    print(jsonData +  "JSONDATA SENT");
+    print(jsonData + "JSONDATA SENT");
     var jsonString = json.encode({
       'event': 'candidate',
       'data': jsonData,
     });
     print(jsonString.toString() + "JSONSTRING NOT FIXED");
     jsonString = _fixNestedJsonString(jsonString);
-    print(jsonString.toString()+ "JSONSTRING FIXED");
+    print(jsonString.toString() + "JSONSTRING FIXED");
     _sendToServer(jsonString, externalSocketId);
   }
 
@@ -259,7 +285,7 @@ class ConnectionObject extends ChangeNotifier {
     }
     acceptRejectConnection(externalSocketId);
   }
-  
+
   sendDisconnectRequest(String reason) {
     var jsonString = json.encode({
       'event': "disconnect",
@@ -277,9 +303,10 @@ class ConnectionObject extends ChangeNotifier {
     messageDestination = _fixNestedJsonString(messageDestination);
     _channel.sink.add(messageDestination);
   }
- ping() {
-   _channel.sink.add("Ping");
- }
+
+  ping() {
+    _channel.sink.add("Ping");
+  }
 
   /// Json string Shenanigans
   String _fixNestedJsonString(String jsonString) {
@@ -311,10 +338,8 @@ class ConnectionObject extends ChangeNotifier {
       externalSocketId = "";
       notifyListeners();
       Navigator.of(navigatorKey.currentContext as BuildContext)
-            .push(MaterialPageRoute(
-                builder: (context) => DeviceSelection(
-                    )));
-      if(reason != "chosen") {
+          .push(MaterialPageRoute(builder: (context) => DeviceSelection()));
+      if (reason != "chosen") {
         disconnectPopup(reason);
       }
     } catch (e) {
@@ -343,7 +368,7 @@ class ConnectionObject extends ChangeNotifier {
         /// an Ice candidate sent by a client via server, adds the candidate to its pool (Ice candidate = description of how to get to any given client)
         case "candidate":
           {
-            print(message.toString()+ "MESSAGE RECEIVD");
+            print(message.toString() + "MESSAGE RECEIVD");
             print(data.toString() + "DATA RECEIVED");
             _peerConnection.addCandidate(RTCIceCandidate(
                 data['candidate'], data['sdpMid'], data['sdpMlineIndex']));
