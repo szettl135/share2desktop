@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -191,37 +193,44 @@ class aDeviceSelection extends State<DeviceSelection> {
   }
 
   Future<void> _cameraFunc() async {
-    dialogOpen = true;
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(AppLocalizations.of(context)!.enterID,
-                    style: Theme.of(context).textTheme.bodyText1),
-                SizedBox(height: 20),
-                TextField(
-                  controller: txtController,
-                ),
-                SizedBox(height: 20),
-                OutlinedButton(
-                    onPressed: () => {
-                          Provider.of<ConnectionObject>(context,listen:false).connectOffer(txtController.text),
-                          Navigator.of(context, rootNavigator: true).pop('dialog'),
-                          waitingForConnection(txtController.text)
-                          //txtController.text für den InputField text
-                        },
-                    child: Text(AppLocalizations.of(context)!.connect))
-                //CHRISTIAN hier noch qr code scanner einfügen; man kann ja beides haben ig
-              ],
+    if (Platform.isIOS || Platform.isAndroid) {
+      // TODO open camera
+    } else {
+      dialogOpen = true;
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text(AppLocalizations.of(context)!.enterID,
+                      style: Theme.of(context).textTheme.bodyText1),
+                  SizedBox(height: 20),
+                  TextField(
+                    controller: txtController,
+                  ),
+                  SizedBox(height: 20),
+                  OutlinedButton(
+                      onPressed: () => {
+                            Provider.of<ConnectionObject>(context,
+                                    listen: false)
+                                .connectOffer(txtController.text),
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog'),
+                            waitingForConnection(txtController.text)
+                            //txtController.text für den InputField text
+                          },
+                      child: Text(AppLocalizations.of(context)!.connect))
+                  //CHRISTIAN hier noch qr code scanner einfügen; man kann ja beides haben ig
+                ],
+              ),
             ),
-          ),
-        );
-      },
-    ).then((value) => dialogOpen = false);
+          );
+        },
+      ).then((value) => dialogOpen = false);
+    }
   }
 
   Future<void> waitingForConnection(String id) async {
