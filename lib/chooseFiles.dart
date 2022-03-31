@@ -60,6 +60,7 @@ class aChooseFiles extends State<ChooseFiles> {
           child: Container(
               alignment: Alignment.center,
               padding: EdgeInsets.all(10),
+              height: MediaQuery.of(context).size.height * 0.075,
               width: MediaQuery.of(context).size.width * 0.40,
               child: Container(
                   alignment: Alignment.center,
@@ -85,6 +86,7 @@ class aChooseFiles extends State<ChooseFiles> {
             child: Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.all(10),
+                height: MediaQuery.of(context).size.height * 0.075,
                 width: MediaQuery.of(context).size.width * 0.40,
                 child: Container(
                     alignment: Alignment.center,
@@ -211,11 +213,11 @@ class aChooseFiles extends State<ChooseFiles> {
                       maxFontSize: 30,
                       stepGranularity: 1,
                       style: Theme.of(context).textTheme.headline3))),
-          Spacer(flex: 4),
+          Spacer(flex: 2),
           Container(
               padding: EdgeInsets.all(8),
               width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.5,
+              height: MediaQuery.of(context).size.height * 0.33,
               child: ListView.builder(
                 itemCount: _files.length,
                 itemExtent: MediaQuery.of(context).size.height * 0.125,
@@ -269,8 +271,8 @@ class aChooseFiles extends State<ChooseFiles> {
                 },
               )),
           buttonSection,
-          Spacer(flex: 1)
-          //SizedBox(height: MediaQuery.of(context).size.width * 0.02)
+          Spacer(flex: 1),
+          SizedBox(height: MediaQuery.of(context).size.width * 0.02)
         ])));
   }
 
