@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:share2desktop/connectionObject.dart';
 import 'package:provider/provider.dart';
+import 'package:share2desktop/main.dart';
 
 class QRCodeScanner extends StatelessWidget {
   @override
@@ -18,7 +19,7 @@ class QRCodeScanner extends StatelessWidget {
             Provider.of<ConnectionObject>(context, listen: false)
                 .connectOffer(code);
             Navigator.of(context, rootNavigator: true).pop('dialog');
-            //waitingForConnection(code); // TODO execute this method from deviceSelection.dart aDeviceSelection class
+            waitingForConnection(code); // TODO execute this method from deviceSelection.dart aDeviceSelection class
           }),
     );
   }
