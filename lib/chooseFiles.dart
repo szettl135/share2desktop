@@ -31,15 +31,8 @@ class ChooseFiles extends StatefulWidget {
 class aChooseFiles extends State<ChooseFiles> {
   var devicesGroup = AutoSizeGroup();
   var buttonsGroup = AutoSizeGroup();
-  double progress = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    progress = 0;
-  }
-
   late List<File> _files = [];
+
   @override
   Widget build(BuildContext context) {
     Widget buttonSection = Row(
@@ -325,7 +318,6 @@ class aChooseFiles extends State<ChooseFiles> {
                             width: MediaQuery.of(context).size.width * 0.1,
                             height: MediaQuery.of(context).size.width * 0.1,
                             child: CircularProgressIndicator(
-                              //value: progress,
                               backgroundColor: Colors.grey,
                               color: Theme.of(context)
                                   .primaryColor, //Colors.purple,
@@ -376,10 +368,6 @@ class aChooseFiles extends State<ChooseFiles> {
             .dataChannel
             .send(RTCDataChannelMessage(data));
         i = i + packSize;
-        setState(() {
-          progress = (i / size);
-          print(progress);
-        });
         //print('Current i: ' + i.toString());
       }
     }
