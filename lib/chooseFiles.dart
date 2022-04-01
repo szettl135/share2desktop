@@ -360,14 +360,14 @@ class aChooseFiles extends State<ChooseFiles> {
             "bytes": fileBytes.sublist(i, i + packSize),
             "finished": false
           });
-          print('big enough: ' + i.toString());
+          //print('big enough: ' + i.toString());
         } else {
           data = jsonEncode({
             "name": basename(file.path),
             "bytes": fileBytes.sublist(i),
             "finished": true
           });
-          print('to big: ' + i.toString());
+          //print('to big: ' + i.toString());
         }
         await Future.delayed(Duration(milliseconds: speed), () {});
         await Provider.of<ConnectionObject>(
@@ -380,7 +380,7 @@ class aChooseFiles extends State<ChooseFiles> {
           progress = (i / size);
           print(progress);
         });
-        print('Current i: ' + i.toString());
+        //print('Current i: ' + i.toString());
       }
     }
     setState(() {

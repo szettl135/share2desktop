@@ -148,7 +148,7 @@ class ConnectionObject extends ChangeNotifier {
 
         if (decodedJSON['finished']) {
           if (!buffer.containsKey(decodedJSON["name"])) {
-            print("absent name (small file)");
+            //print("absent name (small file)");
             await buffer.putIfAbsent(decodedJSON["name"],
                 () => List.filled(0, "na", growable: true));
           }
@@ -164,7 +164,7 @@ class ConnectionObject extends ChangeNotifier {
             }
             File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
 
-            print("file wird geschrieben");
+            //print("file wird geschrieben");
 
             SmartDialog.showToast(AppLocalizations.of(
                         navigatorKey.currentContext as BuildContext)!
@@ -185,9 +185,9 @@ class ConnectionObject extends ChangeNotifier {
             }
 
             File newFile = File(downdir!.path + "/" + decodedJSON['name']);
-            print(newFile.toString());
+            //print(newFile.toString());
 
-            print("file wird geschrieben");
+            //print("file wird geschrieben");
             SmartDialog.showToast(AppLocalizations.of(
                         navigatorKey.currentContext as BuildContext)!
                     .receive1 +
@@ -213,7 +213,7 @@ class ConnectionObject extends ChangeNotifier {
             }
 
             print(newFile.toString());
-            print("file wird geschrieben");
+            //print("file wird geschrieben");
 
             Fluttertoast.showToast(
                 msg: AppLocalizations.of(
@@ -264,7 +264,7 @@ class ConnectionObject extends ChangeNotifier {
                       .receive2);
             }
           }
-          print("buffer wird geadded");
+          //print("buffer wird geadded");
           await buffer.putIfAbsent(
               decodedJSON["name"], () => List.filled(0, "na", growable: true));
           buffer.update(
