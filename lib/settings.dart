@@ -98,7 +98,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   String? selectedDirectory =
                       await FilePicker.platform.getDirectoryPath();
                       ownPath=true;
-                      ownDir=selectedDirectory as Directory;
+                      ownDir=Directory(selectedDirectory!);
+                      print(ownDir.path);
                   if (selectedDirectory == null) {
                     // User canceled the picker
                   }
