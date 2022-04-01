@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:share2desktop/chooseFiles.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sdp_transform/sdp_transform.dart';
 import 'dart:convert';
 import 'package:share2desktop/main.dart';
+import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 
 class ConnectionObject extends ChangeNotifier {
   static final ConnectionObject _connector = ConnectionObject._internal();
@@ -158,16 +160,55 @@ class ConnectionObject extends ChangeNotifier {
 
           await buffer.update(
               decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
+          if (Platform.isWindows) {
+            Directory? downdir = await getDownloadsDirectory();
 
-          Directory? downdir = await getDownloadsDirectory();
+            File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
 
-          File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
+            print("file wird geschrieben");
 
-          print("file wird geschrieben");
-          SmartDialog.showToast(
-              "Datei " + decodedJSON["name"] + " gespeichert.");
-          await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
-              flush: true);
+            SmartDialog.showToast(
+                "Datei " + decodedJSON["name"] + " wurde gespeichert.");
+
+            await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
+                flush: true);
+          } else if (Platform.isMacOS || Platform.isLinux) {
+            Directory? downdir = await getDownloadsDirectory();
+
+            File newFile = File(downdir!.path + "/" + decodedJSON['name']);
+            print(newFile.toString());
+
+            print("file wird geschrieben");
+            SmartDialog.showToast(
+                "Datei " + decodedJSON["name"] + " gespeichert.");
+            await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
+                flush: true);
+          } else if (Platform.isAndroid || Platform.isIOS) {
+            
+            File newFile;
+            if(Platform.isAndroid) {
+              newFile = File("/storage/emulated/0/Download/"+decodedJSON['name']);
+            } else {
+              Directory? downdir = await getApplicationDocumentsDirectory();
+
+
+              newFile = File(downdir.path + "/" + decodedJSON['name']);
+            }
+            print(newFile.toString());
+            print("file wird geschrieben");
+
+           Fluttertoast.showToast(
+                  msg: "Datei " + decodedJSON["name"] + " gespeichert.",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.black,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+
+            await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
+                flush: true);
+          }
 
           if (buffer.containsKey(decodedJSON["name"])) {
             buffer.removeWhere((key, value) => key == decodedJSON['name']);
@@ -175,8 +216,19 @@ class ConnectionObject extends ChangeNotifier {
           //aChooseFiles.empfangen = false;
         } else {
           if (!buffer.containsKey(decodedJSON["name"])) {
-            SmartDialog.showToast(
-                "Datei " + decodedJSON["name"] + " wird empfangen...");
+            if (Platform.isIOS || Platform.isAndroid) {
+              Fluttertoast.showToast(
+                  msg: "Datei " + decodedJSON["name"] + " wird empfangen...",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.black,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            } else {
+              SmartDialog.showToast(
+                  "Datei " + decodedJSON["name"] + " wird empfangen...");
+            }
           }
           print("buffer wird geadded");
           await buffer.putIfAbsent(
@@ -220,14 +272,14 @@ class ConnectionObject extends ChangeNotifier {
       'sdpMid': e.sdpMid,
       'sdpMlineIndex': e.sdpMLineIndex,
     });
-    //print(jsonData +  "JSONDATA SENT");
+    print(jsonData + "JSONDATA SENT");
     var jsonString = json.encode({
       'event': 'candidate',
       'data': jsonData,
     });
     //print(jsonString.toString() + "JSONSTRING NOT FIXED");
     jsonString = _fixNestedJsonString(jsonString);
-    //print(jsonString.toString()+ "JSONSTRING FIXED");
+    print(jsonString.toString() + "JSONSTRING FIXED");
     _sendToServer(jsonString, externalSocketId);
   }
 
@@ -340,8 +392,8 @@ class ConnectionObject extends ChangeNotifier {
         /// an Ice candidate sent by a client via server, adds the candidate to its pool (Ice candidate = description of how to get to any given client)
         case "candidate":
           {
-            //print(message.toString()+ "MESSAGE RECEIVD");
-            //print(data.toString() + "DATA RECEIVED");
+            print(message.toString() + "MESSAGE RECEIVD");
+            print(data.toString() + "DATA RECEIVED");
             _peerConnection.addCandidate(RTCIceCandidate(
                 data['candidate'], data['sdpMid'], data['sdpMlineIndex']));
           }

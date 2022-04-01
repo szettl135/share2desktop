@@ -19,6 +19,8 @@ import 'package:provider/provider.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 bool dialogOpen = false;
+bool ownPath = false;
+late Directory ownDir;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -106,6 +108,57 @@ Future<void> disconnectPopup(String reason) async {
             ),
           ),
         ));
+      },
+    ).then((value) => dialogOpen = false);
+  }
+
+  Future<void> waitingForConnection(String id) async {
+    dialogOpen = true;
+    return showDialog<void>(
+      context: navigatorKey.currentContext as BuildContext,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return WillPopScope(
+            onWillPop: () async => false,
+            child: AlertDialog(
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text(AppLocalizations.of(context)!.connectionReq,
+                        style: Theme.of(context).textTheme.bodyText1),
+                    SizedBox(height: 30),
+                    Center(
+                        child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.1,
+                            height: MediaQuery.of(context).size.width * 0.1,
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.grey,
+                              color: Theme.of(context)
+                                  .primaryColor, //Colors.purple,
+                              strokeWidth: 10,
+                            ))),
+                    SizedBox(height: 30),
+                    Text(AppLocalizations.of(context)!.waitingOn +
+                        " " +
+                        id +
+                        "..."),
+                    SizedBox(height: 20),
+                    OutlinedButton(
+                        onPressed: () => {
+                              print("cancel"),
+                              Provider.of<ConnectionObject>(context,
+                                      listen: false)
+                                  .sendDisconnectRequest(
+                                      "User hat die Verbindung abgebrochen!"),
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop('dialog')
+                            },
+                        child: Text(AppLocalizations.of(context)!.cancel)),
+                    SizedBox(width: 10),
+                  ],
+                ),
+              ),
+            ));
       },
     ).then((value) => dialogOpen = false);
   }

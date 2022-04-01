@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:share2desktop/connectionLost.dart';
 import 'package:share2desktop/connectionObject.dart';
 import 'package:share2desktop/deviceInfo.dart';
 import 'package:share2desktop/main.dart';
+import 'package:share2desktop/qrcodeScanner.dart';
 import 'package:share2desktop/settings.dart';
 import 'package:share2desktop/startscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -134,7 +137,6 @@ class aDeviceSelection extends State<DeviceSelection> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -170,7 +172,6 @@ class aDeviceSelection extends State<DeviceSelection> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -181,9 +182,9 @@ class aDeviceSelection extends State<DeviceSelection> {
                     style: Theme.of(context).textTheme.bodyText1),
                 SizedBox(height: 20),
                 Container(
-                    child: getQRCodeImage(Provider.of<ConnectionObject>(context).internalSocketId),
+                    child: getQRCodeImage(Provider.of<ConnectionObject>(context)
+                        .internalSocketId),
                     width: 400),
-               
               ],
             ),
           ),
@@ -193,37 +194,47 @@ class aDeviceSelection extends State<DeviceSelection> {
   }
 
   Future<void> _cameraFunc() async {
-    dialogOpen = true;
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(AppLocalizations.of(context)!.enterID,
-                    style: Theme.of(context).textTheme.bodyText1),
-                SizedBox(height: 20),
-                TextField(
-                  controller: txtController,
-                ),
-                SizedBox(height: 20),
-                OutlinedButton(
-                    onPressed: () => {
-                          Provider.of<ConnectionObject>(context,listen:false).connectOffer(txtController.text),
-                          Navigator.of(context, rootNavigator: true).pop('dialog'),
-                          waitingForConnection(txtController.text)
-                          //txtController.text für den InputField text
-                        },
-                    child: Text(AppLocalizations.of(context)!.connect))
-                //CHRISTIAN hier noch qr code scanner einfügen; man kann ja beides haben ig
-              ],
+    if (Platform.isIOS || Platform.isAndroid) {
+      // TODO open camera
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => QRCodeScanner()),
+      );
+    } else {
+      dialogOpen = true;
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text(AppLocalizations.of(context)!.enterID,
+                      style: Theme.of(context).textTheme.bodyText1),
+                  SizedBox(height: 20),
+                  TextField(
+                    controller: txtController,
+                  ),
+                  SizedBox(height: 20),
+                  OutlinedButton(
+                      onPressed: () => {
+                            Provider.of<ConnectionObject>(context,
+                                    listen: false)
+                                .connectOffer(txtController.text),
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog'),
+                            waitingForConnection(txtController.text)
+                            //txtController.text für den InputField text
+                          },
+                      child: Text(AppLocalizations.of(context)!.connect))
+                ],
+              ),
             ),
-          ),
-        );
-      },
-    ).then((value) => dialogOpen = false);
+          );
+        },
+      ).then((value) => dialogOpen = false);
+    }
   }
 
   Future<void> waitingForConnection(String id) async {
@@ -232,46 +243,47 @@ class aDeviceSelection extends State<DeviceSelection> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-         return WillPopScope(
-      onWillPop: () async => false,
-      child: AlertDialog(
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(AppLocalizations.of(context)!.connectionReq,
-                    style: Theme.of(context).textTheme.bodyText1),
-                SizedBox(height: 30),
-                Center(child: SizedBox(width: MediaQuery.of(context).size.width*0.1,
-                height: MediaQuery.of(context).size.width*0.1,
-                  child:
-                 CircularProgressIndicator(
-                   
-                backgroundColor: Colors.grey,
-                color: Theme.of(context).primaryColor, //Colors.purple,
-                strokeWidth: 10,                ))),
-                SizedBox(height: 30),
-                Text(AppLocalizations.of(context)!.waitingOn +
-                    " " +
-                    id +
-                    "..."),
-                SizedBox(height: 20),
-                  OutlinedButton(
-                      onPressed: () => {
-                            print("cancel"),
-                            Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("User hat die Verbindung abgebrochen!"),
-                            Navigator.of(context, rootNavigator: true).pop('dialog')
-                          },
-                      child: Text(AppLocalizations.of(context)!.cancel)),
-                      SizedBox(width: 10),
-                      
-                  
-
-
-
-              ],
-            ),
-          ),
-        ));
+        return WillPopScope(
+            onWillPop: () async => false,
+            child: AlertDialog(
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text(AppLocalizations.of(context)!.connectionReq,
+                        style: Theme.of(context).textTheme.bodyText1),
+                    SizedBox(height: 30),
+                    Center(
+                        child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.1,
+                            height: MediaQuery.of(context).size.width * 0.1,
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.grey,
+                              color: Theme.of(context)
+                                  .primaryColor, //Colors.purple,
+                              strokeWidth: 10,
+                            ))),
+                    SizedBox(height: 30),
+                    Text(AppLocalizations.of(context)!.waitingOn +
+                        " " +
+                        id +
+                        "..."),
+                    SizedBox(height: 20),
+                    OutlinedButton(
+                        onPressed: () => {
+                              print("cancel"),
+                              Provider.of<ConnectionObject>(context,
+                                      listen: false)
+                                  .sendDisconnectRequest(
+                                      "User hat die Verbindung abgebrochen!"),
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop('dialog')
+                            },
+                        child: Text(AppLocalizations.of(context)!.cancel)),
+                    SizedBox(width: 10),
+                  ],
+                ),
+              ),
+            ));
       },
     ).then((value) => dialogOpen = false);
   }
@@ -354,33 +366,30 @@ class aDeviceSelection extends State<DeviceSelection> {
                         builder: (context) => SettingsScreen()));
                   },
                 ),
-                 TextButton(
+                TextButton(
                   child: Text("test"),
                   onPressed: () {
-                      waitingForConnection("1234");
+                    waitingForConnection("1234");
                   },
                 ),
                 TextButton(
                   child: Text("test222"),
                   onPressed: () {
-                      disconnectPopup("reason");
+                    disconnectPopup("reason");
                   },
                 ),
                 TextButton(
                   child: Text("test333"),
                   onPressed: () {
-                      acceptRejectConnection("weezer");
+                    acceptRejectConnection("weezer");
                   },
-                  
                 ),
                 TextButton(
                   child: Text("test444"),
                   onPressed: () {
-                      AdaptiveTheme.of(context).toggleThemeMode();
+                    AdaptiveTheme.of(context).toggleThemeMode();
                   },
-                   
                 ),
-            
               ],
             ),
           ),
@@ -390,7 +399,6 @@ class aDeviceSelection extends State<DeviceSelection> {
   }
 
   Future<void> _selectTheme() async {
-    
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -413,8 +421,6 @@ class aDeviceSelection extends State<DeviceSelection> {
                     onPressed: () {
                       AdaptiveTheme.of(context).setDark();
                     }),
-
-               
               ],
             ),
           ),
@@ -467,12 +473,11 @@ class aDeviceSelection extends State<DeviceSelection> {
                 leading: Icon(Icons.settings),
                 title: Text(AppLocalizations.of(context)!.settings),
                 onTap: () {
-                 _settings();
+                  _settings();
 
-                 //altes menü ist drinnen zum testen
+                  //altes menü ist drinnen zum testen
                   /*Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => SettingsScreen()));*/
-                
                 },
               ),
               ListTile(
@@ -481,7 +486,6 @@ class aDeviceSelection extends State<DeviceSelection> {
                 onTap: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => Anleitung()));
-
                 },
               ),
               ListTile(
@@ -489,7 +493,6 @@ class aDeviceSelection extends State<DeviceSelection> {
                 title: Text(AppLocalizations.of(context)!.aboutTheApp),
                 onTap: () {
                   _aboutDialog();
-        
                 },
               ),
             ],
@@ -497,23 +500,17 @@ class aDeviceSelection extends State<DeviceSelection> {
         ),
         appBar: new AppBar(title: new Text("Share2Desktop")),
         body: Column(children: [
-         
           SizedBox(height: 20),
-
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Spacer(flex: 4),
 
-
               OutlinedButton(
                   style: OutlinedButton.styleFrom(
                       primary: Colors.black, padding: EdgeInsets.all(12)),
-                  onPressed: () => {
-                        print("qr button"),
-                        _qrDialog()
-                      },
+                  onPressed: () => {print("qr button"), _qrDialog()},
                   //shape:RectangleBorder(
                   //borderRadius: BorderRadius.circular(16))),
                   child: Row(
@@ -538,11 +535,14 @@ class aDeviceSelection extends State<DeviceSelection> {
                     ],
                   )),
               // SizedBox(width: 30),
-              Spacer(flex:1),
+              Spacer(flex: 1),
               Container(
                 child: IconButton(
-                    onPressed: () => {print("camera"), _cameraFunc()},
-                   // splashColor: Colors.purple,
+                    onPressed: () => {
+                          print("camera"),
+                          _cameraFunc(),
+                        },
+                    // splashColor: Colors.purple,
                     constraints: BoxConstraints(
                         minHeight: 100,
                         minWidth: 100,
@@ -551,7 +551,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                     iconSize: 40.0,
                     icon: Icon(Icons.photo_camera)),
               ),
-              Spacer(flex:4),
+              Spacer(flex: 4),
               //SizedBox(width: MediaQuery.of(context).size.width * 0.2)
             ],
 
@@ -573,8 +573,6 @@ class aDeviceSelection extends State<DeviceSelection> {
                 itemBuilder: (context, index) {
                   return Card(
                     color: Theme.of(context).scaffoldBackgroundColor,
-
-  
                     shape: ContinuousRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(10), // if you need this
@@ -603,24 +601,17 @@ class aDeviceSelection extends State<DeviceSelection> {
                                           0.45,
                                       child: AutoSizeText(
                                         names[index],
-                                     
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
-                                     
                                         maxLines: 1,
-                                       
                                         group: devicesGroup,
-            
                                         maxFontSize: 25,
                                         stepGranularity: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ))
                                 ],
                               )
-
-                 
                             ]),
-        
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ChooseFiles(
@@ -630,9 +621,9 @@ class aDeviceSelection extends State<DeviceSelection> {
                   );
                 },
               )),
-         
+
           SizedBox(height: 20),
-         
+
           Spacer(flex: 1),
         ]));
   }
