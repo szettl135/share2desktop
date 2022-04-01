@@ -32,18 +32,12 @@ class aChooseFiles extends State<ChooseFiles> {
   var devicesGroup = AutoSizeGroup();
   var buttonsGroup = AutoSizeGroup();
   double progress = 0;
-  //static bool empfangen = false;
+
   @override
   void initState() {
     super.initState();
     progress = 0;
-    //empfangen = false;
   }
-//   void setEmpfangen(bool ye) {
-//   setState(() {
-//     empfangen = ye;
-//   });
-// }
 
   late List<File> _files = [];
   @override
@@ -281,24 +275,17 @@ class aChooseFiles extends State<ChooseFiles> {
         await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (result != null) {
-      //files = result.paths.map((path) => File(path!)).toList();
       setState(() {
-        //_files = result.paths.map((path) => File(path!)).toList();
-
         for (PlatformFile file in result.files) {
           for (File u in _files) {
             if (u.path == file.path) {
               _files.remove(u);
-              //_files.add(File(file.path!));
               break;
             }
           }
           ;
         }
-
         _files.addAll(result.paths.map((path) => File(path!)).toList());
-
-        //var existingItem = _files.firstWhere((result) => result..link == _files., orElse: () => null);
       });
     } else {
       // User canceled the picker
@@ -307,14 +294,12 @@ class aChooseFiles extends State<ChooseFiles> {
 
   void _clearFiles() async {
     setState(() {
-      //_files = result.paths.map((path) => File(path!)).toList();
       _files.clear();
     });
   }
 
   void _deleteFile(int index) async {
     setState(() {
-      //_files = result.paths.map((path) => File(path!)).toList();
       _files.removeAt(index);
     });
   }

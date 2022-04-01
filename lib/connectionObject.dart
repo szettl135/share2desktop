@@ -142,16 +142,11 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
-      // setEmpfangen(true);
-      //aChooseFiles.empfangen = true;
       print("paket empfangen");
       try {
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
-        //print(decodedJSON['name']);
-        // print(decodedJSON['finished']);
 
         if (decodedJSON['finished']) {
-          // print("finished");
           if (!buffer.containsKey(decodedJSON["name"])) {
             print("absent name (small file)");
             await buffer.putIfAbsent(decodedJSON["name"],
@@ -171,13 +166,18 @@ class ConnectionObject extends ChangeNotifier {
 
             print("file wird geschrieben");
 
-            SmartDialog.showToast(
-                AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] + AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive3);
+            SmartDialog.showToast(AppLocalizations.of(
+                        navigatorKey.currentContext as BuildContext)!
+                    .receive1 +
+                decodedJSON["name"] +
+                AppLocalizations.of(
+                        navigatorKey.currentContext as BuildContext)!
+                    .receive3);
 
             await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
                 flush: true);
           } else if (Platform.isMacOS || Platform.isLinux) {
-           Directory? downdir;
+            Directory? downdir;
             if (!ownPath) {
               downdir = await getDownloadsDirectory();
             } else {
@@ -188,37 +188,47 @@ class ConnectionObject extends ChangeNotifier {
             print(newFile.toString());
 
             print("file wird geschrieben");
-            SmartDialog.showToast(
-                 AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] +  AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive3);
+            SmartDialog.showToast(AppLocalizations.of(
+                        navigatorKey.currentContext as BuildContext)!
+                    .receive1 +
+                decodedJSON["name"] +
+                AppLocalizations.of(
+                        navigatorKey.currentContext as BuildContext)!
+                    .receive3);
             await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
                 flush: true);
           } else if (Platform.isAndroid || Platform.isIOS) {
-            
             File newFile;
-            if(Platform.isAndroid) {
-              newFile = File("/storage/emulated/0/Download/"+decodedJSON['name']);
+            if (Platform.isAndroid) {
+              newFile =
+                  File("/storage/emulated/0/Download/" + decodedJSON['name']);
             } else {
               Directory? downdir = await getApplicationDocumentsDirectory();
-
 
               newFile = File(downdir.path + "/" + decodedJSON['name']);
             }
 
-            if(ownPath) {
-              newFile=File(ownDir.path+"/"+decodedJSON['name']);
+            if (ownPath) {
+              newFile = File(ownDir.path + "/" + decodedJSON['name']);
             }
 
             print(newFile.toString());
             print("file wird geschrieben");
 
-           Fluttertoast.showToast(
-                  msg:  AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] +  AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive3,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.black,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+            Fluttertoast.showToast(
+                msg: AppLocalizations.of(
+                            navigatorKey.currentContext as BuildContext)!
+                        .receive1 +
+                    decodedJSON["name"] +
+                    AppLocalizations.of(
+                            navigatorKey.currentContext as BuildContext)!
+                        .receive3,
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.black,
+                textColor: Colors.white,
+                fontSize: 16.0);
 
             await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
                 flush: true);
@@ -227,12 +237,17 @@ class ConnectionObject extends ChangeNotifier {
           if (buffer.containsKey(decodedJSON["name"])) {
             buffer.removeWhere((key, value) => key == decodedJSON['name']);
           }
-          //aChooseFiles.empfangen = false;
         } else {
           if (!buffer.containsKey(decodedJSON["name"])) {
             if (Platform.isIOS || Platform.isAndroid) {
               Fluttertoast.showToast(
-                  msg: AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] + AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive2,
+                  msg: AppLocalizations.of(
+                              navigatorKey.currentContext as BuildContext)!
+                          .receive1 +
+                      decodedJSON["name"] +
+                      AppLocalizations.of(
+                              navigatorKey.currentContext as BuildContext)!
+                          .receive2,
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.CENTER,
                   timeInSecForIosWeb: 1,
@@ -240,8 +255,13 @@ class ConnectionObject extends ChangeNotifier {
                   textColor: Colors.white,
                   fontSize: 16.0);
             } else {
-              SmartDialog.showToast(
-                  AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] + AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive2);
+              SmartDialog.showToast(AppLocalizations.of(
+                          navigatorKey.currentContext as BuildContext)!
+                      .receive1 +
+                  decodedJSON["name"] +
+                  AppLocalizations.of(
+                          navigatorKey.currentContext as BuildContext)!
+                      .receive2);
             }
           }
           print("buffer wird geadded");
