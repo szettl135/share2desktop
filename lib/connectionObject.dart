@@ -184,22 +184,7 @@ class ConnectionObject extends ChangeNotifier {
             await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
                 flush: true);
           } else if (Platform.isAndroid || Platform.isIOS) {
-            // DownloadsPathProvider.downloadsDirectory.then((downloadDir) async {
-            //   File newFile =
-            //       File(downloadDir!.path + "/" + decodedJSON['name']);
-            //   print(newFile.toString());
-
-            //   print("file wird geschrieben");
-            //   SmartDialog.showToast(
-            //       "Datei " + decodedJSON["name"] + " gespeichert.");
-            //   await newFile.writeAsBytes(
-            //       buffer[decodedJSON['name']]!.cast<int>(),
-            //       flush: true);
-            // });
-            //Directory? downdir = await getApplicationDocumentsDirectory();
-
-
-            //File newFile = File(downdir.path + "/" + decodedJSON['name']);
+            
             File newFile;
             if(Platform.isAndroid) {
               newFile = File("/storage/emulated/0/Download/"+decodedJSON['name']);
