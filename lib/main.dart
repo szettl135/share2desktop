@@ -19,6 +19,8 @@ import 'package:provider/provider.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 bool dialogOpen = false;
+bool ownPath = false;
+late Directory ownDir;
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(

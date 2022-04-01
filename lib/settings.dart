@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +96,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onPressed: (context) async {
                   String? selectedDirectory =
                       await FilePicker.platform.getDirectoryPath();
-
+                      ownPath=true;
+                      ownDir=selectedDirectory as Directory;
                   if (selectedDirectory == null) {
                     // User canceled the picker
                   }

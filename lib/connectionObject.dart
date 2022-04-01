@@ -196,9 +196,19 @@ class ConnectionObject extends ChangeNotifier {
             //       buffer[decodedJSON['name']]!.cast<int>(),
             //       flush: true);
             // });
-            Directory? downdir = await getApplicationDocumentsDirectory();
+            //Directory? downdir = await getApplicationDocumentsDirectory();
 
-            File newFile = File(downdir.path + "/" + decodedJSON['name']);
+
+            //File newFile = File(downdir.path + "/" + decodedJSON['name']);
+            File newFile;
+            if(Platform.isAndroid) {
+              newFile = File("/storage/emulated/0/Download/"+decodedJSON['name']);
+            } else {
+              Directory? downdir = await getApplicationDocumentsDirectory();
+
+
+              newFile = File(downdir.path + "/" + decodedJSON['name']);
+            }
             print(newFile.toString());
             print("file wird geschrieben");
 
