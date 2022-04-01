@@ -89,6 +89,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _sprache();
                 },
               ),
+              
               SettingsTile(
                 title: Text(AppLocalizations.of(context)!.savepath),
                 description: Text(AppLocalizations.of(context)!.savepath_desc),
@@ -101,6 +102,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   if (selectedDirectory == null) {
                     // User canceled the picker
                   }
+                },
+              ),
+              SettingsTile(
+                title: Text(AppLocalizations.of(context)!.resetPath),
+                description: Text(AppLocalizations.of(context)!.useStandard),
+                leading: Icon(Icons.save),
+                onPressed: (context) async {
+                  ownPath=false;
                 },
               ),
               SettingsTile(

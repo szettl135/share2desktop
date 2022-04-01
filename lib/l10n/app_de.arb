@@ -50,7 +50,12 @@
     "enterID": "ID eingeben",
     "connect": "Verbinden",
     "waitingOn": "Warten auf",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "resetPath": "Eigenen Pfad löschen",
+    "useStandard": "Wieder Standardpfad verwenden",
+    "receive1": "Datei ",
+    "receive2": " wird empfangen...",
+    "receive3": " gespeichert."
 
 
 

@@ -14,7 +14,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:sdp_transform/sdp_transform.dart';
 import 'dart:convert';
 import 'package:share2desktop/main.dart';
-import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ConnectionObject extends ChangeNotifier {
   static final ConnectionObject _connector = ConnectionObject._internal();
@@ -161,26 +161,35 @@ class ConnectionObject extends ChangeNotifier {
           await buffer.update(
               decodedJSON["name"], (value) => value + decodedJSON["bytes"]);
           if (Platform.isWindows) {
-            Directory? downdir = await getDownloadsDirectory();
-
+            Directory? downdir;
+            if (!ownPath) {
+              downdir = await getDownloadsDirectory();
+            } else {
+              downdir = ownDir;
+            }
             File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
 
             print("file wird geschrieben");
 
             SmartDialog.showToast(
-                "Datei " + decodedJSON["name"] + " wurde gespeichert.");
+                AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] + AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive2);
 
             await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
                 flush: true);
           } else if (Platform.isMacOS || Platform.isLinux) {
-            Directory? downdir = await getDownloadsDirectory();
+           Directory? downdir;
+            if (!ownPath) {
+              downdir = await getDownloadsDirectory();
+            } else {
+              downdir = ownDir;
+            }
 
             File newFile = File(downdir!.path + "/" + decodedJSON['name']);
             print(newFile.toString());
 
             print("file wird geschrieben");
             SmartDialog.showToast(
-                "Datei " + decodedJSON["name"] + " gespeichert.");
+                 AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] +  AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive3);
             await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
                 flush: true);
           } else if (Platform.isAndroid || Platform.isIOS) {
@@ -194,11 +203,16 @@ class ConnectionObject extends ChangeNotifier {
 
               newFile = File(downdir.path + "/" + decodedJSON['name']);
             }
+
+            if(ownPath) {
+              newFile=File(ownDir.path+"/"+decodedJSON['name']);
+            }
+
             print(newFile.toString());
             print("file wird geschrieben");
 
            Fluttertoast.showToast(
-                  msg: "Datei " + decodedJSON["name"] + " gespeichert.",
+                  msg:  AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] +  AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive3,
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.CENTER,
                   timeInSecForIosWeb: 1,
@@ -218,7 +232,7 @@ class ConnectionObject extends ChangeNotifier {
           if (!buffer.containsKey(decodedJSON["name"])) {
             if (Platform.isIOS || Platform.isAndroid) {
               Fluttertoast.showToast(
-                  msg: "Datei " + decodedJSON["name"] + " wird empfangen...",
+                  msg: AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] + AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive2,
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.CENTER,
                   timeInSecForIosWeb: 1,
@@ -227,7 +241,7 @@ class ConnectionObject extends ChangeNotifier {
                   fontSize: 16.0);
             } else {
               SmartDialog.showToast(
-                  "Datei " + decodedJSON["name"] + " wird empfangen...");
+                  AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] + AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive2);
             }
           }
           print("buffer wird geadded");

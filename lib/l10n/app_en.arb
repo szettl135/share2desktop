@@ -53,7 +53,12 @@
     "enterID": "Enter ID",
     "connect": "Connect",
     "waitingOn": "Waiting on",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "resetPath": "Delete own Savepath",
+    "useStandard": "Use default again",
+    "receive1": "Receiving ",
+    "receive2": " ...",
+    "receive3": "Saved "
 
 
     

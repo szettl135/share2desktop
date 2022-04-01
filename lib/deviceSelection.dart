@@ -11,7 +11,6 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:share2desktop/connectionLost.dart';
 import 'package:share2desktop/connectionObject.dart';
 import 'package:share2desktop/deviceInfo.dart';
-import 'package:share2desktop/main.dart';
 import 'package:share2desktop/qrcodeScanner.dart';
 import 'package:share2desktop/settings.dart';
 import 'package:share2desktop/startscreen.dart';
