@@ -172,7 +172,7 @@ class ConnectionObject extends ChangeNotifier {
             print("file wird geschrieben");
 
             SmartDialog.showToast(
-                AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] + AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive2);
+                AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive1 + decodedJSON["name"] + AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.receive3);
 
             await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
                 flush: true);
