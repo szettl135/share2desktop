@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share2desktop/chooseFiles.dart';
 import 'package:share2desktop/chooseFiles.dart';
@@ -165,26 +166,28 @@ class ConnectionObject extends ChangeNotifier {
             File newFile = File(downdir!.path + "\\" + decodedJSON['name']);
 
             print("file wird geschrieben");
+
             SmartDialog.showToast(
-                "Datei " + decodedJSON["name"] + " gespeichert.");
+                "Datei " + decodedJSON["name"] + " wurde gespeichert.");
+
             await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
                 flush: true);
           } else if (Platform.isMacOS || Platform.isLinux) {
-
-             Directory? downdir = await getDownloadsDirectory();
+            Directory? downdir = await getDownloadsDirectory();
 
             File newFile = File(downdir!.path + "/" + decodedJSON['name']);
+            print(newFile.toString());
 
             print("file wird geschrieben");
             SmartDialog.showToast(
                 "Datei " + decodedJSON["name"] + " gespeichert.");
             await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
                 flush: true);
-
           } else if (Platform.isAndroid || Platform.isIOS) {
             DownloadsPathProvider.downloadsDirectory.then((downloadDir) async {
               File newFile =
                   File(downloadDir!.path + "/" + decodedJSON['name']);
+              print(newFile.toString());
 
               print("file wird geschrieben");
               SmartDialog.showToast(
@@ -192,10 +195,8 @@ class ConnectionObject extends ChangeNotifier {
               await newFile.writeAsBytes(
                   buffer[decodedJSON['name']]!.cast<int>(),
                   flush: true);
-              
             });
           }
-
 
           if (buffer.containsKey(decodedJSON["name"])) {
             buffer.removeWhere((key, value) => key == decodedJSON['name']);
@@ -203,8 +204,19 @@ class ConnectionObject extends ChangeNotifier {
           //aChooseFiles.empfangen = false;
         } else {
           if (!buffer.containsKey(decodedJSON["name"])) {
-            SmartDialog.showToast(
-                "Datei " + decodedJSON["name"] + " wird empfangen...");
+            if (Platform.isIOS || Platform.isAndroid) {
+              Fluttertoast.showToast(
+                  msg: "Datei " + decodedJSON["name"] + " wird empfangen...",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.black,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            } else {
+              SmartDialog.showToast(
+                  "Datei " + decodedJSON["name"] + " wird empfangen...");
+            }
           }
           print("buffer wird geadded");
           await buffer.putIfAbsent(
