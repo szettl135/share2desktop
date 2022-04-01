@@ -28,7 +28,6 @@ class ChooseFiles extends StatefulWidget {
   aChooseFiles createState() => aChooseFiles();
 }
 
-
 class aChooseFiles extends State<ChooseFiles> {
   var devicesGroup = AutoSizeGroup();
   var buttonsGroup = AutoSizeGroup();
@@ -36,7 +35,6 @@ class aChooseFiles extends State<ChooseFiles> {
   //static bool empfangen = false;
   @override
   void initState() {
-
     super.initState();
     progress = 0;
     //empfangen = false;
@@ -47,11 +45,9 @@ class aChooseFiles extends State<ChooseFiles> {
 //   });
 // }
 
-
   late List<File> _files = [];
   @override
   Widget build(BuildContext context) {
-    
     Widget buttonSection = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -103,177 +99,181 @@ class aChooseFiles extends State<ChooseFiles> {
       ],
     );
 
-     return WillPopScope(
-    onWillPop: () {
-      Provider.of<ConnectionObject>(context,listen:false).sendDisconnectRequest("User hat die Verbindung getrennt!");
-      //trigger leaving and use own data
-      Navigator.pop(context, false);
+    return WillPopScope(
+        onWillPop: () {
+          Provider.of<ConnectionObject>(context, listen: false)
+              .sendDisconnectRequest("User hat die Verbindung getrennt!");
+          //trigger leaving and use own data
+          Navigator.pop(context, false);
 
-      //we need to return a future
-      return Future.value(false);
-    },
-    child: Scaffold(
-        appBar: new AppBar(title: new Text("Share2Desktop")),
-        body: Column(children: [
-          Container(
-            padding: EdgeInsets.all(30),
-            child: Row(
-              //mainAxisAlignment:MainAxisAlignment.center ,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Spacer(),
-                //SizedBox(width: 20),
-                //Spacer(flex:3),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.33,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10),
-                      Container(
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width * 0.30,
-                          child: AutoSizeText(
-                              AppLocalizations.of(context)!.yourDevice,
-                              style: Theme.of(context).textTheme.headline4,
+          //we need to return a future
+          return Future.value(false);
+        },
+        child: Scaffold(
+            appBar: new AppBar(title: new Text("Share2Desktop")),
+            body: Column(children: [
+              Container(
+                padding: EdgeInsets.all(30),
+                child: Row(
+                  //mainAxisAlignment:MainAxisAlignment.center ,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Spacer(),
+                    //SizedBox(width: 20),
+                    //Spacer(flex:3),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.33,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 10),
+                          Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width * 0.30,
+                              child: AutoSizeText(
+                                  AppLocalizations.of(context)!.yourDevice,
+                                  style: Theme.of(context).textTheme.headline4,
+                                  group: devicesGroup,
+                                  maxLines: 1,
+                                  minFontSize: 5,
+                                  maxFontSize: 30,
+                                  stepGranularity: 1,
+                                  overflow: TextOverflow.ellipsis)),
+                          SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                    //Spacer(flex:1),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.025),
+                    //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
+                    Icon(Icons.arrow_forward),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.025),
+                    //Spacer(flex:1),
+                    //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
+                    Container(
+                      alignment: Alignment.topCenter,
+                      width: MediaQuery.of(context).size.width * 0.33,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // SizedBox(height:10),
+                          //Text("Zum Gerät:",style: Theme.of(context).textTheme.bodyText1),
+                          SizedBox(height: 10),
+                          Icon(
+                            Icons.computer,
+                            size: 30.0,
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width * 0.30,
+                            child: AutoSizeText(
+                              widget.targetDeviceName,
+                              textAlign: TextAlign.center,
                               group: devicesGroup,
                               maxLines: 1,
                               minFontSize: 5,
-                              maxFontSize: 30,
+                              maxFontSize: 25,
                               stepGranularity: 1,
-                              overflow: TextOverflow.ellipsis)),
-                      SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-                //Spacer(flex:1),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.025),
-                //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
-                Icon(Icons.arrow_forward),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.025),
-                //Spacer(flex:1),
-                //SizedBox(width: MediaQuery.of(context).size.width * 0.125),
-                Container(
-                  alignment: Alignment.topCenter,
-                  width: MediaQuery.of(context).size.width * 0.33,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // SizedBox(height:10),
-                      //Text("Zum Gerät:",style: Theme.of(context).textTheme.bodyText1),
-                      SizedBox(height: 10),
-                      Icon(
-                        Icons.computer,
-                        size: 30.0,
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width * 0.30,
-                        child: AutoSizeText(
-                          widget.targetDeviceName,
-                          textAlign: TextAlign.center,
-                          group: devicesGroup,
-                          maxLines: 1,
-                          minFontSize: 5,
-                          maxFontSize: 25,
-                          stepGranularity: 1,
-                          style: Theme.of(context).textTheme.headline4,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      SizedBox(height: 10)
-                    ],
-                  ),
-                ),
-                //SizedBox(width: 20)
-                Spacer()
-                //Spacer(flex:3)
-              ],
-            ),
-          ),
-         
-              
-            
-          // (empfangen)? Spacer(flex:1) : SizedBox(height:10),
-          //  (empfangen)? Text("Eine Datei wird gerade übertragen..."): Text("Gerade wird nichts empfangen."),
-          SizedBox(height: 20),
-          Spacer(flex: 2),
-          OutlinedButton(
-              onPressed: _pickFile,
-              child: Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(10),
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  child: AutoSizeText(AppLocalizations.of(context)!.chooseFiles,
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      minFontSize: 5,
-                      maxFontSize: 30,
-                      stepGranularity: 1,
-                      style: Theme.of(context).textTheme.headline3))),
-          Spacer(flex: 2),
-          Container(
-              padding: EdgeInsets.all(8),
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.33,
-              child: ListView.builder(
-                itemCount: _files.length,
-                itemExtent: MediaQuery.of(context).size.height * 0.125,
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    shape: ContinuousRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(10), // if you need this
-                      side: BorderSide(
-                        color: Colors.grey,
-                        width: 1,
+                              style: Theme.of(context).textTheme.headline4,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          SizedBox(height: 10)
+                        ],
                       ),
                     ),
-                    child: ListTile(
-                        leading: Container(
-                            height: double.infinity,
-                            child: Icon(Icons.insert_drive_file_outlined)),
-                        trailing: Container(
-                            height: double.infinity,
-                            child: Icon(Icons.highlight_remove)),
-                        title: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                    //SizedBox(width: 20)
+                    Spacer()
+                    //Spacer(flex:3)
+                  ],
+                ),
+              ),
+
+              // (empfangen)? Spacer(flex:1) : SizedBox(height:10),
+              //  (empfangen)? Text("Eine Datei wird gerade übertragen..."): Text("Gerade wird nichts empfangen."),
+              SizedBox(height: 20),
+              Spacer(flex: 2),
+              OutlinedButton(
+                  onPressed: _pickFile,
+                  child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(10),
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: AutoSizeText(
+                          AppLocalizations.of(context)!.chooseFiles,
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          minFontSize: 5,
+                          maxFontSize: 30,
+                          stepGranularity: 1,
+                          style: Theme.of(context).textTheme.headline3))),
+              Spacer(flex: 2),
+              Container(
+                  padding: EdgeInsets.all(8),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.33,
+                  child: ListView.builder(
+                    itemCount: _files.length,
+                    itemExtent: MediaQuery.of(context).size.height * 0.125,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        shape: ContinuousRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(10), // if you need this
+                          side: BorderSide(
+                            color: Colors.grey,
+                            width: 1,
+                          ),
+                        ),
+                        child: ListTile(
+                            leading: Container(
+                                height: double.infinity,
+                                child: Icon(Icons.insert_drive_file_outlined)),
+                            trailing: Container(
+                                height: double.infinity,
+                                child: Icon(Icons.highlight_remove)),
+                            title: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Container(
-                                      alignment: Alignment.center,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.45,
-                                      child: AutoSizeText(
-                                        basename(_files[index].path.toString()),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                        maxLines: 1,
-                                        group: devicesGroup,
-                                        maxFontSize: 25,
-                                        stepGranularity: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ))
-                                ],
-                              )
-                            ]),
-                        onTap: () {
-                          _deleteFile(index);
-                        }),
-                  );
-                },
-              )),
-          buttonSection,
-          Spacer(flex: 1),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02)
-        ])));
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                          alignment: Alignment.center,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.45,
+                                          child: AutoSizeText(
+                                            basename(
+                                                _files[index].path.toString()),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            maxLines: 1,
+                                            group: devicesGroup,
+                                            maxFontSize: 25,
+                                            stepGranularity: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ))
+                                    ],
+                                  )
+                                ]),
+                            onTap: () {
+                              _deleteFile(index);
+                            }),
+                      );
+                    },
+                  )),
+              buttonSection,
+              Spacer(flex: 1),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02)
+            ])));
   }
 
   void _pickFile() async {
@@ -326,12 +326,10 @@ class aChooseFiles extends State<ChooseFiles> {
       context: navigatorKey.currentContext as BuildContext,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        
         return WillPopScope(
             onWillPop: () async => false,
             child: AlertDialog(
               content: SingleChildScrollView(
-              
                 child: ListBody(
                   children: <Widget>[
                     Text("Daten werden gesendet...",
@@ -375,14 +373,14 @@ class aChooseFiles extends State<ChooseFiles> {
           data = jsonEncode({
             "name": basename(file.path),
             "bytes": fileBytes.sublist(i, i + packSize),
-            "finished": "false"
+            "finished": false
           });
           print('big enough: ' + i.toString());
         } else {
           data = jsonEncode({
             "name": basename(file.path),
             "bytes": fileBytes.sublist(i),
-            "finished": "true"
+            "finished": true
           });
           print('to big: ' + i.toString());
         }

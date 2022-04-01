@@ -140,16 +140,15 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
-     // setEmpfangen(true);
-     //aChooseFiles.empfangen = true;
+      // setEmpfangen(true);
+      //aChooseFiles.empfangen = true;
       print("paket empfangen");
       try {
-
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
         //print(decodedJSON['name']);
         // print(decodedJSON['finished']);
 
-        if (decodedJSON['finished'] == "true") {
+        if (decodedJSON['finished']) {
           // print("finished");
           if (!buffer.containsKey(decodedJSON["name"])) {
             print("absent name (small file)");
@@ -169,7 +168,6 @@ class ConnectionObject extends ChangeNotifier {
               "Datei " + decodedJSON["name"] + " gespeichert.");
           await newFile.writeAsBytes(buffer[decodedJSON['name']]!.cast<int>(),
               flush: true);
-            
 
           if (buffer.containsKey(decodedJSON["name"])) {
             buffer.removeWhere((key, value) => key == decodedJSON['name']);
@@ -222,14 +220,14 @@ class ConnectionObject extends ChangeNotifier {
       'sdpMid': e.sdpMid,
       'sdpMlineIndex': e.sdpMLineIndex,
     });
-    print(jsonData +  "JSONDATA SENT");
+    //print(jsonData +  "JSONDATA SENT");
     var jsonString = json.encode({
       'event': 'candidate',
       'data': jsonData,
     });
-    print(jsonString.toString() + "JSONSTRING NOT FIXED");
+    //print(jsonString.toString() + "JSONSTRING NOT FIXED");
     jsonString = _fixNestedJsonString(jsonString);
-    print(jsonString.toString()+ "JSONSTRING FIXED");
+    //print(jsonString.toString()+ "JSONSTRING FIXED");
     _sendToServer(jsonString, externalSocketId);
   }
 
@@ -259,7 +257,7 @@ class ConnectionObject extends ChangeNotifier {
     }
     acceptRejectConnection(externalSocketId);
   }
-  
+
   sendDisconnectRequest(String reason) {
     var jsonString = json.encode({
       'event': "disconnect",
@@ -277,9 +275,10 @@ class ConnectionObject extends ChangeNotifier {
     messageDestination = _fixNestedJsonString(messageDestination);
     _channel.sink.add(messageDestination);
   }
- ping() {
-   _channel.sink.add("Ping");
- }
+
+  ping() {
+    _channel.sink.add("Ping");
+  }
 
   /// Json string Shenanigans
   String _fixNestedJsonString(String jsonString) {
@@ -311,10 +310,8 @@ class ConnectionObject extends ChangeNotifier {
       externalSocketId = "";
       notifyListeners();
       Navigator.of(navigatorKey.currentContext as BuildContext)
-            .push(MaterialPageRoute(
-                builder: (context) => DeviceSelection(
-                    )));
-      if(reason != "chosen") {
+          .push(MaterialPageRoute(builder: (context) => DeviceSelection()));
+      if (reason != "chosen") {
         disconnectPopup(reason);
       }
     } catch (e) {
@@ -343,8 +340,8 @@ class ConnectionObject extends ChangeNotifier {
         /// an Ice candidate sent by a client via server, adds the candidate to its pool (Ice candidate = description of how to get to any given client)
         case "candidate":
           {
-            print(message.toString()+ "MESSAGE RECEIVD");
-            print(data.toString() + "DATA RECEIVED");
+            //print(message.toString()+ "MESSAGE RECEIVD");
+            //print(data.toString() + "DATA RECEIVED");
             _peerConnection.addCandidate(RTCIceCandidate(
                 data['candidate'], data['sdpMid'], data['sdpMlineIndex']));
           }
