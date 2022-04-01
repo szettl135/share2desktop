@@ -306,14 +306,11 @@ class ConnectionObject extends ChangeNotifier {
       'sdpMid': e.sdpMid,
       'sdpMlineIndex': e.sdpMLineIndex,
     });
-    print(jsonData + "JSONDATA SENT");
     var jsonString = json.encode({
       'event': 'candidate',
       'data': jsonData,
     });
-    //print(jsonString.toString() + "JSONSTRING NOT FIXED");
     jsonString = _fixNestedJsonString(jsonString);
-    print(jsonString.toString() + "JSONSTRING FIXED");
     _sendToServer(jsonString, externalSocketId);
   }
 
@@ -426,8 +423,6 @@ class ConnectionObject extends ChangeNotifier {
         /// an Ice candidate sent by a client via server, adds the candidate to its pool (Ice candidate = description of how to get to any given client)
         case "candidate":
           {
-            print(message.toString() + "MESSAGE RECEIVD");
-            print(data.toString() + "DATA RECEIVED");
             _peerConnection.addCandidate(RTCIceCandidate(
                 data['candidate'], data['sdpMid'], data['sdpMlineIndex']));
           }
