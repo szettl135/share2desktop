@@ -56,9 +56,10 @@
     "cancel": "Cancel",
     "resetPath": "Delete own Savepath",
     "useStandard": "Use default again",
-    "receive1": "Receiving ",
-    "receive2": " ...",
-    "receive3": "Saved "
+    "receive1": "File ",
+    "receive2": " is being received ...",
+    "receive3": " was saved. ",
+    "userCanceled": "User cancelled connection!"
 
 
     

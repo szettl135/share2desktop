@@ -154,7 +154,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                     },
                 )),
                 SizedBox(height: 20),
-                Text("2022-03-13")
+                Text("2022-04-01")
               ],
             ),
           ),
@@ -273,7 +273,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                               Provider.of<ConnectionObject>(context,
                                       listen: false)
                                   .sendDisconnectRequest(
-                                      "User hat die Verbindung abgebrochen!"),
+                                     AppLocalizations.of(context)!.userCanceled),
                               Navigator.of(context, rootNavigator: true)
                                   .pop('dialog')
                             },
@@ -472,11 +472,11 @@ class aDeviceSelection extends State<DeviceSelection> {
                 leading: Icon(Icons.settings),
                 title: Text(AppLocalizations.of(context)!.settings),
                 onTap: () {
-                  _settings();
+                 // _settings();
 
                   //altes menü ist drinnen zum testen
-                  /*Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SettingsScreen()));*/
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SettingsScreen()));
                 },
               ),
               ListTile(

@@ -55,7 +55,8 @@
     "useStandard": "Wieder Standardpfad verwenden",
     "receive1": "Datei ",
     "receive2": " wird empfangen...",
-    "receive3": " gespeichert."
+    "receive3": " gespeichert.",
+    "userCanceled": "User hat die Verbindung abgebrochen!"
 
 
 
