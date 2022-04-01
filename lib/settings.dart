@@ -122,6 +122,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       await SharedPreferences.getInstance();
                   await prefs.setBool('seen', false);
                   AdaptiveTheme.of(context).reset();
+                  ownPath=false;
                 },
               ),
             ],
