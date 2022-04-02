@@ -19,7 +19,7 @@ class QRCodeScanner extends StatelessWidget {
             Provider.of<ConnectionObject>(context, listen: false)
                 .connectOffer(code);
             Navigator.of(context, rootNavigator: true).pop('dialog');
-            waitingForConnection(code); // TODO execute this method from deviceSelection.dart aDeviceSelection class
+            waitingForConnection(code);
           }),
     );
   }
