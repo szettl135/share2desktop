@@ -273,7 +273,8 @@ class aDeviceSelection extends State<DeviceSelection> {
                               Provider.of<ConnectionObject>(context,
                                       listen: false)
                                   .sendDisconnectRequest(
-                                     AppLocalizations.of(context)!.userCanceled),
+                                      AppLocalizations.of(context)!
+                                          .userCanceled),
                               Navigator.of(context, rootNavigator: true)
                                   .pop('dialog')
                             },
@@ -472,7 +473,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                 leading: Icon(Icons.settings),
                 title: Text(AppLocalizations.of(context)!.settings),
                 onTap: () {
-                 // _settings();
+                  // _settings();
 
                   //altes menü ist drinnen zum testen
                   Navigator.of(context).push(MaterialPageRoute(
@@ -558,23 +559,23 @@ class aDeviceSelection extends State<DeviceSelection> {
           ),
           //Abstand
           Spacer(flex: 2),
-          Container(width: MediaQuery.of(context).size.width * 0.9, 
-          //height: MediaQuery.of(context).size.width * 0.2, 
-          padding: EdgeInsets.all(12),child:
-          AutoSizeText(AppLocalizations.of(context)!.getStarted,
-               style: Theme.of(context).textTheme.headline3,
-               textAlign: TextAlign.center,
-               maxLines: 2)
-          ),
+          Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              //height: MediaQuery.of(context).size.width * 0.2,
+              padding: EdgeInsets.all(12),
+              child: AutoSizeText(AppLocalizations.of(context)!.getStarted,
+                  style: Theme.of(context).textTheme.headline3,
+                  textAlign: TextAlign.center,
+                  maxLines: 2)),
           SizedBox(height: 20),
-         Container(width: MediaQuery.of(context).size.width * 0.8, 
-         //height: MediaQuery.of(context).size.width * 0.2, 
-         padding: EdgeInsets.all(12),child:
-          AutoSizeText(AppLocalizations.of(context)!.openTheMenu,
-               style: Theme.of(context).textTheme.headline6,
-               textAlign: TextAlign.center,
-               maxLines: 2)
-         ),
+          Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              //height: MediaQuery.of(context).size.width * 0.2,
+              padding: EdgeInsets.all(12),
+              child: AutoSizeText(AppLocalizations.of(context)!.openTheMenu,
+                  style: Theme.of(context).textTheme.headline6,
+                  textAlign: TextAlign.center,
+                  maxLines: 2)),
           // Container(
           //     padding: EdgeInsets.all(8),
           //     width: MediaQuery.of(context).size.width * 0.9,
