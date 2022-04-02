@@ -32,11 +32,11 @@
     "instructions1_header": "1. How it works and permissions",
     "instructions1": "Share2Desktop does not save any of your data. You have to allow access to your files when asked though, so the app can function properly. The files go through our app for a short amount of time (this is why you need to grant access), then they are sent to the other device through a peer-to-peer (device to device) Connection; your data is then immediatly deleted from our app, we save nothing. You have to grant permission so you can transmit data.",
     "instructions2_header": "2. Choosing a device",
-    "instructions2": "You can choose the target device directly from the list, or you can scan the QR-Code of the other device by pressing the camera button. To get your own QR-Code, press \"Your Device\".",
+    "instructions2": "You can scan/enter the QR-Code of the other device by pressing the camera button. To get your own QR-Code, press \"Your Device\".",
      "instructions3_header": "3. Choosing files",
-    "instructions3": "Pressing \"Choose files\" will open up a menu where you can select multiple files from your system. Select the files you want to send.",
-    "instructions4_header": "4. Receive files",
-    "instructions4": "You will receive a notification after receiving a file. If you tap it, the app will open with the Receive Screen. There you can decide which files you want to accept or decline. If you accept, the file will be saved on your device.",
+    "instructions3": "Connecting will make both devices go onto the \"Send Files\" Screen. Pressing \"Choose files\" will open up a menu where you can select multiple files from your system. Select the files you want to send.",
+    "instructions4_header": "4. Sending and Receiving files",
+    "instructions4": "You can beginn sending data after choosing files by pressing the \"Continue\" button. You are also able to receive files while you are connected. You will see a so-called toast notification if that happens.",
     "connectionLost": "Connection lost!",
     "reconnect": "Reconnect",
     "chooseLang": "Choose a language",
@@ -59,7 +59,10 @@
     "receive1": "File ",
     "receive2": " is being received ...",
     "receive3": " was saved. ",
-    "userCanceled": "User cancelled connection!"
+    "userCanceled": "User cancelled connection!",
+    "sendingFiles": "Sending files...",
+    "getStarted": "Connect to another device to get started.",
+    "openTheMenu": "Open the menu on the left to get more instructions, if needed"
 
 
     

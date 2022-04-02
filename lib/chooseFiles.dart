@@ -310,7 +310,7 @@ class aChooseFiles extends State<ChooseFiles> {
               content: SingleChildScrollView(
                 child: ListBody(
                   children: <Widget>[
-                    Text("Daten werden gesendet...",
+                    Text(AppLocalizations.of(context)!.sendingFiles,
                         style: Theme.of(context).textTheme.bodyText1),
                     SizedBox(height: 30),
                     Center(

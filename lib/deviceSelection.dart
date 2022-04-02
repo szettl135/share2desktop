@@ -154,7 +154,7 @@ class aDeviceSelection extends State<DeviceSelection> {
                     },
                 )),
                 SizedBox(height: 20),
-                Text("2022-04-01")
+                Text("2022-04-02")
               ],
             ),
           ),
@@ -557,73 +557,86 @@ class aDeviceSelection extends State<DeviceSelection> {
             //),
           ),
           //Abstand
-          Spacer(flex: 1),
-          AutoSizeText(AppLocalizations.of(context)!.nearbyDevices,
-              style: Theme.of(context).textTheme.headline2,
-              textAlign: TextAlign.center),
+          Spacer(flex: 2),
+          Container(width: MediaQuery.of(context).size.width * 0.9, 
+          //height: MediaQuery.of(context).size.width * 0.2, 
+          padding: EdgeInsets.all(12),child:
+          AutoSizeText(AppLocalizations.of(context)!.getStarted,
+               style: Theme.of(context).textTheme.headline3,
+               textAlign: TextAlign.center,
+               maxLines: 2)
+          ),
           SizedBox(height: 20),
-          Container(
-              padding: EdgeInsets.all(8),
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.5,
-              child: ListView.builder(
-                itemCount: names.length,
-                itemExtent: MediaQuery.of(context).size.height * 0.125,
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    shape: ContinuousRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(10), // if you need this
-                      side: BorderSide(
-                        color: Colors.grey,
-                        width: 1,
-                      ),
-                    ),
-                    child: ListTile(
-                        leading: Container(
-                            height: double.infinity, child: Icon(icons[index])),
-                        trailing: Container(
-                            height: double.infinity,
-                            child: Icon(Icons.arrow_right_alt)),
-                        title: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                      alignment: Alignment.center,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.45,
-                                      child: AutoSizeText(
-                                        names[index],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                        maxLines: 1,
-                                        group: devicesGroup,
-                                        maxFontSize: 25,
-                                        stepGranularity: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ))
-                                ],
-                              )
-                            ]),
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ChooseFiles(
-                                    targetDeviceName: names[index],
-                                  )));
-                        }),
-                  );
-                },
-              )),
+         Container(width: MediaQuery.of(context).size.width * 0.8, 
+         //height: MediaQuery.of(context).size.width * 0.2, 
+         padding: EdgeInsets.all(12),child:
+          AutoSizeText(AppLocalizations.of(context)!.openTheMenu,
+               style: Theme.of(context).textTheme.headline6,
+               textAlign: TextAlign.center,
+               maxLines: 2)
+         ),
+          // Container(
+          //     padding: EdgeInsets.all(8),
+          //     width: MediaQuery.of(context).size.width * 0.9,
+          //     height: MediaQuery.of(context).size.height * 0.5,
+          //     child: ListView.builder(
+          //       itemCount: names.length,
+          //       itemExtent: MediaQuery.of(context).size.height * 0.125,
+          //       itemBuilder: (context, index) {
+          //         return Card(
+          //           color: Theme.of(context).scaffoldBackgroundColor,
+          //           shape: ContinuousRectangleBorder(
+          //             borderRadius:
+          //                 BorderRadius.circular(10), // if you need this
+          //             side: BorderSide(
+          //               color: Colors.grey,
+          //               width: 1,
+          //             ),
+          //           ),
+          //           child: ListTile(
+          //               leading: Container(
+          //                   height: double.infinity, child: Icon(icons[index])),
+          //               trailing: Container(
+          //                   height: double.infinity,
+          //                   child: Icon(Icons.arrow_right_alt)),
+          //               title: Row(
+          //                   crossAxisAlignment: CrossAxisAlignment.center,
+          //                   mainAxisAlignment: MainAxisAlignment.center,
+          //                   children: [
+          //                     Column(
+          //                       mainAxisAlignment: MainAxisAlignment.center,
+          //                       crossAxisAlignment: CrossAxisAlignment.center,
+          //                       children: [
+          //                         Container(
+          //                             alignment: Alignment.center,
+          //                             width: MediaQuery.of(context).size.width *
+          //                                 0.45,
+          //                             child: AutoSizeText(
+          //                               names[index],
+          //                               style: TextStyle(
+          //                                   fontWeight: FontWeight.bold),
+          //                               maxLines: 1,
+          //                               group: devicesGroup,
+          //                               maxFontSize: 25,
+          //                               stepGranularity: 1,
+          //                               overflow: TextOverflow.ellipsis,
+          //                             ))
+          //                       ],
+          //                     )
+          //                   ]),
+          //               onTap: () {
+          //                 Navigator.of(context).push(MaterialPageRoute(
+          //                     builder: (context) => ChooseFiles(
+          //                           targetDeviceName: names[index],
+          //                         )));
+          //               }),
+          //         );
+          //       },
+          //     )),
 
-          SizedBox(height: 20),
+          // SizedBox(height: 20),
 
-          Spacer(flex: 1),
+          Spacer(flex: 3),
         ]));
   }
 

@@ -130,13 +130,13 @@ class _Anleitung extends State<Anleitung> {
                           height: MediaQuery.of(context).size.height * 0.15,
                           fit: BoxFit.contain,
                         )),
-                        Spacer(flex:1),
-                        Container(
-                            child: Image.asset(
-                          'assets/anleitung2_2.png',
-                          height: MediaQuery.of(context).size.height * 0.15,
-                          fit: BoxFit.contain,
-                        )),
+                        // Spacer(flex:1),
+                        // Container(
+                        //     child: Image.asset(
+                        //   'assets/anleitung2_2.png',
+                        //   height: MediaQuery.of(context).size.height * 0.15,
+                        //   fit: BoxFit.contain,
+                        // )),
                         Spacer(flex:3)
                       ]))),
                   Container(
@@ -186,14 +186,14 @@ class _Anleitung extends State<Anleitung> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Spacer(flex:1),
-                          Container(
-                            child: Image.asset(
-                          'assets/anleitung4_1.png',
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          fit: BoxFit.contain,
-                        )),
-                          Spacer(flex:3)
+                          Spacer(),
+                        //   Container(
+                        //     child: Image.asset(
+                        //   'assets/anleitung4_1.png',
+                        //   height: MediaQuery.of(context).size.height * 0.2,
+                        //   fit: BoxFit.contain,
+                        // )),
+                        //   Spacer(flex:3)
                         ]),
                       )),
                 ]),
