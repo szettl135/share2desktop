@@ -194,7 +194,6 @@ class aDeviceSelection extends State<DeviceSelection> {
 
   Future<void> _cameraFunc() async {
     if (Platform.isIOS || Platform.isAndroid) {
-      // TODO open camera
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => QRCodeScanner()),
