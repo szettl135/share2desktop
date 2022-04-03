@@ -109,7 +109,7 @@ class ConnectionObject extends ChangeNotifier {
       state = e.toString();
       if (e == RTCIceConnectionState.RTCIceConnectionStateDisconnected) {
         connected = false;
-        _disconnect("Client Timed out");
+        _disconnect(AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.timedOut);
       }
       if (e == RTCIceConnectionState.RTCIceConnectionStateConnected) {
         connected = true;
@@ -142,7 +142,7 @@ class ConnectionObject extends ChangeNotifier {
 
     /// when the datachannel receives a message, do something
     dataChannel.onMessage = (event) async {
-      print("paket empfangen");
+     // print("paket empfangen");
       try {
         var decodedJSON = json.decode(event.text) as Map<String, dynamic>;
 
@@ -447,7 +447,7 @@ class ConnectionObject extends ChangeNotifier {
         /// a message directly by the Server, in case the client (somehow) enters a Socket ID that no longer exists.
         case "wrongId":
           {
-            _disconnect("Falsche ID!");
+            _disconnect(AppLocalizations.of(navigatorKey.currentContext as BuildContext)!.wrongID);
             break;
           }
         case "disconnect":

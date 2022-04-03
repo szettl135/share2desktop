@@ -56,10 +56,13 @@
     "receive1": "Datei ",
     "receive2": " wird empfangen...",
     "receive3": " gespeichert.",
-    "userCanceled": "User hat die Verbindung abgebrochen!",
+    "userCanceled": "User*in hat die Verbindung abgebrochen!",
     "sendingFiles": "Daten werden gesendet...",
     "getStarted": "Verbinden Sie sich zu einem anderen Gerät um zu beginnen",
-    "openTheMenu": "Öffnen Sie das Menü links, falls Sie eine Anleitung benötigen"
+    "openTheMenu": "Öffnen Sie das Menü links, falls Sie eine Anleitung benötigen",
+    "userRejected": "Nutzer*in hat abgelehnt!",
+    "wrongID": "ID existiert nicht!",
+    "timedOut": "Zeitüberschreitung des Clients!"
 
 
 

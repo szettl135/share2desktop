@@ -62,7 +62,10 @@
     "userCanceled": "User cancelled connection!",
     "sendingFiles": "Sending files...",
     "getStarted": "Connect to another device to get started.",
-    "openTheMenu": "Open the menu on the left to get more instructions, if needed"
+    "openTheMenu": "Open the menu on the left to get more instructions, if needed",
+    "userRejected": "User rejected connection!",
+    "wrongID": "ID does not exist!",
+    "timedOut": "Client timed out!"
 
 
     
