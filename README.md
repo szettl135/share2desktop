@@ -1,16 +1,13 @@
-# share2desktop
+# Share2Desktop
 
-A new Flutter project.
+"Share2Desktop" soll eine App sein, die das einfache Senden von Daten zwischen IOS, Android, Mac und Windows ermöglicht. Dabei dürfen keine Daten in Geräten von Dritten gespeichert werden. Deshalb soll es durch eine direkte Verbindung zwischen den Geräten funktionieren. Dieser Ansatz wird eine sichere und schnelle Übertragung garantieren. Die App soll im Play Store und auf einer Website verfügbar sein.
 
-## Getting Started
+![Screenshot_20211208-133417](./README.assets/Screenshot_20211208-133417.jpg)
 
-This project is a starting point for a Flutter application.
+![Screenshot_20211208-133420](./README.assets/Screenshot_20211208-133420.jpg)
 
-A few resources to get you started if this is your first Flutter project:
+![Screenshot_20211208-133423](./README.assets/Screenshot_20211208-133423.jpg)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![Screenshot_20211208-133427](./README.assets/Screenshot_20211208-133427.jpg)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot_20211208-133430](./README.assets/Screenshot_20211208-133430.jpg)
